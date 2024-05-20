@@ -1,0 +1,135 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.outlet {
+  margin: auto;
+  min-height: calc(100vh - 150px);
+}
+
+.mainPageText span {
+  font-weight: 600;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.loading {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  max-width: 1440px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  padding: 0 10%;
+  /* margin-bottom: 100px; */
+}
+
+.wrapper {
+  margin-top: 90px;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+@media screen and (min-width: 1550px) {
+  .container {
+    padding: 0px;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .container {
+    padding: 0 60px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    padding: 0 20px;
+  }
+}
+
+@font-face {
+  font-family: "Montserratarm-Black";
+  src: url("../fonts/Montserratarm-Black.otf") format("truetype");
+}
+
+@font-face {
+  font-family: "Montserratarm-Bold";
+  src: url("../fonts/Montserratarm-Bold.otf") format("truetype");
+}
+
+@font-face {
+  font-family: "Montserratarm-ExtraBold";
+  src: url("../fonts/Montserratarm-ExtraBold.otf") format("truetype");
+}
+
+@font-face {
+  font-family: "Montserratarm-ExtraLight";
+  src: url("../fonts/Montserratarm-ExtraLight.otf") format("truetype");
+}
+
+@font-face {
+  font-family: "Montserratarm-Light";
+  src: url("../fonts/Montserratarm-Light.otf") format("truetype");
+}
+
+@font-face {
+  font-family: "Montserratarm-Medium";
+  src: url("../fonts/Montserratarm-Medium.otf") format("truetype");
+}
+
+@font-face {
+  font-family: "Montserratarm-Regular";
+  src: url("../fonts/Montserratarm-Regular.otf") format("truetype");
+}
+
+@font-face {
+  font-family: "Montserratarm-SemiBold";
+  src: url("../fonts/Montserratarm-SemiBold.otf") format("truetype");
+}
+
+@font-face {
+  font-family: "Montserratarm-Thin";
+  src: url("../fonts/Montserratarm-Thin.otf") format("truetype");
+}
+
+input {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  /* Prevent double-tap zooming in some mobile browsers */
+}
+
+::-webkit-scrollbar {
+  /* width: 5px; */
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  /* background: rgba(255, 255, 255, 0.2); */
+
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #FFCE00;
+  border-radius: 20px;
+}

@@ -1,0 +1,408 @@
+.MainHeaderDiv {
+    background-color: #24005C;
+    display: flex;
+    justify-content: center;
+}
+
+.HeaderDiv {
+    position: fixed;
+    z-index: 9999;
+    width: 100%;
+}
+
+.MainHeader {
+    height: 80px;
+    max-width: 1440px;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    padding: 0 10%;
+}
+
+.Logo {
+    width: 124px;
+    height: 51px;
+    cursor: pointer;
+}
+
+.LineHeader {
+    height: 7px;
+    background: linear-gradient(90deg, #FF9700 0%, #FFD300 100%)
+}
+
+.textWrapper {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    /* min-width: 40%; */
+}
+
+.Headertext {
+    cursor: pointer;
+    color: #FFF;
+    font-size: 18px;
+    font-style: normal;
+    line-height: 30px;
+    font-family: "Montserratarm-Medium", sans-serif;
+}
+
+.SearchInput {
+    border: none;
+    border-radius: 29px;
+    background: rgba(255, 255, 255, 0.50);
+    height: 35px;
+    width: 263px;
+    color: rgba(36, 0, 92, 0.63);
+    padding: 0 15px 0 35px;
+}
+
+.SearchInput::placeholder {
+    color: rgba(36, 0, 92, 0.63);
+    font-size: 13px;
+    font-style: normal;
+    font-family: "Montserratarm-Regular", sans-serif;
+    line-height: 30px;
+}
+
+
+.SearchInputSvg {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    height: 20px;
+    padding: 0 10px;
+}
+
+.SearchDiv {
+    position: relative;
+
+}
+
+.HeaderInfo {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.SearchResult {
+    height: 0px;
+    background-color: white;
+    position: absolute;
+    top: 35px;
+    width: 100%;
+    border-radius: 18px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    /* padding: 20px; */
+    border-top: 0px solid rgba(36, 0, 92, 0.2);
+    padding-top: 0;
+    transition: 1000ms;
+    overflow-y: scroll;
+    /* display: none; */
+
+}
+
+#SearchResultActive {
+    /* display: block; */
+    border-top: 1px solid rgba(36, 0, 92, 0.2);
+    height: 200px;
+    padding-top: 20px;
+    overflow-x: hidden;
+}
+
+.SearchResultDiv {
+    padding: 5px 12px;
+    padding-top: 10px;
+    cursor: pointer;
+}
+
+.SearchResultDivInfo {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 7px;
+    justify-content: space-between;
+}
+
+.SearchResultDivInfoPriceButton {
+    width: 20px;
+    height: 20px;
+    border-radius: 20px;
+    background-color: #24005C;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.SearchResultDivInfoPriceButton:hover {
+    background-color: #FEC01E;
+    color: #24005C;
+}
+
+.SearchResultDivInfoMount {
+    font-size: 9px !important;
+    color: rgba(36, 0, 92, 0.5) !important;
+    border: none !important;
+}
+
+.SearchResultDivInfoPrice>p {
+    font-size: 9px;
+    color: rgba(36, 0, 92, 0.5) !important;
+
+}
+
+.SearchResultDivInfoPrice {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.SearchResultDivInfo>p {
+    font-family: "Montserratarm-Regular", sans-serif;
+    font-size: 11px;
+    color: #24005C;
+    /* border-right: 1px solid #24005C; */
+    height: 15px;
+    padding-right: 10px;
+    min-width: 80px;
+}
+
+.phonNumber {
+    border-radius: 36px;
+    background: #FFCE00;
+    border: none;
+    backdrop-filter: blur(9.649999618530273px);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 20px;
+    height: 35px;
+    font-family: "Montserrat arm";
+    font-weight: 600;
+    font-size: 12px;
+    font-family: "Montserratarm-Bold", sans-serif;
+}
+
+.ButtonWrapperHeader {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.ButtonWrapperHeader::before {
+    content: '';
+    position: absolute;
+    top: -10;
+    left: 0px;
+    width: 100%;
+    height: 50px;
+    border: 1px solid transparent;
+    /* Adding a transition for a smooth effect */
+}
+
+.ButtonWrapperHeader:hover::before {
+    border-image: linear-gradient(269.79deg, rgba(255, 200, 0, 0) 0.15%, #FFC800 48.56%, rgba(255, 200, 0, 0) 101.01%);
+    border-image-slice: 1;
+}
+
+
+
+.MobileHeader {
+    display: none;
+}
+
+.LanguageDiv {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+}
+
+#openLanguage>p {
+    color: white !important;
+}
+
+.LanguageDiv>p {
+    color: rgba(255, 255, 255, 0.50);
+    font-size: 18px;
+    font-style: normal;
+    font-family: "Montserratarm-Regular", sans-serif;
+    line-height: 30px;
+}
+
+.SelectLanguage {
+    position: absolute;
+    width: 105px;
+    height: 138px;
+    background-color: white;
+    top: 40px;
+    right: 0px;
+    border-radius: 5px;
+    padding: 0 15px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.SelectLanguage>p {
+    color: #24005C;
+    font-size: 14px;
+    font-style: normal;
+    font-family: "Montserratarm-Regular", sans-serif;
+
+    height: 32%;
+    text-align: center;
+    border-bottom: 1px solid rgba(36, 0, 92, 0.50);
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+}
+
+.SelectLanguage>p:hover {
+    font-weight: 600;
+}
+
+.SelectLanguage>p:last-child {
+    border: none;
+}
+
+.activeHeader {
+    border-radius: 43px;
+    background: #11AEF4;
+    width: 25px;
+    height: 3px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    transition: 1500ms;
+    margin-bottom: -3px;
+}
+
+.notActiveHeader {
+    width: 25px;
+    height: 3px;
+    margin-bottom: -3px;
+}
+
+.CateogryName {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.MobileSearchINput {
+    width: 100%;
+    border-radius: 70px;
+    padding: 10px 35px;
+    border: none;
+}
+
+.MobileSearchINputWrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+#SearchInput {
+    background-color: white;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 18px;
+    border-top-left-radius: 18px;
+    outline: none;
+}
+
+.MobileSearchInputSvg {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    left: 20px;
+    height: 100%;
+    justify-content: center;
+}
+
+.SearchResultDivLine {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(to right, rgba(36, 0, 92, 0.2) 7px, transparent 7px);
+    background-size: 14px 100%;
+}
+
+.MobileHeaderWrapper {
+    display: none;
+    justify-content: flex-end;
+    width: 100%;
+    align-items: center;
+
+}
+
+.notingNotFound {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 85%;
+}
+
+.notingNotFound>p {
+    color: #24005C;
+    font-family: "Montserratarm-Regular", sans-serif;
+    font-size: 15px;
+    font-style: normal;
+}
+
+@media screen and (max-width: 1200px) {
+    .textWrapper {
+        display: none;
+    }
+
+    .MobileHeaderWrapper {
+        display: flex;
+    }
+
+    .MainHeader {
+        justify-content: space-between;
+        padding: 0 60px;
+    }
+
+    .HeaderInfo {
+        display: none;
+    }
+
+    .LanguageDiv {
+        display: none;
+    }
+
+    .MobileHeader {
+        display: block;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .MainHeader {
+        padding: 0 20px;
+        height: 70px;
+    }
+
+    .SearchResult {
+        width: 95%;
+    }
+
+    .Logo {
+        width: 105px;
+        height: 40px;
+    }
+}
+
+@media screen and (min-width: 1550px) {
+    .MainHeader {
+        padding: 0;
+    }
+}

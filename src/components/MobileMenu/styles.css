@@ -1,0 +1,138 @@
+.menu {
+    width: 100%;
+}
+
+.MenuHeadertext {
+    color: #24005C;
+
+    font-family: "Montserratarm-Regular", sans-serif;
+    font-size: 22px;
+    font-style: normal;
+    line-height: 30px;
+}
+
+.MenuWrapperDiv {
+    padding: 20px;
+}
+
+.LineMobileMenu {
+    display: none;
+}
+
+.MenuWrapper {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-direction: column;
+}
+
+.Menu {
+    background-color: white;
+    display: flex;
+    align-items: center;
+    width: 75%;
+    height: 100%;
+    gap: 20px;
+    /* padding: 20px; */
+}
+
+.MobileMenuWrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.MobielLanguage {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.MobielLanguage>p {
+    display: flex;
+    align-items: center;
+    color: rgba(36, 0, 92, 0.50);
+    font-family: "Montserratarm-Regular", sans-serif;
+    font-size: 23px;
+    font-style: normal;
+}
+
+.activeLanguageMobile {
+    color: #24005C !important;
+}
+
+.Menu>p {
+    display: none;
+    padding: 0 20px;
+}
+
+@media screen and (min-width: 768px) {
+    .Menu {
+        /* width: 100%; */
+        width: auto;
+        width: 210px;
+        padding: 20px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .Menu {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px 0px;
+        overflow-y: scroll;
+    }
+
+    .LineMobileMenu {
+        display: block;
+        width: 100%;
+        height: 1px;
+        background: linear-gradient(to right, #24005C 15px, transparent 15px);
+        background-size: 30px 100%;
+    }
+
+
+    .MenuWrapperDiv {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+
+    .Menu>p {
+        display: block;
+        color: #24005C;
+
+        font-size: 26px;
+        font-style: normal;
+        font-family: "Montserratarm-Bold", sans-serif;
+
+        line-height: 25px;
+        margin-bottom: 20px;
+    }
+
+    .MenuWrapper {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .ButtonWrapperHeader {
+        justify-content: flex-start;
+        padding: 0 20px;
+        width: 140px;
+    }
+
+    .MobielLanguage {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .MenuWrapper1 {
+        width: 100%;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.60);
+    }
+}
