@@ -54,6 +54,6 @@ export const Card = ({
                 {/* <Button title={t('BuyNow')} /> */}
             </div>
         </div>
-        <img src={`${process.env.REACT_APP_IMAGE}/${img}`} />
+        <img src={`https://api.shinetickets.com/images/${img}`} />
     </div>
 }

@@ -36,7 +36,6 @@ export const GetFeedback = () => {
 }
 
 export const GetTopEvents = (page) => {
-    console.log("----")
     return (dispatch) => {
         dispatch(StartGetGetTopEvents())
         axios.get(`${"https://api.shinetickets.com"}/getTopEvents?currentPage=${page}`).then((r) => {

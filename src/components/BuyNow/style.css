@@ -1,0 +1,258 @@
+.BuyNowHeader {
+    background-color: #24005C;
+    width: 100%;
+    padding: 15px 30px;
+    border-top-right-radius: 12px;
+    border-top-left-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.BuyNow {
+    width: 100%;
+    overflow-y: scroll;
+}
+
+.errorp {
+    color: red !important;
+    font-size: 12px !important;
+    font-family: "Montserratarm-Regular", sans-serif !important;
+}
+
+.activeSelectedBuy {
+    color: #24005C !important;
+    font-weight: 500 !important;
+}
+
+.BuyNowHeaderTitle {
+    color: #FFF;
+    font-size: 25px;
+    font-style: normal;
+    font-family: "Montserratarm-Bold", sans-serif;
+
+    text-transform: uppercase;
+}
+
+#errorInut {
+    border: 1px solid red !important;
+    border-left: 5px solid #FF3D00 !important;
+
+
+}
+
+.BuyNowHeaderDate {
+    color: rgba(255, 255, 255, 0.50);
+    font-size: 21px;
+    font-style: normal;
+    font-family: "Montserratarm-Regular", sans-serif;
+    line-height: 26px;
+}
+
+.FreeDelivery {
+    color: #00830D;
+    font-family: "Montserratarm-Regular", sans-serif;
+    font-size: 14px;
+    font-style: normal;
+
+    line-height: 26px;
+}
+
+.BuyNowBody {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.InputsBuy {
+    border-radius: 5px;
+    border: 1px solid #CECECE;
+    background: #E9E9E9;
+    padding: 8px 20px;
+    width: 100%;
+    border-left: 5px solid #FF3D00;
+}
+
+.ReadAndAgree>p {
+    color: red;
+}
+
+.InputWeapper {
+    width: 32%;
+    display: flex;
+    flex-direction: column;
+}
+
+.InputWeapperDelivery {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.DeliveryInputWeapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.InputWeapper>p,
+.InputWeapperDelivery>p {
+    height: 5px;
+    color: red;
+    font-size: 12px;
+    font-family: "Montserratarm-Regular", sans-serif;
+}
+
+.InputWrapperBuy {
+    display: flex;
+    justify-content: space-between;
+}
+
+.TextareBuy {
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid #CECECE;
+    height: 90px;
+    background: #E9E9E9;
+    resize: none;
+    padding: 10px 20px;
+}
+
+.InputTextareWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.InputsBuyDelvery {
+    border-radius: 5px;
+    border: 1px solid #CECECE;
+    background: #E9E9E9;
+    padding: 8px 20px;
+    width: 100%;
+    border-left: 5px solid rgba(255, 61, 0, 0.50);
+}
+
+.selectPay {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(36, 0, 92, 0.30);
+    padding: 20px 0;
+}
+
+.selectPay>div {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.BuyMethodSelectImg {
+    display: 'flex';
+    align-items: 'center';
+    cursor: 'pointer';
+    gap: 10;
+    flex-wrap: 'wrap';
+}
+
+.selectPay>p {
+    color: rgba(36, 0, 92, 0.50);
+    font-size: 14px;
+    font-style: normal;
+    font-family: "Montserratarm-Regular", sans-serif;
+    line-height: 26px;
+}
+
+.ReadAndAgree {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    cursor: pointer;
+}
+
+.ReadAndAgree>div {
+    height: 15px;
+}
+
+
+
+.ReadAndAgree>a,
+.ReadAndAgree>p {
+    color: #24005C;
+    font-family: "Montserratarm-Regular", sans-serif;
+    font-size: 12px;
+    font-style: normal;
+}
+
+.BuyEnd {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.BuyEndWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 30px 0;
+}
+
+.BuyEndWrapper>button {
+    border-radius: 5px;
+    background: #FFCE00;
+    padding: 10px 40px;
+    border: none;
+    cursor: pointer;
+    color: #24005C;
+    font-family: "Montserratarm-Medium", sans-serif;
+    font-size: 20px;
+    font-style: normal;
+}
+
+@media screen and (max-width: 768px) {
+    .BuyNowHeaderTitle {
+        font-size: 21px;
+    }
+
+    .InputWeapper {
+        width: 100%;
+    }
+
+    .FreeDelivery {
+        font-size: 11px;
+    }
+
+    .InputWrapperBuy {
+        flex-direction: column;
+        gap: 10px;
+
+    }
+
+    .InputTextareWrapper {
+        gap: 10px;
+    }
+
+    .BuyNowBody {
+        gap: 10px;
+        margin-bottom: 30px;
+    }
+
+    .InputsBuy {
+        width: 100%;
+    }
+
+    .selectPay {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .selectPay>p {
+        font-size: 12px;
+    }
+
+    .BuyEndWrapper {
+        flex-direction: column;
+        gap: 10px;
+    }
+}

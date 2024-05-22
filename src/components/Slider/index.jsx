@@ -12,7 +12,6 @@ const handleDragStart = (e) => e.preventDefault()
 export const Carusel = () => {
     const general = useSelector((st) => st.general)
     const { language } = useSelector((st) => st.StaticReducer)
-    console.log(language, 'language')
     const [data, setData] = useState([])
     const [windowSize, setWindowSize] = useState({
         width: window.innerWidth,
@@ -150,7 +149,6 @@ export const Carusel = () => {
         setData(item)
     }, [general.events, language, windowSize])
 
-    console.log(general)
     return (
         <div style={{ width: '100%' }}>
             <AliceCarousel
