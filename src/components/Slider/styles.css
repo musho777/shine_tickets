@@ -1,0 +1,276 @@
+.alice-carousel__dots-item:not(.__custom) {
+    width: 8px;
+    height: 8px;
+    cursor: pointer;
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+    background-color: #000000;
+    border-radius: 6px;
+}
+
+.CaruselItem {
+    margin-left: 2px;
+    width: 100%;
+    border-radius: 15px;
+}
+
+.alice-carousel__dots-item:not(.__custom):not(:last-child) {
+    margin-right: 10px !important;
+}
+
+.alice-carousel__dots {
+    margin-top: 10px !important;
+}
+
+.BanerImg {
+    width: 99%;
+    height: 400px;
+    border-radius: 15px;
+}
+
+.BanerDiv {
+    position: absolute;
+    width: 99%;
+    height: 400px;
+    background: linear-gradient(180deg, rgba(254, 120, 1, 0.19) 0%, rgba(0, 0, 0, 0.19) 76.15%);
+    backdrop-filter: blur(22.950000762939453px);
+    max-width: 1440px;
+    padding: 20px;
+    gap: 40px;
+}
+
+.BanerImg2 {
+    height: 100%;
+    width: 285px;
+    /* object-fit: cover; */
+}
+
+.BanerDiv {
+    display: flex;
+}
+
+.Primera {
+    display: flex;
+    gap: 20px;
+}
+
+.Primerap {
+    color: #FEE827;
+    font-family: "Montserratarm-Medium", sans-serif;
+
+    font-size: 18px;
+    font-style: normal;
+}
+
+.BanerPrimera {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.PrimeraDate {
+    color: #FFF;
+    font-family: "Montserratarm-Medium", sans-serif;
+
+    font-size: 18px;
+    font-style: normal;
+}
+
+.BanerDivInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: space-between;
+}
+
+.BanerDivInfoPlace {
+    color: #FFF;
+    font-family: "Montserratarm-Regular", sans-serif;
+    font-size: 15px;
+    font-style: normal;
+}
+
+.BanerLocation {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.BanerTitle {
+    color: #FFF;
+    font-family: "Montserratarm-Bold", sans-serif;
+    font-size: 36px;
+    font-style: normal;
+    text-transform: uppercase;
+}
+
+.BanerText {
+    color: #FFF;
+    font-family: "Montserratarm-Regular", sans-serif;
+    font-size: 14px;
+    font-style: normal;
+}
+
+.BanerTextDiv {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.BanerPrice {
+    color: #FFF;
+    /* font-family: Montserrat; */
+    font-family: "Montserratarm-Medium", sans-serif;
+    font-size: 30px;
+    font-style: normal;
+}
+
+.BanerButton {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+.BanerButton>p {
+    color: #FEE827;
+    font-family: "Montserratarm-Regular", sans-serif;
+    font-size: 16px;
+    font-style: normal;
+}
+
+.alice-carousel__dots-item:not(.__custom).__active {
+    background-color: #FFCE00 !important;
+    width: 23px !important;
+    height: 8px !important;
+    border-radius: 6px !important;
+    transition: 700ms;
+}
+
+.alice-carousel__dots-item:not(.__custom) {
+    background: #dbdbdb !important;
+}
+
+.alice-carousel__stage-item * {
+    cursor: pointer;
+    border-radius: 6px;
+}
+
+.BanerPrimeraMobile {
+    display: none;
+}
+
+@media screen and (max-width: 1130px) {
+    .BanerTitle {
+        font-size: 28px;
+    }
+
+    .BanerDivInfo {
+        gap: 5px;
+    }
+
+    .BanerPrice {
+        font-size: 23px;
+    }
+}
+
+@media screen and (max-width: 940px) {
+    .BanerDiv {
+        flex-direction: column;
+    }
+
+    .BanerTitle {
+        line-height: 30px !important;
+        margin-bottom: 5px;
+    }
+
+    .BanerImg2 {
+        height: 175px;
+        /* object-fit: cover; */
+        width: 100%;
+    }
+
+    .BanerText {
+        display: none;
+    }
+
+    .CaruselItem {
+        height: 480px;
+    }
+
+    .BanerDiv {
+        height: 480px;
+    }
+
+    .BanerPrimera {
+        display: none;
+    }
+
+    .BanerPrimeraMobile {
+        gap: 15px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .BanerDiv {
+        padding: 15px;
+        gap: 20px;
+    }
+
+    .Primerap {
+        font-size: 16px;
+    }
+
+    .PrimeraDate {
+        font-size: 16px;
+    }
+
+    .Primera {
+        gap: 10px;
+    }
+
+    .BanerButton {
+        margin-top: 20px;
+        gap: 10px;
+        position: absolute;
+        bottom: 25px;
+    }
+
+    .BanerButton>p {
+        align-items: center;
+        font-size: 12px;
+    }
+
+
+
+    .BanerImg {
+        height: 100%;
+    }
+
+    .BanerDivInfoPlace {
+        width: 100%;
+        font-size: 13px;
+    }
+
+    .BanerLocation {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .BanerTitle {
+        margin-bottom: 1px;
+        font-size: 20px !important;
+    }
+
+    .Primera>p {
+        font-size: 13px;
+    }
+
+    .BanerPrice {
+        font-size: 18px !important;
+    }
+
+    .BanerDivInfoPlace {
+        font-size: 11px !important;
+    }
+}

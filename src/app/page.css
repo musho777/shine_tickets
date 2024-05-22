@@ -1,0 +1,15 @@
+.mainPageText {
+  color: #24005C;
+  font-family: "Montserratarm-Regular", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  margin: 15px 0;
+}
+
+
+@media screen and (max-width: 768px) {
+  .mainPageText {
+    font-size: 12px;
+    margin: 10px 0;
+  }
+}

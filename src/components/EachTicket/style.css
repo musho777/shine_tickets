@@ -1,0 +1,166 @@
+.ticket {
+    border-radius: 4px;
+    background: #FFF;
+    width: 24%;
+    height: 202px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 10px;
+    position: relative;
+    margin-bottom: 1.33%;
+}
+
+.ticket:hover .TicketInfodiv {
+    opacity: 1;
+}
+
+.ticket:hover .TicketInfodivMobile {
+    opacity: 1;
+}
+
+.TicketInfodiv {
+    transition: opacity 400ms;
+    opacity: 0;
+    position: absolute;
+    background: linear-gradient(180deg, #24005C 0%, rgba(36, 0, 92, 0.00) 100%);
+    backdrop-filter: blur(9.550000190734863px);
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    gap: 40px;
+    display: flex;
+}
+
+
+
+.TicketInfo {
+    width: 75%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.TicketInfoLine {
+    width: 1px;
+    height: 100%;
+    background: linear-gradient(to bottom, white 15px, transparent 15px);
+    background-size: 100% 30px;
+}
+
+.ticket>img {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
+
+#left {
+    margin: 0% 2%;
+    margin-bottom: 2%;
+}
+
+.ticketTitle {
+    color: #FFCE00;
+    font-family: "Montserratarm-Bold", sans-serif;
+
+    font-size: 17px;
+    font-style: normal;
+    /* line-height: 25px; */
+}
+
+.TicketData {
+    color: #FFF;
+    font-family: Montserrat;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 600;
+    /* line-height: 30px; */
+}
+
+.TicketTeater {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.TicketTeater>p {
+    color: #FFF;
+    font-family: "Montserrat arm";
+    font-size: 11px;
+    font-style: normal;
+    font-weight: 600;
+    /* font-family: "Montserratarm-Bold", sans-serif; */
+
+    /* line-height: 17px; */
+    text-transform: uppercase;
+}
+
+.TicketPrice {
+    color: #FFCE00;
+    /* font-family: Montserrat; */
+    font-family: "Montserratarm-Medium", sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    line-height: 30px;
+}
+
+.TicketInfodivMobile {
+    display: none;
+}
+
+@media screen and (max-width: 1440px) {
+    .ticket {
+        width: 32.4%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .TicketInfodiv {
+        gap: 10px;
+    }
+
+    .TicketInfodivMobile {
+        transition: opacity 400ms;
+        opacity: 0;
+        position: absolute;
+        background: linear-gradient(180deg, #24005C 0%, rgba(36, 0, 92, 0.00) 100%);
+        backdrop-filter: blur(9.550000190734863px);
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+        gap: 40px;
+        display: flex;
+    }
+
+    .TicketInfodiv {
+        display: none;
+    }
+
+    .ticketTitle {
+        font-size: 14px;
+    }
+
+    .TicketData {
+        font-size: 13px;
+    }
+
+    .TicketTeater {
+        gap: 4px;
+    }
+
+    .TicketTeater>p {
+        font-size: 11px;
+    }
+
+    .TicketPrice {
+        font-size: 17px;
+        line-height: 10px;
+    }
+
+    .ticket {
+        width: 100%;
+        margin-bottom: 6%;
+        height: 200px;
+    }
+}

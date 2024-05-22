@@ -25,7 +25,7 @@ export const OpenCaldendar = (data) => {
 
 export const GetFeedback = () => {
     return (dispatch) => {
-        axios.get(`${process.env.REACT_APP_HOSTNAME}/getFeedback`).then((r) => {
+        axios.get(`${"https://api.shinetickets.com"}/getFeedback`).then((r) => {
             if (r.data.success) {
                 dispatch(SuccessGetFeedback(r.data.feedback))
             }
@@ -36,9 +36,10 @@ export const GetFeedback = () => {
 }
 
 export const GetTopEvents = (page) => {
+    console.log("----")
     return (dispatch) => {
         dispatch(StartGetGetTopEvents())
-        axios.get(`${process.env.REACT_APP_HOSTNAME}/getTopEvents?currentPage=${page}`).then((r) => {
+        axios.get(`${"https://api.shinetickets.com"}/getTopEvents?currentPage=${page}`).then((r) => {
             if (r.data.success) {
                 dispatch(SuccessGetTopEvents(r.data))
             }
@@ -55,7 +56,7 @@ export const GetTopEvents = (page) => {
 export const GetGenerealEvents = () => {
     return (dispatch) => {
         dispatch(StartGetGeneralEvents())
-        axios.get(`${process.env.REACT_APP_HOSTNAME}/getGeneralEvents`).then((r) => {
+        axios.get(`${"https://api.shinetickets.com"}/getGeneralEvents`).then((r) => {
             if (r.data.success) {
                 dispatch(SuccessGetGeneralEvents(r.data.events))
             }
@@ -72,7 +73,7 @@ export const GetGenerealEvents = () => {
 export const GetSinglPage = (id) => {
     return (dispatch) => {
         dispatch(StartGetSinglPage())
-        axios.get(`${process.env.REACT_APP_HOSTNAME}/singleEvent/${id}`).then((r) => {
+        axios.get(`${"https://api.shinetickets.com"}/singleEvent/${id}`).then((r) => {
             if (r.data.success) {
                 dispatch(SuccessSinglPage(r.data))
             } else {
@@ -88,7 +89,7 @@ export const GetSinglPage = (id) => {
 export const SearchAction = (search) => {
     return (dispatch) => {
         dispatch(StartSearch())
-        axios.post(`${process.env.REACT_APP_HOSTNAME}/search`, { search: search }).then((r) => {
+        axios.post(`${"https://api.shinetickets.com"}/search`, { search: search }).then((r) => {
             if (r.data.success) {
                 dispatch(SuccessSearch(r.data.events))
             }
@@ -107,7 +108,7 @@ export const GetAllEvents = (page, data) => {
 
     return (dispatch) => {
         dispatch(StartGetCategoris())
-        axios.post(`${process.env.REACT_APP_HOSTNAME}/filterEvents?currentPage=${page}`, data).then((r) => {
+        axios.post(`${"https://api.shinetickets.com"}/filterEvents?currentPage=${page}`, data).then((r) => {
             if (r.data.success) {
                 dispatch(SuccessGetCategoris(r.data))
             }
@@ -125,7 +126,7 @@ export const GetAllEvents2 = (page, data) => {
 
     return (dispatch) => {
         dispatch(StartGetCategoris())
-        axios.post(`${process.env.REACT_APP_HOSTNAME}/getAllEvents?currentPage=${page}`, data).then((r) => {
+        axios.post(`${"https://api.shinetickets.com"}/getAllEvents?currentPage=${page}`, data).then((r) => {
             if (r.data.success) {
                 dispatch(SuccessGetCategoris(r.data))
             }
@@ -142,7 +143,7 @@ export const GetAllEvents2 = (page, data) => {
 export const GetRandomEvents = (page) => {
     return (dispatch) => {
         dispatch(StartGetRadnomEvents())
-        axios.get(`${process.env.REACT_APP_HOSTNAME}/randomEvents?currentPage=${page}`).then((r) => {
+        axios.get(`${"https://api.shinetickets.com"}/randomEvents?currentPage=${page}`).then((r) => {
             if (r.data.success) {
                 dispatch(SuccessGetRandomEvents(r.data.allEvents, r.data.totalPages))
             }
@@ -173,7 +174,7 @@ export const RemoveTicketsAction = (data) => {
 export const GetCategory = () => {
     return (dispatch) => {
         dispatch(StartGetCategory())
-        axios.get(`${process.env.REACT_APP_HOSTNAME}/getCategories`).then((r) => {
+        axios.get(`${"https://api.shinetickets.com"}/getCategories`).then((r) => {
             if (r.data.success) {
                 dispatch(SuccessGetCategory(r.data.categories))
             }
@@ -190,7 +191,7 @@ export const GetCategory = () => {
 export const SubCategory = (data) => {
     return (dispatch) => {
         dispatch(StartSubCategory())
-        axios.post(`${process.env.REACT_APP_HOSTNAME}/getSubcategories`, data).then((r) => {
+        axios.post(`${"https://api.shinetickets.com"}/getSubcategories`, data).then((r) => {
             dispatch(SuccessGetSubCategory(r.data.category))
         })
             .catch((error) => {
@@ -201,7 +202,7 @@ export const SubCategory = (data) => {
 
 export const GetHall = () => {
     return (dispatch) => {
-        axios.get(`${process.env.REACT_APP_HOSTNAME}/getAllHalls`).then((r) => {
+        axios.get(`${"https://api.shinetickets.com"}/getAllHalls`).then((r) => {
             dispatch(SuccessGetHall(r.data.halls))
         })
     }
@@ -224,7 +225,7 @@ export const ChangeLanguageAction = (data) => {
 
 export const GetAllAds = () => {
     return (dispatch) => {
-        axios.get(`${process.env.REACT_APP_HOSTNAME}/getAllAds`).then((r) => {
+        axios.get(`${"https://api.shinetickets.com"}/getAllAds`).then((r) => {
             dispatch(SuccessGetAllAds(r.data))
         })
     }
@@ -233,7 +234,7 @@ export const GetAllAds = () => {
 export const CreateCurrentTicket = (data, res, selectPay) => {
     return (dispatch) => {
         dispatch(StartCreatTicket())
-        axios.post(`${process.env.REACT_APP_HOSTNAME}/createCurrentTicket`, data).then((r) => {
+        axios.post(`${"https://api.shinetickets.com"}/createCurrentTicket`, data).then((r) => {
             if (r.data.success) {
                 if (selectPay === 1) {
                     window.open(`${res?.data?.formUrl}`)
@@ -253,7 +254,7 @@ export const CreateCurrentTicket = (data, res, selectPay) => {
 
 // export const GetCurrentTicket = () => {
 //     return (dispatch) => {
-//         axios.post(`${process.env.REACT_APP_HOSTNAME}/getCurrentTicket`, { orderId: localStorage.getItem('orderId') })
+//         axios.post(`${"https://api.shinetickets.com"}/getCurrentTicket`, { orderId: localStorage.getItem('orderId') })
 //             .then(res => {
 //                 if (res.data.success) {
 //                     dispatch(ButTickets(res.data.ticket))
@@ -298,7 +299,7 @@ export const ClearDataBuy = () => {
 
 export const BuyTickets = (data) => {
     return (dispatch) => {
-        axios.post(`${process.env.REACT_APP_HOSTNAME}/buyTicket`, data)
+        axios.post(`${"https://api.shinetickets.com"}/buyTicket`, data)
             .then(r => {
                 localStorage.removeItem('orderId')
                 // if (r.data.success) {
@@ -312,7 +313,7 @@ export const BuyTickets = (data) => {
 export const GetTicketStatus = (data) => {
     return (dispatch) => {
         dispatch(StartGetTelStatus())
-        axios.post(`${process.env.REACT_APP_HOSTNAME}/getTicketStatus`, data).then((r) => {
+        axios.post(`${"https://api.shinetickets.com"}/getTicketStatus`, data).then((r) => {
             if (r.data.success) {
                 dispatch(SuccessGetTellStatus(r.data))
             }
@@ -409,7 +410,7 @@ export const GetSinglParonyan = () => {
 export const WeekEvetntApi = () => {
     return (dispatch) => {
         dispatch(StartWeekEvents())
-        axios.get(`${process.env.REACT_APP_HOSTNAME}/getEventsOfTheWeek`).then((r) => {
+        axios.get(`${"https://api.shinetickets.com"}/getEventsOfTheWeek`).then((r) => {
             if (r.data.success) {
                 dispatch(SuccessWeekEvent(r.data.weeklyEvents))
             }
@@ -428,7 +429,7 @@ export const WeekEvetntApi = () => {
 export const GetExpectedEvents = () => {
     return (dispatch) => {
         dispatch(StartGetExpectedEvents())
-        axios.get(`${process.env.REACT_APP_HOSTNAME}/getAllUpcomingEvents`).then((r) => {
+        axios.get(`${"https://api.shinetickets.com"}/getAllUpcomingEvents`).then((r) => {
             if (r.data.success) {
                 dispatch(SuccessGetExpectedEvents(r.data.upcomingEvents))
             }

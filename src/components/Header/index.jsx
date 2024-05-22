@@ -117,7 +117,7 @@ export const Header = () => {
         searchRef?.current?.focus()
     }, [openMobilsSearch])
 
-    return (<div className='HeaderDiv'>
+    return (
         <div className='header'>
             <div className='MainHeaderDiv'>
                 <div className='MainHeader'>
@@ -151,7 +151,7 @@ export const Header = () => {
                             } else if (language === 'ru') {
                                 title = elm.name_ru
                             }
-                            return <div key={i} className='CateogryName'>
+                            return <div className='CateogryName'>
                                 <p onClick={() => {
                                     window.location = (`/Category/${elm?.name}/${elm?._id}`)
                                 }
@@ -358,6 +358,5 @@ export const Header = () => {
             <div className='LineHeader' />
             {openMenuMobile && <MobileMenuComponent setOpen={() => setOpenMenuMobile(false)} />}
         </div>
-    </div >
     )
 }

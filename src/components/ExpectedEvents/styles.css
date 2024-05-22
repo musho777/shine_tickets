@@ -1,0 +1,345 @@
+.ExpectedEventsDiv {
+    width: 49%;
+    background-color: #DCDCDC;
+    border-radius: 10px;
+    padding: 5px;
+    display: flex;
+    position: relative;
+    cursor: pointer;
+    max-width: 682px;
+    min-width: 471px;
+    height: 270px;
+}
+
+.ExpectedEventsDiv>img {
+    width: 100%;
+    border-radius: 10px;
+    height: 100%;
+}
+
+
+.ExpectedEventsDiv:hover .ExpectedEventsInfo {
+    opacity: 1;
+}
+
+.ExpectedEventsDiv:hover .CategoryType {
+    background: linear-gradient(95deg, rgba(255, 255, 255, 0.20) 0%, rgba(255, 154, 154, 0.20) 100%);
+    backdrop-filter: blur(19.799999237060547px);
+
+}
+
+.ExpectedEventsDiv:hover .CategoryType>p {
+    color: #24005C;
+}
+
+
+
+
+.ExpectedEventsInfo {
+    transition: opacity 400ms;
+    opacity: 0;
+    position: absolute;
+    background: linear-gradient(180deg, #24005C 0%, rgba(36, 0, 92, 0.00) 100%);
+    backdrop-filter: blur(9.550000190734863px);
+    width: calc(100% - 10px);
+    height: calc(100% - 10px);
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    border-radius: 10px;
+    padding: 10px 0;
+}
+
+
+.TypeDiv {
+    position: absolute;
+    top: -15px;
+    left: 30px;
+    z-index: 999;
+}
+
+.CardDiv {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.dateAndLocation {
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 70px;
+    padding: 0 20px;
+}
+
+.dateAndLocationLine {
+    width: 2px;
+    background-color: #fff;
+    height: 100%;
+    margin: 0 10px;
+}
+
+.monthAndWeek {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.monthp {
+    color: #FFF;
+    text-align: center;
+    /* font-family: "Montserrat arm"; */
+    font-family: "Montserratarm-Medium", sans-serif;
+
+    font-size: 20px;
+    font-style: normal;
+}
+
+.monthLine {
+    width: 108px;
+    height: 2px;
+    background-color: #fff;
+}
+
+.weekp {
+    color: #FFCE00;
+    text-align: center;
+    font-family: "Montserratarm-Medium", sans-serif;
+    font-size: 15px;
+    font-style: normal;
+
+}
+
+.expectedDate {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.dayDate {
+    border: 1px solid #fff;
+    border-radius: 7px;
+    width: 66px;
+    height: 66px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dayDate>p {
+    color: #FFF;
+
+    font-family: "Montserratarm-Bold", sans-serif;
+
+    font-size: 37px;
+    font-style: normal;
+    line-height: 30px;
+}
+
+.expectTime {
+    color: #FFF;
+    font-family: "Montserratarm-Bold", sans-serif;
+
+    font-size: 23px;
+    font-style: normal;
+}
+
+.LocationDiv {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.LocationDiv>p {
+    color: #FFF;
+
+    font-family: "Montserratarm-Medium", sans-serif;
+
+    font-size: 12px;
+    font-style: normal;
+
+}
+
+.eventType {
+    color: #FFF;
+    font-family: "Montserrat arm";
+    font-size: 17px;
+    font-style: normal;
+    font-weight: 600;
+}
+
+.eventName {
+    color: #FFF;
+    font-size: 31px;
+    font-style: normal;
+    font-family: "Montserratarm-Bold", sans-serif;
+
+    line-height: 30px;
+}
+
+.ExpectedEventInfo {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    padding: 0 20px;
+    margin: 20px 0;
+}
+
+.ExpectedEventLine {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(to right, white 15px, transparent 15px);
+    background-size: 30px 100%;
+}
+
+.ExpectedEventPrice {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ExpectedEventPrice>p {
+    color: #FFCE00;
+    font-family: Montserrat;
+    font-size: 21px;
+    font-style: normal;
+    font-family: "Montserratarm-Bold", sans-serif;
+
+}
+
+.MobilePrice {
+    display: none;
+    justify-content: center;
+}
+
+.MobilePrice>p {
+    color: #FFCE00;
+    font-family: Montserrat;
+    font-size: 21px;
+    font-style: normal;
+}
+
+@media screen and (max-width: 1180px) {
+    .ExpectedEventPrice {
+        padding: 10px 20px;
+    }
+}
+
+@media screen and (max-width: 1135px) {
+    .eventName {
+        font-size: 18px;
+    }
+
+
+
+    .ExpectedEventsInfo {
+        width: 100%;
+    }
+
+    .dayDate>p {
+        font-size: 25px;
+    }
+
+    .dayDate {
+        width: 47px;
+        height: 47px;
+    }
+
+    .LocationDiv {
+        margin-left: 10px;
+    }
+
+    .expectTime {
+        font-size: 20px;
+    }
+
+    .expectedDate {
+        margin-right: 10px;
+    }
+
+    .ExpectedEventInfo {
+        gap: 0px;
+        margin: 10px;
+    }
+
+    .button {
+        width: 130px;
+        padding: 7px;
+        font-size: 16px;
+    }
+}
+
+
+@media screen and (max-width: 1170px) {
+    .CardDiv {
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+    }
+
+
+}
+
+@media screen and (max-width: 768px) {
+    .ExpectedEventsDiv {
+        min-width: 100%;
+        /* width: 375px !important; */
+        height: 298px !important;
+    }
+
+    .MobilePrice {
+        display: flex;
+    }
+
+    .dateAndLocation {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .expectedDateP {
+        margin: 0;
+    }
+
+    .LocationDiv {
+        margin: 0;
+        margin-top: 10px;
+    }
+
+    .eventName {
+        text-align: center;
+    }
+
+    .eventType {
+        text-align: center;
+    }
+
+
+    .ExpectedEventPrice>p {
+        display: none;
+    }
+
+    .ExpectedEventPrice {
+        padding: 0;
+        display: flex;
+        justify-content: center;
+    }
+
+    .ExpectedEventsInfo {
+        padding: 15px 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .eventName {
+        font-size: 13px;
+    }
+}

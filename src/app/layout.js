@@ -2,8 +2,10 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Providers from "./StoreProvider";
 import { Header } from "../components/Header";
-// import App from './myApp'
+import MyApp from "./MyApp";
+// import { useTranslation } from 'react-i18next'
 const inter = Inter({ subsets: ["latin"] });
+
 
 export const metadata = {
   title: "Create Next App",
@@ -11,13 +13,15 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+
+  // const { Event_reducer } = useSelector((st) => st)
+  // const { t } = useTranslation()
+
   return (
     <html lang="en">
       <Providers>
         <body className={inter.className}>
-          <Header />
-          {children}
-          {/* <App children={children} /> */}
+          <MyApp children={children} />
         </body>
       </Providers>
     </html>

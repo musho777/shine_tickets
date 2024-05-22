@@ -16,6 +16,7 @@ body {
   font-weight: 600;
 }
 
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -29,6 +30,12 @@ code {
   align-items: center;
 }
 
+.HeaderDiv {
+  position: fixed;
+  z-index: 9999;
+  width: 100%;
+}
+
 .container {
   max-width: 1440px;
   width: 100%;
@@ -36,7 +43,6 @@ code {
   flex-direction: column;
   margin: 0 auto;
   padding: 0 10%;
-  /* margin-bottom: 100px; */
 }
 
 .wrapper {
@@ -47,6 +53,32 @@ code {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+}
+
+
+
+
+.EventTitle {
+  margin: 40px 0;
+}
+
+.EventTitle>h2 {
+  color: #24005C;
+  font-family: "Montserrat arm";
+  font-family: "Montserratarm-Bold", sans-serif;
+  font-size: 40px;
+  font-style: normal;
+  line-height: 30px;
+}
+
+@media screen and (max-width: 768px) {
+  .Allevents {
+    flex-direction: column;
+  }
+
+  .EventTitle>h2 {
+    font-size: 23px;
+  }
 }
 
 @media screen and (min-width: 1550px) {

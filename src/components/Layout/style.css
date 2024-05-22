@@ -1,0 +1,14 @@
+.outlet {
+    margin: auto;
+    min-height: calc(100vh - 150px);
+}
+
+.HeaderDiv {
+    position: fixed;
+    z-index: 9999;
+    width: 100%;
+}
+
+.mainPageText span {
+    font-weight: 600;
+}

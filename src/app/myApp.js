@@ -1,21 +1,44 @@
-import { Inter } from "next/font/google";
-import "./globals.css";
-import { Header } from "../components/Header";
-// import { I18nextProvider } from 'react-i18next';
-import { appWithTranslation } from 'next-i18next';
-// import i18n from "i18next";
+"use client"
+import './page.css'
+import { useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { ChangeLanguageAction } from "../services/action/action"
+import { Header } from "../components/Header"
+import { Footer } from '../components/Footer'
 
-const inter = Inter({ subsets: ["latin"] });
-const App = ({ children }) => {
+const MyApp = ({ children }) => {
+  const [lang, setLang] = useState('')
+  const { language } = useSelector((st) => st.StaticReducer)
+  const disable = useDispatch()
+  useEffect(() => {
+    let item = localStorage.getItem('lang')
+    if (language) {
+      setLang(language)
+    }
+    else if (item) {
+      setLang(item)
+      disable(ChangeLanguageAction(item))
+    }
+    else {
+      setLang('am')
+      disable(ChangeLanguageAction('am'))
+    }
 
-  return (
-    <div>
-      {/* <I18nextProvider i18n={i18n}> */}
+  }, [language])
+  return <div>
+    <div className="HeaderDiv">
       <Header />
-      {children}
-      {/* </I18nextProvider> */}
     </div>
-  )
+    <div className='container'>
+      <div className='wrapper'>
+        <p className='mainPageText'>{('forDelivery')} <span>+ddfdfdf</span></p>
+      </div>
+    </div>
+    <div className="outlet">
+      {children}
+    </div>
+    <Footer />
+  </div>
 }
 
-export default appWithTranslation(App)
+export default MyApp

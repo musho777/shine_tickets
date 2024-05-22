@@ -1,0 +1,171 @@
+.WeekCard {
+    padding: 0 10px;
+    background-color: #24005C;
+    border-radius: 10px;
+    max-width: 447px;
+    display: flex;
+    gap: 30px;
+    max-height: 185px;
+    cursor: pointer;
+    min-width: 400px;
+}
+
+.WeekCard:hover .WeekcardLine {
+    display: none;
+}
+
+.WeekCard:hover .WeekcardLineSvg {
+    display: block;
+}
+
+.WeekcardLineSvg {
+    display: none;
+}
+
+.WeekcardLineSvgM {
+    display: none;
+}
+
+.WeekCardImg {
+    padding: 10px 0;
+
+}
+
+.WeekCardImg>img {
+    width: 143px;
+    height: 167px;
+    border-radius: 5px;
+}
+
+.WeekcardIfno {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    width: 43%;
+}
+
+.WeekcardIfnoTitle {
+    color: #FFCE00;
+    font-size: 20px;
+    font-style: normal;
+    font-family: "Montserratarm-Bold", sans-serif;
+
+}
+
+.WeekCardDate {
+    color: #FFF;
+    font-family: Montserrat;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+}
+
+.WeekCardPlace {
+    color: #FFF;
+    font-family: "Montserratarm-Medium", sans-serif;
+
+    font-size: 14px;
+    font-style: normal;
+    text-transform: uppercase;
+}
+
+.WeekcardLine {
+    width: 1px;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.50) 15px, transparent 15px);
+    background-size: 100% 30px;
+}
+
+.WeekCardWrapper {
+    display: flex;
+    gap: 20px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    padding: 15px 0;
+}
+
+.WeekEvents {
+    /* height: 490px; */
+    padding: 50px 0;
+    margin-top: 30px;
+    background: rgba(36, 0, 92, 0.15);
+}
+
+.WeekEventTitle {
+    /* margin: 10px 0; */
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.WeekArrow {
+    display: flex;
+    gap: 5px;
+    display: none;
+}
+
+.WeekArrow svg {
+    cursor: pointer;
+}
+
+.WeekEventTitle>h2 {
+    color: #24005C;
+    font-size: 40px;
+    font-style: normal;
+    font-family: "Montserratarm-Bold", sans-serif;
+
+    line-height: 30px;
+}
+
+@media screen and (max-width: 768px) {
+    .WeekCard {
+        min-width: 312px;
+    }
+
+    .WeekEventTitle>h2 {
+        font-size: 23px;
+    }
+
+    .WeekArrow {
+        display: none;
+    }
+
+    .WeekCardImg>img {
+        width: 108px;
+        height: 127px;
+    }
+
+    .WeekcardIfnoTitle {
+        font-size: 16px;
+    }
+
+    .WeekCardDate {
+        font-size: 16px;
+    }
+
+    .WeekCard {
+        gap: 20px;
+    }
+
+    .WeekcardLine {
+        background-size: 100% 34px;
+    }
+
+    .WeekcardLineSvgM {
+        display: none;
+    }
+
+    .WeekcardLineSvg {
+        display: none;
+    }
+
+    .WeekCard:hover .WeekcardLineSvgM {
+        display: block;
+    }
+
+    .WeekCard:hover .WeekcardLineSvg {
+        display: none;
+    }
+
+}

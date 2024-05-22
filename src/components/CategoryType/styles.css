@@ -1,0 +1,16 @@
+.CategoryType {
+    width: 125px;
+    height: 38px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.CategoryType>p {
+    color: #FFF;
+    font-family: "Montserrat arm";
+    font-family: "Montserratarm-Medium", sans-serif;
+    font-size: 16px;
+    font-style: normal;
+}
