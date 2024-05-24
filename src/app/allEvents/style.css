@@ -1,0 +1,198 @@
+.AllEventsCardWrapper {
+  width: 100%;
+
+}
+
+.rdrDateDisplayWrapper {
+  display: none !important;
+}
+
+.AllEventsCardWrapper>img {
+  width: 100%;
+  height: 55%;
+  border-radius: 10px;
+  transition: 1000ms;
+  object-fit: contain;
+}
+
+#AllEventsWrapperCard {
+  background-color: #24005C !important;
+  width: 100%;
+}
+
+.AllEventsCardWrapperInfo {
+  height: 43%;
+  position: relative;
+  gap: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.AllTopEventWrapper {
+  flex-wrap: wrap;
+  display: flex;
+  gap: 2.66%;
+}
+
+.AllTopEventWrapper>div {
+  margin-bottom: 2.66%;
+}
+
+
+#AllEventsInfo {
+  height: 100%;
+}
+
+.AllEventsCardWrapperInfoTitleDateTeter {
+  font-family: "Montserratarm-Medium", sans-serif;
+  color: white;
+  font-size: 12px;
+  position: absolute;
+  bottom: 10px;
+}
+
+.AllEventsCardWrapperInfoTitle {
+  font-family: "Montserratarm-Bold", sans-serif;
+  font-size: 15px;
+  color: #FFCE00;
+  height: 45px;
+}
+
+.AllEventsCardWrapperInfoTitleDate {
+  color: white;
+  font-family: "Montserratarm-Bold", sans-serif;
+}
+
+.rdrInRange {
+  color: #24005C !important;
+}
+
+.rdrStartEdge {
+  color: #24005C !important;
+}
+
+.rdrEndEdge {
+  color: #24005C !important;
+}
+
+.DataPickerDiv {
+  position: absolute;
+  z-index: 999;
+  top: 40px;
+  left: 227px;
+}
+
+
+.CategoryButtonWrapper {
+  display: flex;
+  gap: 20px;
+}
+
+.FilterWrapper {
+  display: flex;
+  gap: 40px;
+  margin-top: 40px;
+  align-items: center;
+  flex-wrap: wrap;
+  position: relative;
+  /* justify-content: space-between; */
+  /* width: 50%; */
+}
+
+.FilterWrapper>div>img {
+  cursor: pointer;
+}
+
+.SelectorDivWrapper {
+  margin-left: 80px;
+}
+
+.mFilterWrapper {
+  display: none;
+}
+
+.MultyselectItemCategory {
+  position: absolute;
+  /* width: 300px; */
+  width: 95%;
+  margin-top: 10px;
+  max-height: 200px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 2px;
+  background: #F8F8F8;
+  overflow-x: auto;
+  left: 0;
+  right: 0;
+  margin: auto;
+  margin-top: 10px;
+  color: #333333;
+  font-family: Kanit;
+  font-size: 14px;
+  font-style: normal;
+  line-height: normal;
+}
+
+
+.MultyselectItemCategory>div {
+  padding: 20px;
+}
+
+.MultyselectItemCategory>div:hover {
+  background: #24005C;
+}
+
+.css-19micn4-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected {
+  background-color: #24005C !important;
+}
+
+
+.rdrCalendarWrapper {
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  background-color: #DED9E7 !important;
+  border: 1px solid #24005C !important;
+  border-radius: 10px;
+}
+
+.rdrDefinedRangesWrapper {
+  display: none;
+}
+
+
+
+
+@media screen and (min-width: 1440px) {
+  .AllTopEventWrapper {
+    gap: 5%;
+  }
+
+  .AllTopEventWrapper>div {
+    margin-bottom: 5%;
+  }
+}
+
+@media screen and (min-width:1330px) and (max-width: 1550px) {
+  .AllTopEventWrapper {
+    gap: calc((100% - 1040px) / 3);
+  }
+
+}
+
+@media screen and (min-width:905px) and (max-width: 1330px) {
+  .AllTopEventWrapper {
+    gap: calc((100% - 780px) / 2);
+  }
+
+  #AllEventsWrapperCard {
+    width: 260px !important;
+  }
+}
+
+@media screen and (max-width: 904px) {
+  .AllTopEventWrapper {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    overflow-y: scroll;
+    padding: 15px 0;
+  }
+
+}

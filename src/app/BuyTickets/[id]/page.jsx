@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { CalendarSvg1, ClearSvg, LocationSvg1, Restart } from '../../../components/svg'
 import { ZoomMap } from '../../../components/ZoomMap/ZoomMap'
 import '../styles.css'
+import '../../Single/styles.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { TopEvents } from '../../../components/TopEvents/TopEvents';
 import { useTranslation } from 'react-i18next';

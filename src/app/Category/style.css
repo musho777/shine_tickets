@@ -1,0 +1,337 @@
+.CategoryBaner {
+    width: 100%;
+    position: relative;
+    height: 250px;
+}
+
+.CategoryBaner>img {
+    width: 100%;
+    /* height: 100%; */
+    height: 250px;
+}
+
+.CategoryBanerFon {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.Emoji {
+    display: block;
+}
+
+.EmojiM {
+    display: none;
+}
+
+.NotFound {
+    margin-top: 30px;
+    text-align: center;
+    font-size: 30px;
+    font-style: normal;
+    color: #24005C;
+    font-family: "Montserratarm-Bold", sans-serif;
+}
+
+.CategoryBanerFon p {
+    color: #FFF;
+
+    font-size: 78px;
+    font-style: normal;
+    font-family: "Montserratarm-Bold", sans-serif;
+
+    line-height: 30px;
+}
+
+.FilterDiv {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.FilterDiv>div {
+    width: 50%;
+}
+
+
+.SubCategoryButton {
+    color: #24005C;
+    font-family: "Montserratarm-Medium", sans-serif;
+    font-size: 16px;
+    font-style: normal;
+
+    line-height: 30px;
+    padding: 5px 30px;
+    border: none;
+    border-radius: 6px;
+    background: rgba(36, 0, 92, 0.15);
+    backdrop-filter: blur(9.649999618530273px);
+    cursor: pointer;
+    color: rgba(36, 0, 92, 0.50);
+}
+
+#C {
+    background: linear-gradient(90deg, #FF6969 0%, rgba(255, 105, 105, 0.00) 100%);
+}
+
+#O {
+    background: linear-gradient(90deg, #11AEF4 0%, rgba(17, 174, 244, 0.00) 100%);
+}
+
+#K {
+    background: linear-gradient(90deg, #FEC01E 0%, rgba(254, 192, 30, 0.00) 100%);
+}
+
+#T {
+    background: linear-gradient(90deg, #D943FF 0%, rgba(217, 67, 255, 0.00) 100%);
+}
+
+#A {
+    background: linear-gradient(90deg, #4DCF5F 0%, rgba(77, 207, 95, 0.00) 100%);
+}
+
+#active {
+    background: #FFCE00;
+    backdrop-filter: blur(9.649999618530273px);
+    color: #24005C !important;
+    border: none;
+}
+
+.CategoryScreenBaner {
+    display: block;
+}
+
+.CategoryScreenBaner2 {
+    display: none;
+}
+
+.FilterDivButton {
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+.FilterDivTitle {
+    color: #24005C;
+    font-family: "Montserratarm-Medium", sans-serif;
+
+    font-size: 16px;
+    font-style: normal;
+
+}
+
+.FilterDivButton>div {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.CalendarDivCalendar {
+    border-radius: 6px;
+    background: #DED9E7;
+    backdrop-filter: blur(9.649999618530273px);
+    width: 230px;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    z-index: 999;
+    cursor: pointer;
+
+}
+
+.CalendarWrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+    cursor: pointer;
+}
+
+.CalendarDiv {
+    display: flex;
+    gap: 30px;
+}
+
+.CalendarDiv>div {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.CalendarDiV {
+    position: absolute;
+    top: 50px;
+    z-index: 1000;
+}
+
+.CalendarDivCalendaR {
+    position: absolute;
+    width: 100%;
+    height: 0px;
+    top: 40px;
+    background: #DED9E7;
+    backdrop-filter: blur(9.649999618530273px);
+    z-index: 9999 !important;
+    transition: 1000ms;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    overflow-y: scroll;
+}
+
+.getCategoryDiv {
+    padding: 20px 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    font-size: 13px;
+    text-align: center;
+}
+
+.getCategoryDiv:hover {
+    background-color: #aea6bd;
+}
+
+.ClearFilterDiv {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    align-items: flex-end;
+    margin: 10px;
+}
+
+.NotFoundDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+}
+
+.ClearFilter {
+    display: flex;
+    border: 1px solid #24005C;
+    /* max-width: 240px; */
+    padding: 7px 20px;
+    border-radius: 50px;
+    cursor: pointer;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    background-color: rgba(36, 0, 92, 0.1);
+}
+
+.ClearFilter p {
+    font-family: 'Montserratarm-Regular', sans-serif;
+    color: #24005C;
+    font-size: 14px;
+}
+
+@media screen and (max-width: 1200px) {
+    .FilterDiv {
+        flex-direction: column;
+    }
+
+    .FilterDivButton {
+        margin-top: 20px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .CalendarDiv {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .CalendarDiv>div {
+        width: 100%;
+    }
+
+    .CalendarDivCalendar {
+        width: 100%;
+    }
+
+    .ClearFilterDiv {
+        justify-content: center;
+    }
+
+    #CategoryCardWrapper {
+        display: flex !important;
+        overflow: hidden !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+        align-items: center;
+
+    }
+
+    #CategoryCardWrapper>div {
+        margin-bottom: 30px;
+    }
+
+    .FilterDiv>div {
+        width: 100%;
+        padding: 0 20px;
+    }
+
+    .CalendarWrapper>svg {
+        display: none;
+    }
+
+    .CategoryBaner>img {
+        height: 103px;
+    }
+
+    .CategoryBaner {
+        height: 103px;
+    }
+
+    .FilterDivButton {
+        margin-top: 10px;
+    }
+
+    .CategoryBanerFon p {
+        color: #FFF;
+        font-size: 30px;
+        font-style: normal;
+        font-family: "Montserratarm-Bold", sans-serif;
+    }
+
+    #CategoryScreen1 {
+        padding: 0 !important;
+    }
+
+    .CategoryScreen1Div {
+        padding: 0 20px;
+    }
+
+    .CategoryScreenBaner {
+        display: none;
+    }
+
+    .FilterDiv {
+        margin-top: 10px;
+    }
+
+    .CategoryScreenBaner2 {
+        display: block;
+        margin-top: 20px;
+    }
+
+    .Emoji {
+        display: none;
+    }
+
+    .EmojiM {
+        display: block;
+    }
+
+    .NotFound {
+        font-size: 15px;
+    }
+}

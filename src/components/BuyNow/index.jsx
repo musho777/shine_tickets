@@ -10,6 +10,7 @@ import { Buffer } from "buffer"
 import 'react-phone-input-2/lib/style.css'
 import { useTranslation } from 'react-i18next'
 import InputMask from 'react-input-mask';
+import Image from 'next/image'
 
 export const BuyNow = ({ open, isParonyanEvent, paronyanSeans, event_id, grupID }) => {
     const { language } = useSelector((st) => st.StaticReducer)
@@ -335,11 +336,11 @@ export const BuyNow = ({ open, isParonyanEvent, paronyanSeans, event_id, grupID 
                             {selectPay == 1 ? <SelectedSvg /> : <SelectSvg />}
                         </div>
                         <div className='BuyMethodSelectImg'>
-                            <img alt='' width={80} height={34} src={require('../../assets/MIR_logo.png')} />
-                            <img alt='' width={55} height={34} src={require('../../assets/amex_logo.png')} />
-                            <img alt='' width={55} height={34} src={require('../../assets/mastercard_logo.png')} />
-                            <img alt='' width={80} height={34} src={require('../../assets/visa_logo.png')} />
-                            <img alt='' width={55} height={34} src={require('../../assets/arca_logo.png')} />
+                            <Image alt='' width={80} height={34} src={require('../../assets/MIR_logo.png')} />
+                            <Image alt='' width={55} height={34} src={require('../../assets/amex_logo.png')} />
+                            <Image alt='' width={55} height={34} src={require('../../assets/mastercard_logo.png')} />
+                            <Image alt='' width={80} height={34} src={require('../../assets/visa_logo.png')} />
+                            <Image alt='' width={55} height={34} src={require('../../assets/arca_logo.png')} />
                         </div>
                     </div>
                     <p className={selectPay == 1 && 'activeSelectedBuy'}>{t('Youwillreceive')}</p>
@@ -364,7 +365,7 @@ export const BuyNow = ({ open, isParonyanEvent, paronyanSeans, event_id, grupID 
                         <div className='BuyMethodSelect'>
                             {selectPay == 3 ? <SelectedSvg /> : <SelectSvg />}
                         </div>
-                        <img width={68} height={34} src={require('../../assets/22.png')} />
+                        <Image width={68} height={34} src={require('../../assets/22.png')} />
                     </div>
                     <p className={selectPay == 3 && 'activeSelectedBuy'}>{t('Shippingisfree')}</p>
 

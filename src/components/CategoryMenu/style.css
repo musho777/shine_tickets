@@ -1,0 +1,22 @@
+.categoryMenu {
+    background: #E7E7E7;
+    min-height: calc(100vh - 187px);
+    margin-top: -30px;
+}
+
+.categoryMenu>div {
+    padding: 0 20px;
+    color: #333333;
+    font-family: Kanit;
+    font-size: 18px;
+    font-style: normal;
+    line-height: normal;
+    height: 45px;
+    display: flex;
+    align-items: center;
+}
+
+.categoryMenu>div:hover {
+    background-color: #333333;
+    color: white;
+}

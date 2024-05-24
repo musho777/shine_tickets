@@ -95,6 +95,7 @@ export const Carusel = () => {
                     <div key={i} className='CaruselItem'>
                         <div className='BanerDiv' >
                             <img
+                                onDragStart={handleDragStart}
                                 className='BanerImg2'
                                 src={windowSize.width > 940 ? `https://api.shinetickets.com/images/${elm?.eventId?.image}` :
                                     `https://api.shinetickets.com/images/${elm?.eventId?.largeImage}`
