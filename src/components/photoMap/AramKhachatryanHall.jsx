@@ -104,7 +104,7 @@ const AramKhachatryan = ({ eventId, soldTickets, sessionID, pading, value, place
 
     useEffect(() => {
         const image = new Image()
-        image.src = require('../../assets/Aram-w.png')
+        image.src = '/assets/Aram-w.png'
 
         image.onload = () => {
             const canvas = document.createElement('canvas')
@@ -133,12 +133,21 @@ const AramKhachatryan = ({ eventId, soldTickets, sessionID, pading, value, place
         };
     }, []);
 
+    const [imageSrc, setImageSrc] = useState(null);
+
+    useEffect(() => {
+        const img = new Image();
+        img.src = '/assets/Aram.png'; // Path to the image in the public directory
+        img.onload = () => setImageSrc(img.src);
+    }, []);
+
+
     return (
         <div >
             <img
                 style={{ paddingTop: pading, paddingLeft: pading }}
                 className="zoomable-image"
-                alt='' src={require('../../assets/Aram.png')} />
+                alt='' src={imageSrc} />
             {coordinatesState.map((e, i) => {
                 let top = -15
                 let left = 10

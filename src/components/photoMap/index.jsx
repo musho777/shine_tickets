@@ -97,7 +97,7 @@ const PhotoCoordinatesByColor = ({ eventId, soldTickets, sessionID, pading, valu
 
     useEffect(() => {
         const image = new Image()
-        image.src = require('../../assets/Redessign.png')
+        image.src = '/assets/Redessign.png'
         image.onload = () => {
             const canvas = document.createElement('canvas')
             canvas.width = image.width
@@ -122,6 +122,13 @@ const PhotoCoordinatesByColor = ({ eventId, soldTickets, sessionID, pading, valu
             setCoordinatesState(coordinates)
         };
     }, []);
+    const [imageSrc, setImageSrc] = useState(null);
+    useEffect(() => {
+        const img = new Image();
+        img.src = '/assets/Redessign.png'; // Path to the image in the public directory
+        img.onload = () => setImageSrc(img.src);
+    }, []);
+
 
 
     return (
@@ -129,7 +136,7 @@ const PhotoCoordinatesByColor = ({ eventId, soldTickets, sessionID, pading, valu
             <img
                 style={{ paddingTop: pading, paddingLeft: pading }}
                 className="zoomable-image"
-                alt='' src={require('../../assets/Redessign.png')} />
+                alt='' src={imageSrc} />
             {coordinatesState.map((e, i) => {
                 let top = -1
                 let left = -8
