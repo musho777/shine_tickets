@@ -3,18 +3,18 @@ import './style.css'
 import { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import { ActiveArrowSvg, ArrowSvg, MobileMenu, PhonSvg, SearchMobileSvg, SearchSvg, WorldSvg } from '../svg'
-import { ChangeLanguageAction, GetCategory, GetFeedback, SearchAction } from '../../services/action/action'
-import { useTranslation } from 'react-i18next'
+import { MobileMenu, PhonSvg, SearchMobileSvg, SearchSvg } from '../svg'
+import { GetCategory, GetFeedback, SearchAction } from '../../services/action/action'
 import { MobileMenuComponent } from '../MobileMenu'
 import logo from '../../assets/logo.webp'
 import Image from 'next/image'
+import { useTranslation } from 'react-i18next';
+import { Language } from './components/language'
 
 export const Header = () => {
     const dispatch = useDispatch()
     const search = useSelector((st) => st.search)
     const getCategory = useSelector((st) => st.getCategory)
-    const events = useSelector((st) => st.getAllEventes)
 
     const { language } = useSelector((st) => st.StaticReducer)
     const inputRef = useRef(null);
@@ -24,8 +24,7 @@ export const Header = () => {
     const [openMenuMobile, setOpenMenuMobile] = useState(false)
     const [searchResult, setSearchResult] = useState(false)
     const [searchResultData, setSearchResultDAta] = useState(false)
-
-    const [disable, setDisable] = useState(false)
+    const { id } = useParams()
     const { t } = useTranslation()
     const searchRef = useRef()
 
@@ -42,10 +41,6 @@ export const Header = () => {
     });
 
     useEffect(() => {
-        setDisable(!events.loading)
-    }, [events.loading])
-
-    useEffect(() => {
         if (openMenuMobile) {
             document.body.style.overflow = 'hidden';
         }
@@ -55,6 +50,7 @@ export const Header = () => {
     }, [openMenuMobile])
 
     useEffect(() => {
+        searchRef?.current?.focus()
         if (!openMobilsSearch) {
             setValue('')
         }
@@ -69,7 +65,6 @@ export const Header = () => {
         }
     }
 
-    const { id } = useParams()
     useEffect(() => {
         if (value) {
             dispatch(SearchAction(value))
@@ -87,7 +82,6 @@ export const Header = () => {
                 setSearchResultDAta(true)
             }
         }, 300);
-
 
 
         if (!searchResult) {
@@ -113,9 +107,6 @@ export const Header = () => {
         };
     }, [searchResult])
 
-    useEffect(() => {
-        searchRef?.current?.focus()
-    }, [openMobilsSearch])
 
     return (
         <div className='header'>
@@ -241,32 +232,7 @@ export const Header = () => {
                             </button>
                         </div>
                     </div>
-                    <div
-                        id={openLanguage ? 'openLanguage' : ''}
-                        onClick={(e) => {
-                            e.stopPropagation()
-                            e.preventDefault()
-                            setOpenLanguage(true)
-                        }
-                        } className='LanguageDiv'>
-                        <WorldSvg />
-                        {localStorage.getItem('lang') === 'am'
-                            ? <p>ՀԱՅ</p>
-                            : localStorage.getItem('lang') === 'en'
-                                ? <p>ENG</p>
-                                : <p>РУС</p>
-                        }
-                        {openLanguage ?
-
-                            <ActiveArrowSvg /> :
-                            <ArrowSvg />
-                        }
-                        {openLanguage && <div className='SelectLanguage'>
-                            <p onClick={() => dispatch(ChangeLanguageAction('am'))} >Հայերեն</p>
-                            <p onClick={() => dispatch(ChangeLanguageAction('ru'))} >Русский</p>
-                            <p onClick={() => dispatch(ChangeLanguageAction('en'))} >English</p>
-                        </div>}
-                    </div>
+                    <Language openLanguage={openLanguage} setOpenLanguage={(e) => setOpenLanguage(e)} />
                     <div className='MobileHeaderWrapper'>
                         {!openMobilsSearch ?
 

@@ -1,37 +1,37 @@
 "use client"
 import './page.css'
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { ChangeLanguageAction } from "../services/action/action"
 import { Header } from "../components/Header"
 import { Footer } from '../components/Footer'
+import { appWithTranslation, useTranslation } from 'next-i18next';
+import '../lib/i18n'
 
 const MyApp = ({ children }) => {
-  const [lang, setLang] = useState('')
+  const { t } = useTranslation()
+  const { Event_reducer } = useSelector((st) => st)
   const { language } = useSelector((st) => st.StaticReducer)
+
   const disable = useDispatch()
+
   useEffect(() => {
     let item = localStorage.getItem('lang')
-    if (language) {
-      setLang(language)
-    }
-    else if (item) {
-      setLang(item)
+    if (item) {
       disable(ChangeLanguageAction(item))
     }
     else {
-      setLang('am')
       disable(ChangeLanguageAction('am'))
     }
-
   }, [language])
+
   return <div>
     <div className="HeaderDiv">
       <Header />
     </div>
     <div className='container'>
       <div className='wrapper'>
-        <p className='mainPageText'>{('forDelivery')} <span>+ddfdfdf</span></p>
+        <p className='mainPageText'>{t('forDelivery')} <span>{Event_reducer?.feedback?.phone}</span></p>
       </div>
     </div>
     <div className="outlet">
@@ -41,4 +41,4 @@ const MyApp = ({ children }) => {
   </div>
 }
 
-export default MyApp
+export default appWithTranslation(MyApp)
