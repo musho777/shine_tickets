@@ -19,8 +19,7 @@ export const WeekEvents = () => {
             </div>
             <div className="WeekCardWrapper">
                 {getWeekEvent.events.map((elm, i) => {
-                    // if (!elm.isParonyanEvent) {
-                    return <div>
+                    return <div key={i}>
                         <WeekCard
                             date={elm.date}
                             time={elm.time}

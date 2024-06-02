@@ -7,7 +7,6 @@ import { useTranslation } from 'react-i18next'
 export const MobileMenuComponent = ({ setOpen }) => {
     const getCategory = useSelector((st) => st.getCategory)
     const { language } = useSelector((st) => st.StaticReducer)
-    const navigation = useNavigate()
     const dispatch = useDispatch()
     const feedback = useSelector(st => st.Event_reducer.feedback)
     const { t } = useTranslation()
@@ -28,7 +27,7 @@ export const MobileMenuComponent = ({ setOpen }) => {
             <p>{t('DEPARTMENTS')}</p>
             <div className='MenuWrapper'>
                 <div className='MenuWrapperDiv'>
-                    {getCategory.category.map(elm => {
+                    {getCategory.category.map((elm, i) => {
                         let div = ''
                         let bg = ''
                         if (elm._id === "65ce7bcc25c566d4e297d2ec") {
@@ -71,7 +70,8 @@ export const MobileMenuComponent = ({ setOpen }) => {
                             {div}
                             <p onClick={() => {
                                 setOpen(false)
-                                navigation(`/Category/${elm.name}/${elm?._id}`)
+                                window.location = `/Category/${elm?.name}/${elm?._id}`
+                                // navigation(`/Category/${elm.name}/${elm?._id}`)
                             }}
                                 className='MenuHeadertext'>{title}</p>
                         </div>

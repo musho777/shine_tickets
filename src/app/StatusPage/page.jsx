@@ -1,3 +1,4 @@
+"use client"
 import './styles.css'
 import { PuffLoader } from 'react-spinners'
 import { useEffect } from 'react'

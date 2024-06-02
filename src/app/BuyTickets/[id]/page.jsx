@@ -414,7 +414,7 @@ const BuyTickets = ({ params }) => {
     <div className='ticketPrice'>
       {
         price.map((elm, i) => {
-          return <div onClick={() => ChoosePrice(i)} style={{ backgroundColor: color[i] }}>{elm.price}</div>
+          return <div key={i} onClick={() => ChoosePrice(i)} style={{ backgroundColor: color[i] }}>{elm.price}</div>
         })
       }
       <div onClick={() => ChoosePrice(-1)} style={{ backgroundColor: '#7d4e5a' }}>{t('All')}</div>
@@ -451,7 +451,7 @@ const BuyTickets = ({ params }) => {
           <div className='TicketBody'>
             {
               tickets?.tickets?.map((elm, i) => {
-                return <div className='TikcetsWrapper'>
+                return <div key={i} className='TikcetsWrapper'>
                   <div className='TicketDiv'>
                     <div className='TicketInfoo'>
                       <p>{elm?.parterre && t('Parterre')} {elm?.lodge && t('Lodge')} {elm?.amphitheater && t('Amphitheater')} {elm?.stage && 'Stage'}</p>
@@ -527,7 +527,7 @@ const BuyTickets = ({ params }) => {
       <div className='ticketPriceMobile'>
         {
           price.map((elm, i) => {
-            return <div onClick={() => ChoosePrice(i)} style={{ backgroundColor: color[i] }}>{elm.price}</div>
+            return <div key={i} onClick={() => ChoosePrice(i)} style={{ backgroundColor: color[i] }}>{elm.price}</div>
           })
         }
         <div onClick={() => ChoosePrice(-1)} style={{ backgroundColor: '#7d4e5a' }}>{t('All')}</div>
@@ -563,7 +563,7 @@ const BuyTickets = ({ params }) => {
             <div className='TicketBody'>
               {
                 tickets?.tickets?.map((elm, i) => {
-                  return <div className='TikcetsWrapper'>
+                  return <div key={i} className='TikcetsWrapper'>
                     <div className='TicketDiv'>
                       <div className='TicketInfoo'>
                         <p>{elm?.parterre && t('Parterre')} {elm?.lodge && t('Lodge')} {elm?.amphitheater && t('Amphitheater')} {elm?.stage && 'Stage'}</p>

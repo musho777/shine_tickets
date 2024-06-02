@@ -90,6 +90,7 @@ export const SearchAction = (search) => {
         dispatch(StartSearch())
         axios.post(`${"https://api.shinetickets.com"}/search`, { search: search }).then((r) => {
             if (r.data.success) {
+                console.log(r)
                 dispatch(SuccessSearch(r.data.events))
             }
             else {

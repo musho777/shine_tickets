@@ -1,9 +1,10 @@
 import './style.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { FbSvg, InstagramSvg, MobilFb, MobileI, MobileT, TwitterSvg } from '../svg'
+import { FbSvg, InstagramSvg } from '../svg'
 import { useTranslation } from 'react-i18next'
 import { useEffect } from 'react'
 import { GetFeedback } from '../../services/action/action'
+import img from '../../assets/logo2.png'
 import Image from 'next/image'
 
 export const Footer = ({ menu }) => {
@@ -39,7 +40,7 @@ export const Footer = ({ menu }) => {
                 <div className='footerColumns'>
                     <Image
                         width={200}
-                        onClick={() => scrollToTop()} src={require('../../assets/logo2.png')} />
+                        onClick={() => scrollToTop()} src={img} />
                     <p className=''>
                         {t('SHINETICKETSLLC')} <span className='PrivacyPolicySpan' onClick={() => window.location = ('PrivacyPolicy')}>{t('SHINETICKETSLLC2')}</span> {t('SHINETICKETSLLC1')}
                     </p>
@@ -133,7 +134,10 @@ export const Footer = ({ menu }) => {
 
                 </div>
                 <div className='footerColumns'>
-                    <img onClick={() => scrollToTop()} src={require('../../assets/logo2.png')} />
+                    <Image
+                        width={50}
+                        height={40}
+                        onClick={() => scrollToTop()} src={img} />
                     <p className=''>
                         {t('SHINETICKETSLLC')}
                     </p>
