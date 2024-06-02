@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { GetExpectedEvents } from '../../services/action/action'
 export const ExpectedEvents = () => {
-    const { getExpectedEvents } = useSelector((st) => st)
+    const getExpectedEvents = useSelector((st) => st.getExpectedEvents)
     const { language } = useSelector((st) => st.StaticReducer)
     const dispatch = useDispatch()
     useEffect(() => {

@@ -13,7 +13,7 @@ import { TopEventsComponent } from '../components/TopEvents'
 export default function Home() {
   const dispatch = useDispatch()
   const general = useSelector((st) => st.general)
-  const { getWeekEvent } = useSelector((st) => st)
+  const getWeekEvent = useSelector((st) => st.getWeekEvent)
 
 
   useEffect(() => {

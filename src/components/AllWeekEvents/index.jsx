@@ -31,7 +31,7 @@ export const AllWeekEvents = () => {
     const [date, setDate] = useState('')
     const [height, setHeight] = useState(false)
     const { paronyanEvents } = useSelector((st) => st)
-    const { getWeekEvent } = useSelector((st) => st)
+    const getWeekEvent = useSelector((st) => st.getWeekEvent)
 
     useEffect(() => {
         HallName()

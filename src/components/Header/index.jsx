@@ -66,7 +66,11 @@ export const Header = () => {
             <div className='MainHeaderDiv'>
                 <div className='MainHeader'>
                     {!openMobilsSearch && <div onClick={() => window.location = '/'}>
-                        <Image className='Logo' src={logo} />
+                        <Image
+                            alt=''
+                            className='Logo'
+                            src={logo}
+                        />
                     </div>}
                     <Category />
                     <div className='HeaderInfo'>

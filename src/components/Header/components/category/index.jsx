@@ -7,7 +7,7 @@ export const Category = ({ }) => {
   const getCategory = useSelector((st) => st.getCategory)
   const { language } = useSelector((st) => st.StaticReducer)
   return <div className='textWrapper'>
-    {getCategory.category.map(elm => {
+    {getCategory.category.map((elm, i) => {
       let bg = ''
       if (elm._id === "65ce7bcc25c566d4e297d2ec") {
         bg = '#FF6969'
@@ -32,7 +32,7 @@ export const Category = ({ }) => {
       } else if (language === 'ru') {
         title = elm.name_ru
       }
-      return <div className='CateogryName'>
+      return <div key={i} className='CateogryName'>
         <p onClick={() => { window.location = (`/Category/${elm?.name}/${elm?._id}`) }
         } className='Headertext'>{title}</p>
         <div

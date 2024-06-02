@@ -6,7 +6,7 @@ import { useSelector } from "react-redux"
 
 export const WeekEvents = () => {
     const { t } = useTranslation()
-    const { getWeekEvent } = useSelector((st) => st)
+    const getWeekEvent = useSelector((st) => st.getWeekEvent)
 
     return <div className="WeekEvents">
         <div className="container">

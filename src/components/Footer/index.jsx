@@ -10,7 +10,7 @@ import Image from 'next/image'
 export const Footer = ({ menu }) => {
     const getCategory = useSelector((st) => st.getCategory)
     const { language } = useSelector((st) => st.StaticReducer)
-    const { Event_reducer } = useSelector((st) => st)
+    const Event_reducer = useSelector((st) => st.Event_reducer)
     const dispatch = useDispatch()
     const { t } = useTranslation()
 
@@ -39,6 +39,7 @@ export const Footer = ({ menu }) => {
             <div className='container' id='footerWrapperDiv'>
                 <div className='footerColumns'>
                     <Image
+                        alt=''
                         width={200}
                         onClick={() => scrollToTop()} src={img} />
                     <p className=''>
@@ -56,7 +57,7 @@ export const Footer = ({ menu }) => {
                     <div className='footerColumnsWrapperDiv'>
                         <p className='footerColumnsTitle'>{t('Sections')}</p>
                         <div className='footerColumnsInfo'>
-                            {getCategory.category.map(elm => {
+                            {getCategory.category.map((elm, i) => {
                                 let title = ''
                                 if (language === 'am') {
                                     title = elm.name
@@ -65,7 +66,7 @@ export const Footer = ({ menu }) => {
                                 } else if (language === 'ru') {
                                     title = elm.name_ru
                                 }
-                                return <p onClick={() => window.location = (`/Category/${elm.name}/${elm?._id}`)}>
+                                return <p key={i} onClick={() => window.location = (`/Category/${elm.name}/${elm?._id}`)}>
                                     {title}
                                 </p>
                             })}
@@ -116,7 +117,7 @@ export const Footer = ({ menu }) => {
                     <div className='footerColumnsWrapperDiv'>
                         <p className='footerColumnsTitle'>{t('Sections')}</p>
                         <div className='footerColumnsInfo'>
-                            {getCategory.category.map(elm => {
+                            {getCategory.category.map((elm, i) => {
                                 let title = ''
                                 if (language === 'am') {
                                     title = elm.name
@@ -125,7 +126,7 @@ export const Footer = ({ menu }) => {
                                 } else if (language === 'ru') {
                                     title = elm.name_ru
                                 }
-                                return <p onClick={() => window.location = `/Category/${elm?.name}/${elm?._id}`}>
+                                return <p key={i} onClick={() => window.location = `/Category/${elm?.name}/${elm?._id}`}>
                                     {title}
                                 </p>
                             })}
@@ -135,6 +136,7 @@ export const Footer = ({ menu }) => {
                 </div>
                 <div className='footerColumns'>
                     <Image
+                        alt=''
                         width={50}
                         height={40}
                         onClick={() => scrollToTop()} src={img} />

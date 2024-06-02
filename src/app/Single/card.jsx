@@ -1,3 +1,4 @@
+import '../../components/Slider/styles.css'
 import { useTranslation } from 'react-i18next';
 import { Button } from '../../components/Button'
 import { LocationSvg, SeansCaelndar } from '../../components/svg'

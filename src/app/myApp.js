@@ -10,7 +10,7 @@ import '../lib/i18n'
 
 const MyApp = ({ children }) => {
   const { t } = useTranslation()
-  const { Event_reducer } = useSelector((st) => st)
+  const Event_reducer = useSelector((st) => st.Event_reducer)
   const { language } = useSelector((st) => st.StaticReducer)
 
   const disable = useDispatch()
@@ -25,7 +25,7 @@ const MyApp = ({ children }) => {
     }
   }, [language])
 
-  return <div>
+  return <>
     <div className="HeaderDiv">
       <Header />
     </div>
@@ -38,7 +38,9 @@ const MyApp = ({ children }) => {
       {children}
     </div>
     <Footer />
-  </div>
+  </>
 }
 
 export default appWithTranslation(MyApp)
+
+
