@@ -62,43 +62,45 @@ export const Header = () => {
     }, [searchResult]);
 
     return (
-        <div className='header'>
-            <div className='MainHeaderDiv'>
-                <div className='MainHeader'>
-                    {!openMobilsSearch && <div onClick={() => window.location = '/'}>
-                        <Image
-                            alt=''
-                            className='Logo'
-                            src={logo}
-                        />
-                    </div>}
-                    <Category />
-                    <div className='HeaderInfo'>
-                        <Search />
-                        <div className='ButtonWrapperHeader'>
-                            <button onClick={() => {
-                                window.location.href = `tel:${feedback.phone}`;
-                            }} className='phonNumber'>
-                                <PhonSvg />
-                                {t('freeDelivery1')}
-                            </button>
+        <div className="HeaderDiv">
+            <div className='header'>
+                <div className='MainHeaderDiv'>
+                    <div className='MainHeader'>
+                        {!openMobilsSearch && <div onClick={() => window.location = '/'}>
+                            <Image
+                                alt=''
+                                className='Logo'
+                                src={logo}
+                            />
+                        </div>}
+                        <Category />
+                        <div className='HeaderInfo'>
+                            <Search />
+                            <div className='ButtonWrapperHeader'>
+                                <button onClick={() => {
+                                    window.location.href = `tel:${feedback.phone}`;
+                                }} className='phonNumber'>
+                                    <PhonSvg />
+                                    {t('freeDelivery1')}
+                                </button>
+                            </div>
                         </div>
+                        <Language />
+                        <MobileSearchs
+                            searchResultData={searchResultData}
+                            setSearchResult={setSearchResult}
+                            openMobilsSearch={openMobilsSearch}
+                            setOpenMobileSearch={setOpenMobileSearch}
+                            openMenuMobile={openMenuMobile}
+                            value={value} setValue={setValue}
+                            setOpenMenuMobile={setOpenMenuMobile}
+                            searchResult={searchResult}
+                        />
                     </div>
-                    <Language />
-                    <MobileSearchs
-                        searchResultData={searchResultData}
-                        setSearchResult={setSearchResult}
-                        openMobilsSearch={openMobilsSearch}
-                        setOpenMobileSearch={setOpenMobileSearch}
-                        openMenuMobile={openMenuMobile}
-                        value={value} setValue={setValue}
-                        setOpenMenuMobile={setOpenMenuMobile}
-                        searchResult={searchResult}
-                    />
                 </div>
+                <div className='LineHeader' />
+                {openMenuMobile && <MobileMenuComponent setOpen={() => setOpenMenuMobile(false)} />}
             </div>
-            <div className='LineHeader' />
-            {openMenuMobile && <MobileMenuComponent setOpen={() => setOpenMenuMobile(false)} />}
         </div>
     )
 }

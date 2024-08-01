@@ -3,7 +3,7 @@ import './style.css'
 import '../../components/TopEvents/styles.css'
 import '../category/style.css'
 import 'react-date-range/dist/styles.css'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import 'react-date-range/dist/theme/default.css'
 import { useDispatch, useSelector } from 'react-redux'
@@ -34,6 +34,8 @@ const AllEventss = () => {
   const getCategory = useSelector((st) => st.getCategory)
   const [date, setDate] = useState('')
   const [height, setHeight] = useState(false)
+  const menuRef = useRef(null);
+
 
   useEffect(() => {
     HallName()
@@ -158,10 +160,18 @@ const AllEventss = () => {
     />
   }
 
-  document.body.addEventListener('click', function () {
-    setOpenCalendar(false)
-    setHeight(false)
-  });
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setOpenCalendar(false)
+        setHeight(false)
+      }
+    };
+    document.body.addEventListener('click', handleClickOutside);
+    return () => {
+      document.body.removeEventListener('click', handleClickOutside);
+    };
+  }, []);
 
   const ClearFunction = () => {
     setActiveButton('Բոլորը')
@@ -238,43 +248,50 @@ const AllEventss = () => {
             </div>
             <div>
               <p className='FilterDivTitle'>{t('Place1')}</p>
-              <div style={{ borderBottomLeftRadius: height && 0, borderBottomRightRadius: height && 0 }} onClick={(e) => {
+              <div ref={menuRef} style={{ borderBottomLeftRadius: height && 0, borderBottomRightRadius: height && 0 }} onClick={(e) => {
                 e.preventDefault()
                 e.stopPropagation()
-                setHeight(!height)
+                setHeight(true)
               }} className='CalendarDivCalendar'>
-                <p>{hallName ? (hallName) : (hallDefaultName)}</p>
-                <div style={{ height: height ? 200 : 0 }} className='CalendarDivCalendaR'>
+                <p>{truncateText(hallName ? (hallName) : (hallDefaultName))}</p>
+                <div ref={menuRef} style={{ height: height ? 200 : 0 }} className='CalendarDivCalendaR'>
                   <div
+                    ref={menuRef}
                     onClick={() => {
                       setHallId('')
                       setHallName(hallDefaultName)
+                      setHeight(false)
                     }}
                     className='getCategoryDiv'>{(hallDefaultName)}</div>
-                  {height && getCategory?.hall.map((elm, i) => {
-                    if (language == 'en') {
-                      return <div onClick={() => {
-                        setHallId(elm?._id)
-                        setHallName(`${elm.place_en} ${elm?.hall_en}`)
-                      }} className='getCategoryDiv'>{(`${elm.place_en} ${elm?.hall_en} `)}</div>
-                    }
-                    else if (language == 'am') {
-                      return <div
-                        onClick={() => {
+                  <div ref={menuRef}>
+                    {height && getCategory?.hall.map((elm, i) => {
+                      if (language == 'en') {
+                        return <div ref={menuRef} onClick={() => {
                           setHallId(elm?._id)
-                          setHallName(`${elm.place} ${elm?.hall}`)
-                        }}
-                        className='getCategoryDiv'>{`${elm.place} ${elm?.hall}`}</div>
-                    }
-                    else if (language == 'ru') {
-                      return <div
-                        onClick={() => {
-                          setHallId(elm?._id)
-                          setHallName(`${elm.place_ru} ${elm?.hall_ru}`)
-                        }}
-                        className='getCategoryDiv'>{`${elm.place_ru} ${elm?.hall_ru}`}</div>
-                    }
-                  })}
+                          setHallName(`${elm.place_en} ${elm?.hall_en}`)
+                          setHeight(false)
+                        }} className='getCategoryDiv'>{(`${elm.place_en} ${elm?.hall_en} `)}</div>
+                      }
+                      else if (language == 'am') {
+                        return <div
+                          ref={menuRef}
+                          onClick={() => {
+                            setHallId(elm?._id)
+                            setHallName(`${elm.place} ${elm?.hall}`)
+                          }}
+                          className='getCategoryDiv'>{`${elm.place} ${elm?.hall}`}</div>
+                      }
+                      else if (language == 'ru') {
+                        return <div
+                          ref={menuRef}
+                          onClick={() => {
+                            setHallId(elm?._id)
+                            setHallName(`${elm.place_ru} ${elm?.hall_ru}`)
+                          }}
+                          className='getCategoryDiv'>{`${elm.place_ru} ${elm?.hall_ru}`}</div>
+                      }
+                    })}
+                  </div>
                 </div>
               </div>
             </div>

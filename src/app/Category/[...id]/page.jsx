@@ -317,13 +317,14 @@ const Category = ({ params }) => {
                         className='getCategoryDiv'>{(hallDefaultName)}</div>
                       {height && getCategory.hall.map((elm, i) => {
                         if (language == 'en') {
-                          return <div onClick={() => {
+                          return <div key={i} onClick={() => {
                             setHallId(elm._id)
                             setHallName(`${elm.place_en} ${elm?.hall_en}`)
                           }} className='getCategoryDiv'>{`${elm.place_en} ${elm?.hall_en}`}</div>
                         }
                         else if (language == 'am') {
                           return <div
+                            key={i}
                             onClick={() => {
                               setHallId(elm._id)
                               setHallName(`${elm.place} ${elm?.hall}`)
@@ -332,6 +333,7 @@ const Category = ({ params }) => {
                         }
                         else if (language == 'ru') {
                           return <div
+                            key={i}
                             onClick={() => {
                               setHallId(elm._id)
                               setHallName(`${elm.place_ru} ${elm?.hall_ru}`)
@@ -366,7 +368,7 @@ const Category = ({ params }) => {
                     else if (language === 'ru') {
                       name = elm?.name_ru
                     }
-                    return <button onClick={() => {
+                    return <button key={i} onClick={() => {
                       setActiveButton(elm?.name)
                       setSubcategoryId(elm?._id)
                     }} id={activeButton == elm?.name && 'active'} className='SubCategoryButton'>{name}</button>

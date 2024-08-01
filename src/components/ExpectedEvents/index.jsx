@@ -56,6 +56,7 @@ export const ExpectedEvents = () => {
                     category = elm.category.name_en
                 }
                 return <Card
+                    key={i}
                     month={month}
                     time={elm.time}
                     day={elm.day}

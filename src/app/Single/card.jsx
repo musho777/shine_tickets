@@ -105,7 +105,7 @@ export const Card = ({
                                 .filter(node => node.nodeType === 3)
                                 .map(node => node.textContent.trim());
                             const time = matchResult[5];
-                            return <div onClick={(e) => {
+                            return <div key={i} onClick={(e) => {
                                 e.stopPropagation()
                                 e.preventDefault()
                                 setActive(i)
@@ -178,7 +178,7 @@ export const Card = ({
                         .filter(node => node.nodeType === 3)
                         .map(node => node.textContent.trim());
                     const time = matchResult[5];
-                    return <div onClick={() => {
+                    return <div key={i} onClick={() => {
                         setActive(i)
                         dispatch(ActiveSeans(elm.id))
                         setActiveSeans(elm.id)

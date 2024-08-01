@@ -1,4 +1,4 @@
-import '../StatusPage/styles.css'
+import '../StatusPageReject/styles.css'
 import Image from 'next/image'
 
 const DeliveryStatusPage = () => {

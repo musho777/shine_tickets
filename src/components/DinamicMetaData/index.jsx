@@ -10,6 +10,7 @@ const DynamicMeta = ({ title, description }) => {
   return (
     <>
       <Head>
+        <link rel="shortcut icon" href="../../app/favicon.ico" />
         {/* Set dynamic metadata */}
         <meta name="description" content={description} />
       </Head>

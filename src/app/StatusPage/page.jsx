@@ -1,14 +1,16 @@
 "use client"
-import './styles.css'
+import '../StatusPageReject/styles.css'
 import { PuffLoader } from 'react-spinners'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { GetTicketStatus } from '../../services/action/action'
-import { StatusPageReject } from './reject'
+import { StatusPageReject } from '../StatusPageReject'
 
-const StatusPage = ({ s }) => {
+const StatusPage = ({ params }) => {
+    console.log(params)
     const dispatch = useDispatch()
-    let orderId = window.location?.href?.split('order=')[1]
+    // const orderId = router.query.order;
+    // let orderId = window.location?.href?.split('order=')[1]
     useEffect(() => {
         dispatch(GetTicketStatus({ orderId }))
     }, [])
@@ -35,7 +37,7 @@ const StatusPage = ({ s }) => {
     else {
         return <StatusPageReject />
     }
-
+    return <div></div>
 }
 
 export default StatusPage
