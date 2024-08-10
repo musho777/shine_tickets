@@ -201,10 +201,6 @@
         height: 480px;
     }
 
-    .BanerPrimera {
-        display: none;
-    }
-
     .BanerPrimeraMobile {
         gap: 15px;
         display: flex;

@@ -39,11 +39,9 @@ export const WeekEvents = () => {
                 })
                 }
             </div>
-            <div className="ShowAllButtonWrappr">
-                {getWeekEvent.events > 8 &&
-                    <ShowAllButton onClick={() => window.location = '/allWeekEvents'} />
-                }
-            </div>
+            {getWeekEvent.events > 8 &&
+                <ShowAllButton onClick={() => window.location = '/allWeekEvents'} />
+            }
         </div>
     </div>
 }

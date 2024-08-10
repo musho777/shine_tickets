@@ -14,35 +14,23 @@ export default function Home() {
   const dispatch = useDispatch()
   const general = useSelector((st) => st.general)
   const getWeekEvent = useSelector((st) => st.getWeekEvent)
-
+  const { language } = useSelector((st) => st.StaticReducer)
 
   useEffect(() => {
     localStorage.setItem('orderId', '')
-    dispatch(GetGenerealEvents())
+    if (language) {
+      dispatch(GetGenerealEvents(language))
+    }
     dispatch(GetAllAds())
     dispatch(WeekEvetntApi())
-  }, [])
-    ;
-
-  if (general?.loading) {
-    return (
-      <div className='loading'>
-        <PuffLoader color="#FEE827" />
-      </div>
-    )
-  }
+  }, [language])
   return (
     <div className='mainPage'>
       <div className='container'>
-        {general?.events?.length > 0 &&
-          <Carusel />
-        }
-        <TopEventsComponent />
+        <Carusel />
+        {/* <TopEventsComponent /> */}
       </div>
-      {
-        getWeekEvent.events.length > 0 &&
-        <WeekEvents />
-      }
+      {/* <WeekEvents /> */}
       <div className='container'>
         <ALLEvents />
         <ExpectedEvents />

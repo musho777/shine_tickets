@@ -16,12 +16,15 @@ import MobileSearchs from './components/mobileSearch'
 export const Header = () => {
     const dispatch = useDispatch()
 
+    const { language } = useSelector((st) => st.StaticReducer)
     const [value, setValue] = useState('')
     const [openMenuMobile, setOpenMenuMobile] = useState(false)
     const [searchResult, setSearchResult] = useState(false)
     const [searchResultData, setSearchResultDAta] = useState(false)
     const { t } = useTranslation()
     const searchRef = useRef()
+    const color = ['#FF6969', '#D943FF', '#FFCE00', '#4DCF5F', '#11AEF4']
+
 
     const feedback = useSelector(st => st.Event_reducer.feedback)
     const [openMobilsSearch, setOpenMobileSearch] = useState(false)
@@ -40,9 +43,11 @@ export const Header = () => {
     }, [value, dispatch])
 
     useEffect(() => {
-        dispatch(GetCategory())
+        if (language) {
+            dispatch(GetCategory(language))
+        }
         dispatch(GetFeedback())
-    }, [])
+    }, [language])
 
     useEffect(() => {
         const timeoutId = setTimeout(() => {
@@ -73,7 +78,7 @@ export const Header = () => {
                                 src={logo}
                             />
                         </div>}
-                        <Category />
+                        <Category color={color} />
                         <div className='HeaderInfo'>
                             <Search />
                             <div className='ButtonWrapperHeader'>
@@ -99,7 +104,7 @@ export const Header = () => {
                     </div>
                 </div>
                 <div className='LineHeader' />
-                {openMenuMobile && <MobileMenuComponent setOpen={() => setOpenMenuMobile(false)} />}
+                {openMenuMobile && <MobileMenuComponent color={color} setOpen={() => setOpenMenuMobile(false)} />}
             </div>
         </div>
     )

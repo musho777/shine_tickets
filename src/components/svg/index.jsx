@@ -428,37 +428,9 @@ export const CalendarSvg1 = () => {
 
 }
 
-export const RedSvg = () => {
+export const CategoryDiv = ({ color }) => {
     return <svg width="25" height="3" viewBox="0 0 25 3" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect width="25" height="3" rx="1.5" fill="#FF6969" />
-    </svg>
-
-}
-
-export const BlueSvg = () => {
-    return <svg width="25" height="3" viewBox="0 0 25 3" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect width="25" height="3" rx="1.5" fill="#11AEF4" />
-    </svg>
-
-}
-
-export const OrangeSvg = () => {
-    return <svg width="25" height="3" viewBox="0 0 25 3" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect width="25" height="3" rx="1.5" fill="#FFCE00" />
-    </svg>
-
-}
-
-export const TetreSvg = () => {
-    return <svg width="25" height="3" viewBox="0 0 25 3" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect width="25" height="3" rx="1.5" fill="#D943FF" />
-    </svg>
-
-}
-
-export const SportSvg = () => {
-    return <svg width="25" height="3" viewBox="0 0 25 3" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect width="25" height="3" rx="1.5" fill="#4DCF5F" />
+        <rect width="25" height="3" rx="1.5" fill={color} />
     </svg>
 
 }

@@ -6,7 +6,6 @@ import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import 'react-date-range/dist/theme/default.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
 import { CategoryMenu } from '../../../components/CategoryMenu'
 import { GetAllEvents, GetHall, SubCategory } from '../../../services/action/action'
 import { Calendar } from '../../../components/Calendar'
@@ -15,6 +14,13 @@ import { ClearFiltr, Emoji, EmojiM } from '../../../components/svg'
 import { ExpectedEvents } from '../../../components/ExpectedEvents'
 import { PuffLoader } from 'react-spinners'
 import DynamicMeta from '@/src/components/DinamicMetaData'
+import operaImage from '../../../assets/Opera.webp'
+import concertImage from '../../../assets/Concert.webp'
+import teaterImage from '../../../assets/Teater.webp'
+import CinemaImage from '../../../assets/Cinema.webp'
+import sportImage from '../../../assets/Oter.webp'
+
+
 
 const Category = ({ params }) => {
   const dispatch = useDispatch()
@@ -76,7 +82,7 @@ const Category = ({ params }) => {
     setSubcategoryId('')
     setHallId('')
     setSelectedDate([{ startDate: '', endDate: '', key: 'selection' }])
-    if (id == '65ce7bcc25c566d4e297d2ec') {
+    if (id == '1') {
       setName('CONCERT')
       setBaner(
         <div className='CategoryBaner'>
@@ -85,11 +91,11 @@ const Category = ({ params }) => {
               <p>{t('CONCERT')}</p>
             </div>
           </div>
-          <img src={require('../../../assets/Concert.webp')} />
+          <img src={concertImage.src} />
         </div>
       )
     }
-    else if (id == '65ce7dbd25c566d4e297d437') {
+    else if (id == '4') {
       setName('OPERA')
       setBaner(
         <div className='CategoryBaner'>
@@ -98,11 +104,11 @@ const Category = ({ params }) => {
               <p>{t('OPERA')}</p>
             </div>
           </div>
-          <img src={require('../../../assets/Opera.webp')} />
+          <img src={operaImage.src} />
         </div>
       )
     }
-    else if (id == '65ce7d9d25c566d4e297d3f3') {
+    else if (id == '3') {
       setName('CINEMA')
       setBaner(
         <div className='CategoryBaner'>
@@ -111,11 +117,11 @@ const Category = ({ params }) => {
               <p>{t('CINEMA')}</p>
             </div>
           </div>
-          <img src={require('../../../assets/Cinema.webp')} />
+          <img src={CinemaImage.src} />
         </div>
       )
     }
-    else if (id == '65ce7c4a25c566d4e297d30b') {
+    else if (id == '2') {
       setName('THEATRE')
       setBaner(
         <div className='CategoryBaner'>
@@ -124,11 +130,11 @@ const Category = ({ params }) => {
               <p>{t('THEATRE')}</p>
             </div>
           </div>
-          <img src={require('../../../assets/Teater.webp')} />
+          <img src={teaterImage.src} />
         </div>
       )
     }
-    else if (id == '65ce7e9f25c566d4e297d47c') {
+    else if (id == '5') {
       setName('Sport')
       setBaner(
         <div className='CategoryBaner'>
@@ -137,19 +143,14 @@ const Category = ({ params }) => {
               <p>ՍՊՈՐՏ</p>
             </div>
           </div>
-          <img src={require('../../../assets/Oter.webp')} />
+          <img src={sportImage.src} />
         </div>
       )
     }
     else {
       setBaner(
         <div className='CategoryBaner'>
-          {/* <div id='K' className='CategoryBanerFon' >
-                        <div className='container'>
-                            <p>ԿԻՆՈ</p>
-                        </div>
-                    </div>
-                    <img src={require('../../assets/Cinema.png')} /> */}
+
         </div>
       )
     }

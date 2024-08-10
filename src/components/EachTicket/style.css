@@ -134,7 +134,7 @@
     }
 
     .TicketInfodiv {
-        display: none;
+        /* display: none; */
     }
 
     .ticketTitle {

@@ -8,6 +8,9 @@ import { MD5 } from "crypto-js";
 const keys = "hYDepOnSarMi";
 const secretKey = "cyJhbGcieiJIUdzI1Nir9eyJt2xglIyoiQWRdtsg";
 
+const url = 'http://127.0.0.1:8000/api/v1/'
+const uuid = '924f93ba-38bb-4c37-b01d-5e3f966dd401'
+
 
 export const OpenCategoryMenu = (data) => {
     return {
@@ -52,12 +55,12 @@ export const GetTopEvents = (page) => {
     }
 }
 
-export const GetGenerealEvents = () => {
+export const GetGenerealEvents = (lang) => {
     return (dispatch) => {
         dispatch(StartGetGeneralEvents())
-        axios.get(`${"https://api.shinetickets.com"}/getGeneralEvents`).then((r) => {
-            if (r.data.success) {
-                dispatch(SuccessGetGeneralEvents(r.data.events))
+        axios.get(`${url}${uuid}/slider-all-data?locale=${lang}`).then((r) => {
+            if (r.status == '200') {
+                dispatch(SuccessGetGeneralEvents(r.data.data))
             }
             else {
                 dispatch(ErrorGetGeneralEvents())
@@ -121,18 +124,13 @@ export const GetAllEvents = (page, data) => {
     }
 }
 
-export const GetAllEvents2 = (page, data) => {
-
+export const GetAllEvents2 = (page, language, data) => {
     return (dispatch) => {
         dispatch(StartGetCategoris())
-        axios.post(`${"https://api.shinetickets.com"}/getAllEvents?currentPage=${page}`, data).then((r) => {
-            if (r.data.success) {
-                dispatch(SuccessGetCategoris(r.data))
-            }
-            else {
-                dispatch(ErrorGetCategoris())
-            }
-        })
+        axios.get(`${url}${uuid}/events-data-by-category?locale=${language}&category=all&page=${page}`, data)
+            .then((r) => {
+                dispatch(SuccessGetCategoris(r.data.data))
+            })
             .catch((error) => {
                 dispatch(ErrorGetCategoris())
             })
@@ -170,12 +168,12 @@ export const RemoveTicketsAction = (data) => {
     }
 }
 
-export const GetCategory = () => {
+export const GetCategory = (lang) => {
     return (dispatch) => {
         dispatch(StartGetCategory())
-        axios.get(`${"https://api.shinetickets.com"}/getCategories`).then((r) => {
-            if (r.data.success) {
-                dispatch(SuccessGetCategory(r.data.categories))
+        axios.get(`${url}${uuid}/category-title?locale=${lang}`).then((r) => {
+            if (r.status == 200) {
+                dispatch(SuccessGetCategory(r.data.data))
             }
             else {
                 dispatch(ErrorGetCategory())
