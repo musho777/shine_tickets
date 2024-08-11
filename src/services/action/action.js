@@ -84,20 +84,18 @@ export const GetSinglPage = (id, lang) => {
     }
 }
 
-export const SearchAction = (search) => {
+export const SearchAction = (search, lang) => {
     return (dispatch) => {
+
         dispatch(StartSearch())
-        axios.post(`${"https://api.shinetickets.com"}/search`, { search: search }).then((r) => {
-            if (r.data.success) {
-                dispatch(SuccessSearch(r.data.events))
-            }
-            else {
-                dispatch(ErrorSearch())
-            }
-        })
-            .catch((error) => {
-                dispatch(ErrorSearch())
+        if (search)
+            axios.get(`${url}${uuid}/search-events-by-title-and-date?locale=${lang}&search=${search}`, { search: search }).then((r) => {
+                console.log(r)
+                dispatch(SuccessSearch(r.data.data))
             })
+                .catch((error) => {
+                    dispatch(ErrorSearch())
+                })
     }
 }
 

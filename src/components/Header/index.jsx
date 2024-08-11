@@ -1,6 +1,6 @@
 "use client"
 import './style.css'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { PhonSvg, } from '../svg'
 import { GetCategory, GetFeedback, SearchAction } from '../../services/action/action'
@@ -20,27 +20,10 @@ export const Header = () => {
     const [value, setValue] = useState('')
     const [openMenuMobile, setOpenMenuMobile] = useState(false)
     const [searchResult, setSearchResult] = useState(false)
-    const [searchResultData, setSearchResultDAta] = useState(false)
     const { t } = useTranslation()
-    const searchRef = useRef()
-    const color = ['#FF6969', '#D943FF', '#FFCE00', '#4DCF5F', '#11AEF4']
-
-
     const feedback = useSelector(st => st.Event_reducer.feedback)
     const [openMobilsSearch, setOpenMobileSearch] = useState(false)
-
-    useEffect(() => {
-        searchRef?.current?.focus()
-        if (!openMobilsSearch) {
-            setValue('')
-        }
-    }, [openMobilsSearch])
-
-    useEffect(() => {
-        if (value) {
-            dispatch(SearchAction(value))
-        }
-    }, [value, dispatch])
+    const color = ['#FF6969', '#D943FF', '#FFCE00', '#4DCF5F', '#11AEF4']
 
     useEffect(() => {
         if (language) {
@@ -49,22 +32,11 @@ export const Header = () => {
         dispatch(GetFeedback())
     }, [language])
 
-    useEffect(() => {
-        const timeoutId = setTimeout(() => {
-            if (searchResult) {
-                setSearchResultDAta(true)
-            }
-        }, 300);
 
-
-        if (!searchResult) {
-            setSearchResultDAta(false)
-        }
-
-        return () => {
-            clearTimeout(timeoutId);
-        };
-    }, [searchResult]);
+    const SearchFunction = (value) => {
+        dispatch(SearchAction(value, language))
+        setValue(value)
+    }
 
     return (
         <div className="HeaderDiv">
@@ -92,12 +64,13 @@ export const Header = () => {
                         </div>
                         <Language />
                         <MobileSearchs
-                            searchResultData={searchResultData}
+                            SearchFunction={(e) => SearchFunction(e)}
                             setSearchResult={setSearchResult}
                             openMobilsSearch={openMobilsSearch}
                             setOpenMobileSearch={setOpenMobileSearch}
                             openMenuMobile={openMenuMobile}
-                            value={value} setValue={setValue}
+                            value={value}
+                            setValue={setValue}
                             setOpenMenuMobile={setOpenMenuMobile}
                             searchResult={searchResult}
                         />
