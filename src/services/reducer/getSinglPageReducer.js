@@ -14,7 +14,7 @@ export const GetSinglPageReducer = (state = store, action) => {
         case 'SuccessSinglPage':
             temp.loading = false
             temp.error = ''
-            temp.events = action.data
+            temp.events = action.data.data
             break
         case 'ErrorSinglPage':
             temp.loading = false

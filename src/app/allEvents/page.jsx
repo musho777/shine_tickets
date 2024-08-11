@@ -36,6 +36,7 @@ const AllEventss = () => {
   const [height, setHeight] = useState(false)
   const menuRef = useRef(null);
 
+  console.log(events.events, 'getCategory')
 
   useEffect(() => {
     HallName()
@@ -47,38 +48,13 @@ const AllEventss = () => {
     }
   }, [getCategory])
 
-  useEffect(() => {
-    let date = new Date(selectedDate[0].endDate)
-    let startDate = new Date(selectedDate[0].startDate)
-    let statDate = ''
-    let endDate = ''
-    if (selectedDate[0].endDate) {
-      endDate = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
-    }
-    if (selectedDate[0].startDate) {
-      statDate = `${startDate.getFullYear()}-${startDate.getMonth() + 1}-${startDate.getDate()}`
-    }
-    if (subcategoryId == '') {
-      dispatch(GetAllEvents2(page, {
-        categoryId: '',
-        date: {
-          startDate: statDate,
-          endDate
-        }, hallId: hallId
-      }))
-    }
-    else {
-      dispatch(GetAllEvents2(page, {
-        category: subcategoryId,
-        categoryId: subcategoryId,
-        date: {
-          startDate: statDate,
-          endDate
-        }, hall: hallId
-      }))
-    }
 
-  }, [selectedDate, subcategoryId, page, hallId])
+  useEffect(() => {
+
+    if (language) {
+      dispatch(GetAllEvents2(page, language))
+    }
+  }, [page, language])
 
   useEffect(() => {
     setData([])
@@ -102,8 +78,8 @@ const AllEventss = () => {
     else {
       combinedArray = data
     }
-    if (events.events.events?.length > 0) {
-      combinedArray = item.concat(events.events.events);
+    if (events.events?.length > 0) {
+      combinedArray = item.concat(events.events);
     }
     setData(combinedArray)
   }, [events.events])
@@ -336,7 +312,7 @@ const AllEventss = () => {
           </div> :
           <div className='CategoryScreen1Div'>
             <AllEventsWrappers loading={events.loading} showButton={page < events.events.totalPages} setPage={(e) => setPage(e)} page={page} data={data} />
-            {!events.events.events?.length > 0 && !events.loading &&
+            {!events.events?.length > 0 && !events.loading &&
               <div className='NotFoundDiv'>
                 <div className='Emoji'>
                   <Emoji />

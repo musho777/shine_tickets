@@ -1,20 +1,15 @@
 import { useTranslation } from 'react-i18next';
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { SuccessSinglPage } from '../../services/action/SuccessAction';
 import { Button } from '../../components/Button';
 import { CategoryType } from '../../components/CategoryType';
+import { truncateText } from '@/src/function/function';
 export const Card = ({
   image,
   location,
-  location_en,
-  location_ru,
   data,
   price,
   category,
-  hall,
-  hall_ru,
-  hall_en,
   id,
   day,
   months,
@@ -22,50 +17,12 @@ export const Card = ({
   currentDayOfWeek,
   type = true,
   time2,
-  month1,
-  year,
+  title,
   place,
-  place_en,
-  place_ru,
-  title
+  date
 }) => {
-  function truncateText(text, leng = 24) {
-    if (text?.length > leng) {
-      return text.substring(0, leng) + '...';
-    }
-    else {
-      return text;
-    }
-  }
   const { t } = useTranslation();
-  const [languageData, setLanguageData] = useState({ title: '', location: '', categorName: '', hall: '', place: '' })
-  const { language } = useSelector((st) => st.StaticReducer)
   const dispatch = useDispatch()
-  useEffect(() => {
-    let item = { ...languageData }
-    if (language === 'am') {
-      item.title = data?.eventId.title
-      item.location = location
-      item.categorName = category?.name
-      item.hall = hall
-      item.place = place
-    }
-    else if (language === 'en') {
-      item.title = data?.eventId.title
-      item.location = location_en
-      item.categorName = category?.name_en
-      item.hall = hall_en
-      item.place = place_en
-    }
-    else if (language === 'ru') {
-      item.title = data?.eventId.title
-      item.location = location_ru
-      item.categorName = category?.name_ru
-      item.hall = hall_ru
-      item.place = place_ru
-    }
-    setLanguageData(item)
-  }, [language])
 
   const handelClick = () => {
     if (!type) {
@@ -93,7 +50,7 @@ export const Card = ({
 
   return <div className='TopEvents' id={'AllEventsWrapperCard'}>
     <div className='TypeTopDiv'>
-      <CategoryType type={category?._id} name={languageData?.categorName} />
+      <CategoryType type={category?._id} name={category} />
     </div>
     <div className='TopEventsInfo' id={'AllEventsInfo'}>
       <div className='TopEventsInfoDiv'>
@@ -108,13 +65,13 @@ export const Card = ({
         <p className='TopEventsTime'>{time}</p>
       </div>
       <div>
-        <p className='TopEventsInfoPlace'>{languageData?.hall} {languageData.place}</p>
+        <p className='TopEventsInfoPlace'>{place}</p>
       </div>
       <div className='TopEventsInfoLine' />
       <div className='TopEventsDiv'>
         <div className='TopEventsDivDiv'>
-          <p className='TopEventsTeaterName'>{languageData?.location}</p>
-          <p className='TopEventsName'>{truncateText(languageData?.title, 40)}</p>
+          <p className='TopEventsTeaterName'>{location}</p>
+          <p className='TopEventsName'>{truncateText(title, 40)}</p>
         </div>
         <p className='TopEventsPrice'>{price}</p>
       </div>
@@ -128,9 +85,9 @@ export const Card = ({
     <div className='AllEventsCardWrapper'>
       <img src={image} />
       <div className='AllEventsCardWrapperInfo'>
-        <p className='AllEventsCardWrapperInfoTitle'>{truncateText(languageData.title, 43)}</p>
-        <p className='AllEventsCardWrapperInfoTitleDate'>{day}.{month1}.{year} {time}</p>
-        <p className='AllEventsCardWrapperInfoTitleDateTeter'>{languageData?.hall}  {languageData.place}</p>
+        <p className='AllEventsCardWrapperInfoTitle'>{truncateText(title, 43)}</p>
+        <p className='AllEventsCardWrapperInfoTitleDate'>{date}</p>
+        <p className='AllEventsCardWrapperInfoTitleDateTeter'> {place}</p>
       </div>
     </div>
   </div>

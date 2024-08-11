@@ -2,7 +2,6 @@
 import '../styles.css'
 
 import { useEffect, useState } from 'react'
-import { PuffLoader } from 'react-spinners'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { GetSinglPage } from '../../../services/action/action'
@@ -25,63 +24,26 @@ const Single = ({ params }) => {
     var daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
     const [languageData, setLanguageData] = useState({ title: '', description: '', hall: '', place: '' })
     useEffect(() => {
-        dispatch(GetSinglPage(id))
-    }, [])
-    useEffect(() => {
-        let item = { ...languageData }
-        if (language === 'am') {
-            item.title = event?.title
-            item.description = event?.description
-            item.hall = event?.sessions[0]?.hallId.place
-            item.place = event?.sessions[0]?.hallId.hall
+        if (language && id) {
+            dispatch(GetSinglPage(id, language))
         }
-        else if (language === 'en') {
-            item.title = event?.title_en
-            item.description = event?.description_en
-            item.hall = event?.sessions[0]?.hallId?.place_en
-            item.place = event?.sessions[0]?.hallId.hall_en
-        }
-        else if (language === 'ru') {
-            item.title = event?.title_ru
-            item.description = event?.description_ru
-            item.hall = event?.sessions[0]?.hallId?.place_ru
-            item.place = event?.sessions[0]?.hallId.hall_ru
-        }
-        setLanguageData(item)
-    }, [language, event])
+    }, [language])
 
-
-    if (getSinglPage.loading) {
-        return (
-            <div className='container'>
-                <div className='loading'>
-                    <PuffLoader color="#FEE827" />
-                </div>
-            </div>
-        )
-    }
     return (
         <>
             <DynamicMeta title={event?.title_en} description={event?.description_en} />
             <div id='singlPage' className='container'>
                 <Card
-                    time={event?.sessions[0]?.time}
-                    img={`https://api.shinetickets.com/images/${getSinglPage.events.event?.image}`}
-                    imgLarg={`https://api.shinetickets.com/images/${getSinglPage.events.event?.largeImage}`}
-                    id={id}
-                    data={event?.sessions[0]?.date}
+                    img={`http://localhost:8000/${getSinglPage.events.main_image}`}
+                    imgLarg={`http://localhost:8000/${getSinglPage.events.cover_image}`}
+                    date={getSinglPage?.events?.dates && getSinglPage?.events?.dates[0].start_date}
                     description={languageData?.description}
-                    title={languageData?.title}
-                    priceEnd={`${event?.sessions[0]?.priceEnd} AMD`}
-                    priceStart={`${event?.sessions[0]?.priceStart} -`}
-                    hall={languageData?.hall}
-                    place={languageData?.place}
+                    title={getSinglPage.events.name}
+                    priceEnd={`${getSinglPage.events.price} AMD`}
+                    priceStart={`${getSinglPage.events.price} -`}
+                    place={getSinglPage.events.place}
                     onClick={() => window.location = `/BuyTickets/${id}`}
-                    largImage={
-                        getSinglPage.events.event?.largeImage ? `https://api.shinetickets.com/images/${getSinglPage.events.event?.largeImage}` :
-                            `https://api.shinetickets.com/images/${getSinglPage.events.event?.image}`
-
-                    }
+                    largImage={`http://localhost:8000/${getSinglPage.events.cover_image}`}
                 />
                 {languageData?.description?.length > 0 && <div className='DescriptionDiv'>
                     <p className='descriptionDiv2Title'>{t('description')}</p>

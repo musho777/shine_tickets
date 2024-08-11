@@ -6,9 +6,7 @@ import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import 'react-date-range/dist/theme/default.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { CategoryMenu } from '../../../components/CategoryMenu'
-import { GetAllEvents, GetHall, SubCategory } from '../../../services/action/action'
-import { Calendar } from '../../../components/Calendar'
+import { GetAllEvents2, GetHall, SubCategory } from '../../../services/action/action'
 import { CategoryCardWrapper } from '../CategoryCardWrapper'
 import { ClearFiltr, Emoji, EmojiM } from '../../../components/svg'
 import { ExpectedEvents } from '../../../components/ExpectedEvents'
@@ -27,21 +25,11 @@ const Category = ({ params }) => {
   const id = params.id[1]
   const { t } = useTranslation()
   const events = useSelector((st) => st.getAllEventes)
-  const openMenu = useSelector((st) => st.StaticReducer)
   const { language } = useSelector((st) => st.StaticReducer)
-  const getSubCategory = useSelector((st) => st.getSubCAtegory)
   const [page, setPage] = useState(1)
-  const [open, setOpen] = useState(false)
   const [hallId, setHallId] = useState('')
-  const [hallName, setHallName] = useState()
-  const [hallDefaultName, setHallDefaultName] = useState('')
   const [subcategoryId, setSubcategoryId] = useState('')
-  const [openCalendar, setOpenCalendar] = useState(false)
-  const [activeButton, setActiveButton] = useState('Բոլորը')
   const [selectedDate, setSelectedDate] = useState([{ startDate: '', endDate: '', key: 'selection', },])
-  const getCategory = useSelector((st) => st.getCategory)
-  const [date, setDate] = useState('')
-  const [height, setHeight] = useState(false)
   const [baner, setBaner] = useState(<div></div>)
   const [data, setData] = useState([])
   const [name, setName] = useState("")
@@ -50,10 +38,6 @@ const Category = ({ params }) => {
     setData([])
     setPage(1)
   }, [])
-
-  useEffect(() => {
-    HallName()
-  }, [language])
 
   useEffect(() => {
     dispatch(GetHall())
@@ -67,18 +51,14 @@ const Category = ({ params }) => {
     if (selectedDate[0].startDate) {
       statDate = `${startDate.getFullYear()}-${startDate.getMonth() + 1}-${startDate.getDate()}`
     }
-    dispatch(GetAllEvents(page, {
-      category: id, subcategory: subcategoryId, date: {
-        startDate: statDate,
-        endDate
-      }, hall: hallId
-    }))
-  }, [selectedDate, id, subcategoryId, page, hallId])
+    if (language) {
+      dispatch(GetAllEvents2(page, language))
+    }
+  }, [selectedDate, id, subcategoryId, page, hallId, language])
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
     dispatch(SubCategory({ id: id }))
-    setActiveButton('Բոլորը')
     setSubcategoryId('')
     setHallId('')
     setSelectedDate([{ startDate: '', endDate: '', key: 'selection' }])
@@ -192,9 +172,6 @@ const Category = ({ params }) => {
     if (day1 > 0 && day1 < 10) {
       day1 = `0${day1}`
     }
-    setDate(`
-            ${month}.${day}.${year} - ${month1}.${day1}.${year1}
-        `)
   }, [selectedDate])
 
   useEffect(() => {
@@ -207,57 +184,17 @@ const Category = ({ params }) => {
     else {
       combinedArray = data
     }
-    if (events.events.sessions?.length > 0) {
-      combinedArray = item.concat(events.events.sessions);
+    if (events.events?.length > 0) {
+      combinedArray = item.concat(events.events);
     }
     setData(combinedArray)
   }, [events.events])
 
 
-  if (openMenu?.categoryMenu) {
-    return <CategoryMenu onClick={(e) => {
-      setHallId(e?._id)
-    }} item={events.hall} close={() => setOpen(!open)} />
-  }
-  if (openMenu?.openCalendar) {
-    return <Calendar
-      selectedDate={selectedDate}
-      setSelectedDate={(e) => setSelectedDate(e)}
-      close={() => dispatch(openCalendar(false))}
-    />
-  }
-
-  document.body.addEventListener('click', function () {
-    setOpenCalendar(false)
-    setHeight(false)
-  });
-
   const ClearFunction = () => {
-    setActiveButton('Բոլորը')
     setSubcategoryId('')
     setHallId('')
-    setHallName('')
     setSelectedDate([{ startDate: '', endDate: '', key: 'selection' }])
-  }
-  const HallName = () => {
-    if (hallId == '') {
-      if (language === 'ru') {
-        setHallName('Все залы')
-      }
-      if (language === 'am') {
-        setHallName('Բոլոր դահլիճները')
-      } if (language === 'en') {
-        setHallName('All halls')
-      }
-    }
-    if (language === 'ru') {
-      setHallDefaultName('Все залы')
-    }
-    if (language === 'am') {
-      setHallDefaultName('Բոլոր դահլիճները')
-    } if (language === 'en') {
-      setHallDefaultName('All halls')
-    }
   }
   return (
     <>
@@ -269,7 +206,6 @@ const Category = ({ params }) => {
         <div className='CategoryScreenBaner'>
           {baner}
         </div>
-
         <div>
           <div id='CategoryScreen1' className='container'>
             <div onClick={() => ClearFunction()} className='ClearFilterDiv'>
@@ -278,106 +214,7 @@ const Category = ({ params }) => {
                 <ClearFiltr />
               </div>}
             </div>
-            <div className='FilterDiv'>
-              <div className='CalendarDiv'>
-                <div >
-                  <p className='FilterDivTitle'>{t('Date')}</p>
-                  <div className='CalendarWrapper'>
-                    <div onClick={(e) => {
-                      e.preventDefault()
-                      e.stopPropagation()
-                      setOpenCalendar(true)
-                    }
-                    } className='CalendarDivCalendar'>
-                      <p>{date}</p>
-                    </div>
-                    <div className='CalendarDiV'>
-                      {openCalendar && <Calendar
-                        selectedDate={selectedDate}
-                        setSelectedDate={(e) => setSelectedDate(e)}
-                        close={() => dispatch(openCalendar(false))}
-                      />}
-                    </div>
-                  </div>
-                </div>
-                <div>
-                  <p className='FilterDivTitle'>{t('Place1')}</p>
-                  <div style={{ borderBottomLeftRadius: height && 0, borderBottomRightRadius: height && 0 }} onClick={(e) => {
-                    e.preventDefault()
-                    e.stopPropagation()
-                    setHeight(!height)
-                    setOpenCalendar(false)
-                  }} className='CalendarDivCalendar'>
-                    <p>{hallName ? (hallName) : (hallDefaultName)}</p>
-                    <div style={{ height: height ? 200 : 0 }} className='CalendarDivCalendaR'>
-                      <div
-                        onClick={() => {
-                          setHallId('')
-                          setHallName(hallDefaultName)
-                        }}
-                        className='getCategoryDiv'>{(hallDefaultName)}</div>
-                      {height && getCategory.hall.map((elm, i) => {
-                        if (language == 'en') {
-                          return <div key={i} onClick={() => {
-                            setHallId(elm._id)
-                            setHallName(`${elm.place_en} ${elm?.hall_en}`)
-                          }} className='getCategoryDiv'>{`${elm.place_en} ${elm?.hall_en}`}</div>
-                        }
-                        else if (language == 'am') {
-                          return <div
-                            key={i}
-                            onClick={() => {
-                              setHallId(elm._id)
-                              setHallName(`${elm.place} ${elm?.hall}`)
-                            }}
-                            className='getCategoryDiv'>{(`${elm.place} ${elm?.hall}`)}</div>
-                        }
-                        else if (language == 'ru') {
-                          return <div
-                            key={i}
-                            onClick={() => {
-                              setHallId(elm._id)
-                              setHallName(`${elm.place_ru} ${elm?.hall_ru}`)
-                            }}
-                            className='getCategoryDiv'>{`${elm.place_ru} ${elm?.hall_ru}`}</div>
-                        }
-                      })}
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className='FilterDivButton'>
-                {getSubCategory?.data?.subcategories?.length > 0 && <p className='FilterDivTitle'>{t('Genre')}</p>}
-                <div>
-                  {getSubCategory?.data?.subcategories?.length > 0 &&
-                    <button
-                      onClick={() => {
-                        setActiveButton('Բոլորը')
-                        setSubcategoryId('')
-                      }} id={activeButton == 'Բոլորը' && 'active'} className='SubCategoryButton'
-                    >
-                      {t('All')}
-                    </button>}
-                  {getSubCategory?.data?.subcategories?.map((elm, i) => {
-                    let name = ''
-                    if (language === 'am') {
-                      name = elm?.name
-                    }
-                    else if (language === 'en') {
-                      name = elm?.name_en
-                    }
-                    else if (language === 'ru') {
-                      name = elm?.name_ru
-                    }
-                    return <button key={i} onClick={() => {
-                      setActiveButton(elm?.name)
-                      setSubcategoryId(elm?._id)
-                    }} id={activeButton == elm?.name && 'active'} className='SubCategoryButton'>{name}</button>
-                  })}
-                </div>
-
-              </div>
-            </div>
+            {/* <FiltrDiv /> */}
             <div className='CategoryScreenBaner2'>
               {baner}
             </div>
@@ -387,7 +224,7 @@ const Category = ({ params }) => {
               </div> :
               <div className='CategoryScreen1Div'>
                 <CategoryCardWrapper loading={events.loading} showButton={page < events.events.totalPages} setPage={(e) => setPage(e)} page={page} data={data} />
-                {!events.events?.sessions?.length > 0 && !events?.loading &&
+                {!events.events?.length > 0 && !events?.loading &&
                   <div className='NotFoundDiv'>
                     <div className='Emoji'>
                       <Emoji />
@@ -406,7 +243,6 @@ const Category = ({ params }) => {
             <ExpectedEvents />
           </div>
         </div>
-
       </div>
     </>
   )

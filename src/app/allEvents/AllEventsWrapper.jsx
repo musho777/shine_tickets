@@ -1,6 +1,7 @@
 import { ShowAllButton } from "../../components/Button/ShowAllButton"
 import { useTranslation } from "react-i18next";
 import { Card } from "./Card";
+import { truncateText } from "@/src/function/function";
 
 export const AllEventsWrappers = ({ loading, data, setPage, page, showButton }) => {
   const { t } = useTranslation()
@@ -16,45 +17,41 @@ export const AllEventsWrappers = ({ loading, data, setPage, page, showButton }) 
     </div>
     <div id='CategoryCardWrapper' className="AllTopEventWrapper">
       {
-        data.length > 0 && data.map((elm, i) => {
+        data.map((elm, i) => {
+          let date = elm.dates[0].start_date
+          console.log(elm.dates[0].start_date)
           const dateObject = new Date(elm?.date);
-          let day = dateObject.getDate();
-          if (day <= 9) {
-            day = `0${day}`
+          let day = date.slice(8, 10);
+          let month = date.slice(5, 7);
+          let time = date.slice(11, 16)
+          if (month[0] == 0) {
+            month = month[1]
           }
-          let month = dateObject.getMonth();
           let month1 = dateObject.getMonth();
           let year = dateObject.getFullYear()
           if (month1 <= 9) {
             month1 = `0${month1 + 1}`
           }
           var currentDayOfWeek = daysOfWeek[dateObject.getDay()];
-          if (elm._id != "65d222f051424e16acf10852")
-            return <Card
-              key={i}
-              day={day}
-              time={elm.time}
-              id={elm.eventId?._id}
-              image={`https://api.shinetickets.com/images/${elm.eventId
-                .largeImage}`}
-              year={year}
-              month1={month1}
-              category={elm.eventId.category}
-              location={elm?.location}
-              location_en={elm?.hallId?.location_en}
-              location_ru={elm?.hallId?.location_ru}
-              hall={elm.hallId?.place}
-              hall_en={elm.hallId?.place_en}
-              hall_ru={elm.hallId?.place_ru}
-              place={elm.hallId?.hall}
-              place_ru={elm.hallId?.hall_ru}
-              place_en={elm.hallId?.hall_en}
-              title={elm?.eventId?.title}
-              months={months[month]}
-              currentDayOfWeek={currentDayOfWeek}
-              data={elm}
-              price={`${elm?.priceStart} - ${elm?.priceEnd} AMD`}
-            />
+          return <Card
+            key={i}
+            day={day}
+            time={time}
+            id={elm.eventId?._id}
+            image={`http://localhost:8000/${elm.cover_image}`}
+            year={year}
+            month1={month1}
+            category={elm.category.name}
+            date={elm.dates[0].start_date}
+            location={elm?.address}
+            hall={elm.address}
+            place={elm.address}
+            title={elm?.name}
+            months={truncateText(months[month], 4)}
+            currentDayOfWeek={currentDayOfWeek}
+            data={elm}
+            price={`${elm?.price} - ${elm?.price} AMD`}
+          />
         })}
     </div>
     {showButton && <div className="ShowAllButtonWrappr">

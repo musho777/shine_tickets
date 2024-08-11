@@ -7,7 +7,6 @@ import { useDispatch } from 'react-redux';
 import { ActiveSeans } from '../../services/action/action';
 
 export const Card = ({
-    id,
     img,
     largImage,
     title,
@@ -15,8 +14,7 @@ export const Card = ({
     priceEnd,
     priceStart,
     hall,
-    time,
-    data,
+    date,
     onClick,
     isParonyan,
     seans,
@@ -31,7 +29,6 @@ export const Card = ({
     const divRef = useRef()
     const [hight, setHeight] = useState(0)
     const [openSeans, setOpenSeans] = useState(false)
-    const [date, setDate] = useState()
     const dispatch = useDispatch()
     document.body.addEventListener('click', function () {
         setOpenSeans(false)
@@ -49,16 +46,6 @@ export const Card = ({
             dispatch(ActiveSeans(data1[0].id))
             setActiveSeans(data1[0].id)
         }
-        let date = new Date(data)
-        let day = date.getDate()
-        let mount = date.getMonth() + 1
-        if (day < 10) {
-            day = `0${day}`
-        }
-        if (mount < 10) {
-            mount = `0${mount}`
-        }
-        setDate(`${day}-${mount}`)
     }, [])
 
     const [windowSize, setWindowSize] = useState({
@@ -131,7 +118,7 @@ export const Card = ({
                         <p className='SinglPrimerap'>{t('Primera')}</p>
                         {isParonyan ?
                             <p id="paronyan" className='SinglPrimeraDate' dangerouslySetInnerHTML={{ __html: data }} /> :
-                            <p className='SinglPrimeraDate'>{date} {time}</p>
+                            <p className='SinglPrimeraDate'>{date}</p>
                         }
                     </div>
                     <div className='SinglBanerLocation'>
@@ -147,7 +134,7 @@ export const Card = ({
                         <p className='Primerap'>{t('Primera')}</p>
                         {isParonyan ?
                             <p id="paronyan" className='PrimeraDate' dangerouslySetInnerHTML={{ __html: data }} /> :
-                            <p className='PrimeraDate'>{date} {time}</p>
+                            <p className='PrimeraDate'>{date}</p>
                         }
                     </div>
                     <div className='BanerLocation'>

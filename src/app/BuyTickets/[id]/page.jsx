@@ -12,6 +12,7 @@ import { CartPopup } from '../../../components/popup/cart';
 import { BuyNow } from '../../../components/BuyNow';
 import { PuffLoader } from 'react-spinners';
 import DynamicMeta from '@/src/components/DinamicMetaData';
+import { truncateText } from '@/src/function/function';
 
 const BuyTickets = ({ params }) => {
   const dispatch = useDispatch()
@@ -253,6 +254,8 @@ const BuyTickets = ({ params }) => {
     </svg>
   ]
 
+  console.log(getSinglPage.events)
+
   useEffect(() => {
     let item = [...price]
     if (getSinglPage?.events?.event?.sessions[0].places[0]) {
@@ -294,14 +297,7 @@ const BuyTickets = ({ params }) => {
     translation: { x: 0, y: 0 }
   });
 
-  function truncateText(text) {
-    if (text?.length > 15) {
-      return text.substring(0, 15) + '...';
-    }
-    else {
-      return text;
-    }
-  }
+
 
   useEffect(() => {
     if (event?.sessions[0]?.hallId?._id == '65ce79ca603a99ef4d2ba0a3') {
@@ -310,16 +306,6 @@ const BuyTickets = ({ params }) => {
         translation: { x: 100, y: 0 }
       })
     }
-    let date = new Date(event?.sessions[0]?.date)
-    let mount = date.getMonth() + 1
-    let day = date.getDate()
-    if (mount < 10) {
-      mount = `0${mount}`
-    }
-    if (day < 10) {
-      day = `0${day}`
-    }
-    setDate(`${day}.${mount}`)
   }, [event])
 
 
@@ -331,10 +317,13 @@ const BuyTickets = ({ params }) => {
       })
   };
   useEffect(() => {
-    if (id) {
-      dispatch(GetSinglPage(id))
+    console.log()
+    if (id && language) {
+      dispatch(GetSinglPage(id, language))
     }
-  }, [id])
+  }, [id, language])
+
+
   useEffect(() => {
     let price = 0
     tickets.tickets?.map((elm, i) => {
@@ -342,36 +331,6 @@ const BuyTickets = ({ params }) => {
     })
     setTotal(price)
   }, [tickets])
-
-  useEffect(() => {
-    if (!getSinglPage.events?.event
-      ?.isParonyanEvent) {
-      let item = { ...data }
-
-      if (language === 'am') {
-        item.name = getSinglPage?.events?.event?.title
-        item.description = getSinglPage.events.event?.description
-        item.hall = getSinglPage.events.event?.sessions[0]?.hallId?.hall
-        item.place = getSinglPage.events.event?.sessions[0]?.hallId?.place
-      }
-      else if (language === 'ru') {
-        item.name = getSinglPage.events.event?.title_ru
-        item.description = getSinglPage.events.event?.description_ru
-        item.hall = getSinglPage.events.event?.sessions[0]?.hallId.hall_ru
-        item.place = getSinglPage.events.event?.sessions[0]?.hallId?.place_ru
-
-      }
-      else if (language === 'en') {
-        item.name = getSinglPage.events.event?.title_en
-        item.description = getSinglPage.events.event?.description_en
-        item.hall = getSinglPage.events.event?.sessions[0]?.hallId.hall_en
-        item.place = getSinglPage.events.event?.sessions[0]?.hallId?.place_en
-
-      }
-      setData(item)
-    }
-
-  }, [language, getSinglPage])
 
 
   const ChoosePrice = (index) => {
@@ -418,32 +377,28 @@ const BuyTickets = ({ params }) => {
           open={open} />
       </CartPopup >}
       <div className='ticketPrice'>
-        {
-          price.map((elm, i) => {
-            return <div key={i} onClick={() => ChoosePrice(i)} style={{ backgroundColor: color[i] }}>{elm.price}</div>
-          })
-        }
+        {price.map((elm, i) => {
+          return <div key={i} onClick={() => ChoosePrice(i)} style={{ backgroundColor: color[i] }}>{elm.price}</div>
+        })}
         <div onClick={() => ChoosePrice(-1)} style={{ backgroundColor: '#7d4e5a' }}>{t('All')}</div>
       </div>
       <div className='BuyTicketsWrapper'>
 
         <div className='BuyTicketsCard' id='mobileBuyTicketsCard'>
-          <img src={`https://api.shinetickets.com/images/${getSinglPage.events.event?.image}`} />
+          <img src={`http://localhost:8000/${getSinglPage.events.main_image}`} />
           <div className='BuyTicketsCardInfo'>
             <div>
-              <p className='BuyTicketTitle'>{truncateText(data?.name)}</p>
+              <p className='BuyTicketTitle'>{truncateText(getSinglPage.events.name, 15)}</p>
             </div>
             <div className='BuyTicketDate'>
               <CalendarSvg1 />
-              <p className='BuyTicketDateMonth'>
-                {date}
-              </p>
+              <p className='BuyTicketDateMonth'>{getSinglPage.events.dates && getSinglPage.events.dates[0].start_date.slice(5, 10)}</p>
               <div></div>
-              <p className='BuyTicketDateTime'>{getSinglPage.events.event?.sessions[0]?.time}</p>
+              <p className='BuyTicketDateTime'>{getSinglPage.events.dates && getSinglPage.events.dates[0].start_date.slice(10, 16)}</p>
             </div>
             <div className='BuyTicketDateLocation'>
               <LocationSvg1 />
-              <p>{data.place} {data.hall}</p>
+              <p>{getSinglPage.events.place}</p>
             </div>
           </div>
         </div>
@@ -476,8 +431,6 @@ const BuyTickets = ({ params }) => {
                   </div>
                 })
               }
-
-
               <div className='TotalPrice'>
                 <p className='Totalp'>{t('TOTALLY')}</p>
                 <p className='ToatalPricep'>{total} AMD</p>
@@ -542,22 +495,22 @@ const BuyTickets = ({ params }) => {
         <div className='BuyTicketsCardWrapperDiv'>
           <div className='BuyTicketsCardWrapper'>
             <div className='BuyTicketsCard'>
-              <img src={`https://api.shinetickets.com/images/${getSinglPage.events.event?.image}`} />
+              <img src={`http://localhost:8000/${getSinglPage.events.main_image}`} />
               <div className='BuyTicketsCardInfo'>
                 <div>
-                  <p className='BuyTicketTitle'>{truncateText(data?.name)}</p>
+                  <p className='BuyTicketTitle'>{truncateText(getSinglPage.events.name, 15)}</p>
                 </div>
                 <div className='BuyTicketDate'>
                   <div>
                     <CalendarSvg1 />
                   </div>
-                  <p className='BuyTicketDateMonth'>   {date} </p>
+                  <p className='BuyTicketDateMonth'>   {getSinglPage.events.dates && getSinglPage.events.dates[0].start_date.slice(5, 10)}</p>
                   <div className='LineBuyTicketDate'></div>
-                  <p className='BuyTicketDateTime'>{getSinglPage.events.event?.sessions[0]?.time}</p>
+                  <p className='BuyTicketDateTime'>{getSinglPage.events.dates && getSinglPage.events.dates[0].start_date.slice(10, 16)}</p>
                 </div>
                 <div className='BuyTicketDateLocation'>
                   <LocationSvg1 />
-                  <p>{data.place}  {data.hall}</p>
+                  <p>{getSinglPage.events.place}</p>
                 </div>
               </div>
             </div>

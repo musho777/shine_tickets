@@ -2,22 +2,16 @@ import { useTranslation } from 'react-i18next';
 import { Button } from '../Button'
 import { CategoryType } from '../CategoryType'
 import './styles.css'
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { SuccessSinglPage } from '../../services/action/SuccessAction';
-import { useNavigate } from 'react-router-dom';
-import { useRouter } from 'next/router';
+import { truncateText } from '@/src/function/function';
 export const TopEvents = ({
     image,
     location,
-    location_en,
-    location_ru,
     data,
     price,
     category,
     hall,
-    hall_ru,
-    hall_en,
     id,
     day,
     months,
@@ -26,55 +20,11 @@ export const TopEvents = ({
     type = true,
     time2,
     place,
-    place_en,
-    place_ru,
     title
 }) => {
-    function truncateText(text) {
-        if (text?.length > 43) {
-            return text.substring(0, 43) + '...';
-        }
-        else {
-            return text;
-        }
-    }
-    function truncateTextWeek(text) {
-        if (text?.length > 9) {
-            return text.substring(0, 5) + '...';
-        }
-        else {
-            return text;
-        }
-    }
+
     const { t } = useTranslation();
-    const [languageData, setLanguageData] = useState({ title: '', location: '', categorName: '', hall: '', place: '' })
-    const { language } = useSelector((st) => st.StaticReducer)
     const dispatch = useDispatch()
-    useEffect(() => {
-        let item = { ...languageData }
-        if (language === 'am') {
-            item.title = data?.title
-            item.location = location
-            item.categorName = category?.name
-            item.hall = hall
-            item.place = place
-        }
-        else if (language === 'en') {
-            item.title = data?.title_en
-            item.location = location_en
-            item.categorName = category?.name_en
-            item.hall = hall_en
-            item.place = place_en
-        }
-        else if (language === 'ru') {
-            item.title = data?.title_ru
-            item.location = location_ru
-            item.categorName = category?.name_ru
-            item.hall = hall_ru
-            item.place = place_ru
-        }
-        setLanguageData(item)
-    }, [language])
 
     const handelClick = () => {
         if (!type) {
@@ -102,7 +52,7 @@ export const TopEvents = ({
 
     return <div className='TopEvents'>
         <div className='TypeTopDiv'>
-            <CategoryType type={category?._id} name={languageData?.categorName} />
+            <CategoryType type={category?._id} name={category} />
         </div>
         <div className='TopEventsInfo' >
             <div className='TopEventsInfoDiv'>
@@ -110,20 +60,20 @@ export const TopEvents = ({
                     <p>{day}</p>
                 </div>
                 <div className='TopEventsMonthAndWeek'>
-                    <p className='TopEventsMonth'>{months}</p>
+                    <p className='TopEventsMonth'>{truncateText(months, 5)}</p>
                     <div className='TopEventsLine' />
-                    <p className='TopEventsWeek'>{truncateTextWeek(currentDayOfWeek)}</p>
+                    <p className='TopEventsWeek'>{truncateText(currentDayOfWeek, 9)}</p>
                 </div>
                 <p className='TopEventsTime'>{time}</p>
             </div>
             <div>
-                <p className='TopEventsInfoPlace'>{languageData.place} {languageData.hall}</p>
+                <p className='TopEventsInfoPlace'>{place} {hall}</p>
             </div>
             <div className='TopEventsInfoLine' />
             <div className='TopEventsDiv'>
                 <div className='TopEventsDivDiv'>
-                    <p className='TopEventsTeaterName'>{languageData?.location}</p>
-                    <p className='TopEventsName'>{truncateText(languageData?.title)}</p>
+                    <p className='TopEventsTeaterName'>{location}</p>
+                    <p className='TopEventsName'>{truncateText(title, 43)}</p>
                 </div>
                 <p className='TopEventsPrice'>{price}</p>
             </div>

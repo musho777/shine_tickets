@@ -72,15 +72,11 @@ export const GetGenerealEvents = (lang) => {
     }
 }
 
-export const GetSinglPage = (id) => {
+export const GetSinglPage = (id, lang) => {
     return (dispatch) => {
         dispatch(StartGetSinglPage())
-        axios.get(`${"https://api.shinetickets.com"}/singleEvent/${id}`).then((r) => {
-            if (r.data.success) {
-                dispatch(SuccessSinglPage(r.data))
-            } else {
-                dispatch(ErrorSinglPage())
-            }
+        axios.get(`${url}${uuid}/project-event-data?locale=${lang}&id=${id}`).then((r) => {
+            dispatch(SuccessSinglPage(r.data))
         })
             .catch((error) => {
                 dispatch(ErrorSinglPage())
@@ -112,7 +108,7 @@ export const GetAllEvents = (page, data) => {
         dispatch(StartGetCategoris())
         axios.post(`${"https://api.shinetickets.com"}/filterEvents?currentPage=${page}`, data).then((r) => {
             if (r.data.success) {
-                dispatch(SuccessGetCategoris(r.data))
+                // dispatch(SuccessGetCategoris(r.data))
             }
             else {
                 dispatch(ErrorGetCategoris())
@@ -129,6 +125,7 @@ export const GetAllEvents2 = (page, language, data) => {
         dispatch(StartGetCategoris())
         axios.get(`${url}${uuid}/events-data-by-category?locale=${language}&category=all&page=${page}`, data)
             .then((r) => {
+                console.log(data)
                 dispatch(SuccessGetCategoris(r.data.data))
             })
             .catch((error) => {
