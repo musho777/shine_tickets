@@ -19,7 +19,6 @@ export const AllEventsWrappers = ({ loading, data, setPage, page, showButton }) 
       {
         data.map((elm, i) => {
           let date = elm.dates[0].start_date
-          console.log(elm.dates[0].start_date)
           const dateObject = new Date(elm?.date);
           let day = date.slice(8, 10);
           let month = date.slice(5, 7);

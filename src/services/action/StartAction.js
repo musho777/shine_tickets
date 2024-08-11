@@ -75,3 +75,9 @@ export const StartGetExpectedEvents = () => {
         type: 'StartGetExpectedEvents'
     }
 }
+
+export const StartGetHallAction = () => {
+    return {
+        type: 'StartGetHallAction'
+    }
+}

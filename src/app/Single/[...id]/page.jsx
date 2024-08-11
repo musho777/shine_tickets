@@ -1,7 +1,7 @@
 "use client"
 import '../styles.css'
 
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { GetSinglPage } from '../../../services/action/action'
@@ -15,14 +15,12 @@ const Single = ({ params }) => {
     const { t } = useTranslation();
     const getSinglPage = useSelector((st) => st.getSinglPage)
     const { language } = useSelector((st) => st.StaticReducer)
-    let { event } = getSinglPage?.events
     let { recomended } = getSinglPage?.events
     var months = [
         "January", "February", "March", "April", "May", "June",
         "July", "August", "September", "October", "November", "December"
     ];
     var daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-    const [languageData, setLanguageData] = useState({ title: '', description: '', hall: '', place: '' })
     useEffect(() => {
         if (language && id) {
             dispatch(GetSinglPage(id, language))
@@ -31,13 +29,13 @@ const Single = ({ params }) => {
 
     return (
         <>
-            <DynamicMeta title={event?.title_en} description={event?.description_en} />
+            <DynamicMeta title={getSinglPage.events?.name} description={getSinglPage.events?.description} />
             <div id='singlPage' className='container'>
                 <Card
                     img={`http://localhost:8000/${getSinglPage.events.main_image}`}
                     imgLarg={`http://localhost:8000/${getSinglPage.events.cover_image}`}
                     date={getSinglPage?.events?.dates && getSinglPage?.events?.dates[0].start_date}
-                    description={languageData?.description}
+                    description={getSinglPage?.events?.description}
                     title={getSinglPage.events.name}
                     priceEnd={`${getSinglPage.events.price} AMD`}
                     priceStart={`${getSinglPage.events.price} -`}
@@ -45,10 +43,10 @@ const Single = ({ params }) => {
                     onClick={() => window.location = `/BuyTickets/${id}`}
                     largImage={`http://localhost:8000/${getSinglPage.events.cover_image}`}
                 />
-                {languageData?.description?.length > 0 && <div className='DescriptionDiv'>
+                <div className='DescriptionDiv'>
                     <p className='descriptionDiv2Title'>{t('description')}</p>
-                    <p>{languageData?.description}</p>
-                </div>}
+                    <div dangerouslySetInnerHTML={{ __html: getSinglPage?.events?.description }} />
+                </div>
                 <div className='RecDiv2'>
                     {
                         recomended?.length > 0 &&
@@ -83,7 +81,7 @@ const Single = ({ params }) => {
                         </div>
                     }
                 </div>
-            </div>
+            </div >
         </>
     )
 }

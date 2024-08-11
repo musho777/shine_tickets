@@ -65,3 +65,9 @@ export const ErrorGetExpectedEvents = () => {
         type: 'ErrorGetExpectedEvents'
     }
 }
+
+export const ErrorGetHallAction = () => {
+    return {
+        type: 'ErrorGetHallAction'
+    }
+}

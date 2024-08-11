@@ -8,7 +8,7 @@ export const TicketsForBuyReducer = (state = store, action) => {
             temp.tickets.push(action.data)
             break;
         case 'RemoveTicketsAction':
-            const index = temp.tickets.findIndex(({ seatId }) => seatId == action.data.seatId);
+            const index = temp.tickets.findIndex(({ id }) => id == action.data.id);
             temp.tickets.splice(index, 1)
             break
         case 'RemoveAllTickets':

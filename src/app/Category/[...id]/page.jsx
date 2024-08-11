@@ -52,7 +52,7 @@ const Category = ({ params }) => {
       statDate = `${startDate.getFullYear()}-${startDate.getMonth() + 1}-${startDate.getDate()}`
     }
     if (language) {
-      dispatch(GetAllEvents2(page, language))
+      dispatch(GetAllEvents2(page, language, id))
     }
   }, [selectedDate, id, subcategoryId, page, hallId, language])
 
@@ -200,7 +200,7 @@ const Category = ({ params }) => {
     <>
       <DynamicMeta
         title={name}
-        description={event?.description_en}
+        description={event?.description}
       />
       <div className='CategoryScreen'>
         <div className='CategoryScreenBaner'>
@@ -214,7 +214,6 @@ const Category = ({ params }) => {
                 <ClearFiltr />
               </div>}
             </div>
-            {/* <FiltrDiv /> */}
             <div className='CategoryScreenBaner2'>
               {baner}
             </div>

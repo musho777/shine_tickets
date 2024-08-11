@@ -117,3 +117,10 @@ export const SuccessGetExpectedEvents = (data) => {
         data
     }
 }
+
+export const SuccessGetHallAction = (data) => {
+    return {
+        type: 'SuccessGetHallAction',
+        data
+    }
+}

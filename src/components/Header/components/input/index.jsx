@@ -41,10 +41,8 @@ export const Input = ({ searchResult, setSearchResult, setSearchResultDAta }) =>
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (searchRef.current && !searchRef.current.contains(event.target)) {
-        setINputFocus(false)
-        setSearchResult(false)
-      }
+      setINputFocus(false)
+      setSearchResult(false)
     };
     document.body.addEventListener('click', handleClickOutside);
     return () => {
@@ -53,7 +51,6 @@ export const Input = ({ searchResult, setSearchResult, setSearchResultDAta }) =>
   }, []);
 
   const Search = (value) => {
-    console.log(value)
     dispatch(SearchAction(value, language))
     setValue(value)
   }

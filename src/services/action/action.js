@@ -1,7 +1,7 @@
 import axios from "axios"
-import { StartCreatTicket, StartGetCategoris, StartGetCategory, StartGetExpectedEvents, StartGetGeneralEvents, StartGetGetTopEvents, StartGetParonyanEvents, StartGetRadnomEvents, StartGetSinglPage, StartGetTelStatus, StartSearch, StartSubCategory, StartWeekEvents } from "./StartAction"
-import { ErrorCreatTicket, ErrorGetCategoris, ErrorGetCategory, ErrorGetExpectedEvents, ErrorGetGeneralEvents, ErrorGetRandomEvetns, ErrorGetSubCategory, ErrorGetTelStatus, ErrorGetTopEvents, ErrorSearch, ErrorSinglPage, ErrorWeekEvents } from "./ErrorAction"
-import { SuccessCreatTicket, SuccessGetAllAds, SuccessGetCategoris, SuccessGetCategory, SuccessGetEventValidity, SuccessGetExpectedEvents, SuccessGetFeedback, SuccessGetGeneralEvents, SuccessGetHall, SuccessGetParonyanEvetns, SuccessGetRandomEvents, SuccessGetSubCategory, SuccessGetTellStatus, SuccessGetTopEvents, SuccessSearch, SuccessSinglPage, SuccessWeekEvent, eventValidity } from "./SuccessAction"
+import { StartCreatTicket, StartGetCategoris, StartGetCategory, StartGetExpectedEvents, StartGetGeneralEvents, StartGetGetTopEvents, StartGetHallAction, StartGetParonyanEvents, StartGetRadnomEvents, StartGetSinglPage, StartGetTelStatus, StartSearch, StartSubCategory, StartWeekEvents } from "./StartAction"
+import { ErrorCreatTicket, ErrorGetCategoris, ErrorGetCategory, ErrorGetExpectedEvents, ErrorGetGeneralEvents, ErrorGetHallAction, ErrorGetRandomEvetns, ErrorGetSubCategory, ErrorGetTelStatus, ErrorGetTopEvents, ErrorSearch, ErrorSinglPage, ErrorWeekEvents } from "./ErrorAction"
+import { SuccessCreatTicket, SuccessGetAllAds, SuccessGetCategoris, SuccessGetCategory, SuccessGetEventValidity, SuccessGetExpectedEvents, SuccessGetFeedback, SuccessGetGeneralEvents, SuccessGetHall, SuccessGetHallAction, SuccessGetParonyanEvetns, SuccessGetRandomEvents, SuccessGetSubCategory, SuccessGetTellStatus, SuccessGetTopEvents, SuccessSearch, SuccessSinglPage, SuccessWeekEvent, eventValidity } from "./SuccessAction"
 import { MD5 } from "crypto-js";
 
 
@@ -90,7 +90,6 @@ export const SearchAction = (search, lang) => {
         dispatch(StartSearch())
         if (search)
             axios.get(`${url}${uuid}/search-events-by-title-and-date?locale=${lang}&search=${search}`, { search: search }).then((r) => {
-                console.log(r)
                 dispatch(SuccessSearch(r.data.data))
             })
                 .catch((error) => {
@@ -118,12 +117,11 @@ export const GetAllEvents = (page, data) => {
     }
 }
 
-export const GetAllEvents2 = (page, language, data) => {
+export const GetAllEvents2 = (page, language, id = 'all') => {
     return (dispatch) => {
         dispatch(StartGetCategoris())
-        axios.get(`${url}${uuid}/events-data-by-category?locale=${language}&category=all&page=${page}`, data)
+        axios.get(`${url}${uuid}/events-data-by-category?locale=${language}&category=${id}&page=${page}`)
             .then((r) => {
-                console.log(data)
                 dispatch(SuccessGetCategoris(r.data.data))
             })
             .catch((error) => {
@@ -243,6 +241,19 @@ export const CreateCurrentTicket = (data, res, selectPay) => {
     }
 }
 
+
+export const GetHallAction = () => {
+    return (dispatch) => {
+        dispatch(StartGetHallAction())
+        axios.get(`${url}${uuid}/map-and-seat-data-for-reserve?project_event_id=1&event_date_id=2&event_id=1&locale=am`).then((r) => {
+            dispatch(SuccessGetHallAction(r.data))
+
+        })
+            .catch((error) => {
+                dispatch(ErrorGetHallAction())
+            })
+    }
+}
 
 // export const GetCurrentTicket = () => {
 //     return (dispatch) => {

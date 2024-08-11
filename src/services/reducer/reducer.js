@@ -20,6 +20,7 @@ import { GetWeekEventReducer } from './GetWeekEventReducer'
 import { GetParonyanEventsReducer } from './GetParonyanEventsReducer'
 import { GetExpectedEventsReducer } from './GetExpectedEventsReducer'
 import { ActiveSeansReducer } from './ActiveSeansReducer'
+import { GetHallActionRecuer } from './GetHallActionRecuer'
 
 const reducer = combineReducers({
     Ticket_reducer,
@@ -43,6 +44,7 @@ const reducer = combineReducers({
     paronyanEvents: GetParonyanEventsReducer,
     getExpectedEvents: GetExpectedEventsReducer,
     activeSeans: ActiveSeansReducer,
+    getHall: GetHallActionRecuer
 })
 
 export default reducer

@@ -1,10 +1,8 @@
 import '../../components/Slider/styles.css'
 import { useTranslation } from 'react-i18next';
 import { Button } from '../../components/Button'
-import { LocationSvg, SeansCaelndar } from '../../components/svg'
+import { LocationSvg } from '../../components/svg'
 import { useEffect, useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { ActiveSeans } from '../../services/action/action';
 
 export const Card = ({
     img,
@@ -17,22 +15,12 @@ export const Card = ({
     date,
     onClick,
     isParonyan,
-    seans,
-    setActiveSeans,
     imgLarg,
     place
 }) => {
     const { t } = useTranslation();
-    const [data1, setData1] = useState(seans)
-    const [active, setActive] = useState(0)
-    const [showAll, setShowAll] = useState(false)
     const divRef = useRef()
     const [hight, setHeight] = useState(0)
-    const [openSeans, setOpenSeans] = useState(false)
-    const dispatch = useDispatch()
-    document.body.addEventListener('click', function () {
-        setOpenSeans(false)
-    });
 
     useEffect(() => {
         if (divRef.current) {
@@ -41,12 +29,6 @@ export const Card = ({
         }
     }, [description]);
 
-    useEffect(() => {
-        if (data1?.length > 0) {
-            dispatch(ActiveSeans(data1[0].id))
-            setActiveSeans(data1[0].id)
-        }
-    }, [])
 
     const [windowSize, setWindowSize] = useState({
         width: window.innerWidth,
@@ -70,47 +52,6 @@ export const Card = ({
         <div ref={divRef} className='SinglBanerDiv' >
             <div className='SiglBanerImg2'>
                 <img className='SiglBanerImg2' src={windowSize.width > 960 ? img : imgLarg} />
-                {data1?.length && <div className='SeansCaelndar'>
-                    <div onClick={(e) => {
-                        e.stopPropagation()
-                        e.preventDefault()
-                        setOpenSeans(true)
-                    }
-                    }>
-                        <SeansCaelndar />
-                    </div>
-                    {openSeans && <div className='SeansDivMobile'>
-                        {data1?.map((elm, i) => {
-                            const matchResult = elm.time.match(/(\d+)([\s\S]*?)(<div[\s\S]*?<\/div>)([\s\S]*?)(\d+:\d+)/);
-                            const day = matchResult[1];
-                            const divContent = matchResult[3];
-                            const parser = new DOMParser();
-                            const doc = parser.parseFromString(divContent, "text/html");
-                            const divElement = doc.body.firstChild;
-                            divElement.removeChild(divElement.querySelector('br'));
-                            const linesArray = Array.from(divElement.childNodes)
-                                .filter(node => node.nodeType === 3)
-                                .map(node => node.textContent.trim());
-                            const time = matchResult[5];
-                            return <div key={i} onClick={(e) => {
-                                e.stopPropagation()
-                                e.preventDefault()
-                                setActive(i)
-                                dispatch(ActiveSeans(elm.id))
-                                setActiveSeans(elm.id)
-
-                            }} className='SeansDivItem'>
-                                {i == active && <div className='SeansActive' />}
-                                {(linesArray[1].slice(0, 3) == 'ԿԻՐ' || linesArray[1].slice(0, 3) == 'ՇԱԲ') &&
-                                    <p style={{ color: 'red' }} className='WeekDey'>{linesArray[1].slice(0, 3)}</p>
-                                }
-                                <p className='WeekDey'>{linesArray[1].slice(0, 3)}</p>
-                                <p>{day} {linesArray[0]}</p>
-                                <p className='WeekDey'>{time}</p>
-                            </div>
-                        })}
-                    </div>}
-                </div>}
             </div>
             <div className='SinglBanerDivInfo'>
                 <div className='SinglBanerPrimera'>
@@ -152,34 +93,6 @@ export const Card = ({
                 </div>
 
             </div>
-            {data1?.length > 0 && <div className='SeansDiv'>
-                {data1?.map((elm, i) => {
-                    const matchResult = elm.time.match(/(\d+)([\s\S]*?)(<div[\s\S]*?<\/div>)([\s\S]*?)(\d+:\d+)/);
-                    const day = matchResult[1];
-                    const divContent = matchResult[3];
-                    const parser = new DOMParser();
-                    const doc = parser.parseFromString(divContent, "text/html");
-                    const divElement = doc.body.firstChild;
-                    divElement.removeChild(divElement.querySelector('br'));
-                    const linesArray = Array.from(divElement.childNodes)
-                        .filter(node => node.nodeType === 3)
-                        .map(node => node.textContent.trim());
-                    const time = matchResult[5];
-                    return <div key={i} onClick={() => {
-                        setActive(i)
-                        dispatch(ActiveSeans(elm.id))
-                        setActiveSeans(elm.id)
-                    }} id={active == i ? 'SeansDivItemActive' : ''} className='SeansDivItem'>
-                        {i == active && <div className='SeansActive' />}
-                        {(linesArray[1].slice(0, 3) == 'ԿԻՐ' || linesArray[1].slice(0, 3) == 'ՇԱԲ') &&
-                            <p style={{ color: 'red' }} className='WeekDey'>{linesArray[1].slice(0, 3)}</p>
-                        }
-                        <p className='WeekDey'>{linesArray[1].slice(0, 3)}</p>
-                        <p>{day} {linesArray[0]}</p>
-                        <p className='WeekDey'>{time}</p>
-                    </div>
-                })}
-            </div>}
         </div>
         <img
             className='SinglBanerImg'

@@ -7,7 +7,6 @@ import { GetTicketStatus } from '../../services/action/action'
 import { StatusPageReject } from '../StatusPageReject'
 
 const StatusPage = ({ params }) => {
-    console.log(params)
     const dispatch = useDispatch()
     // const orderId = router.query.order;
     // let orderId = window.location?.href?.split('order=')[1]

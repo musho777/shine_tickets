@@ -13,6 +13,32 @@
 
 }
 
+.addTicketButton {
+    background-color: green;
+}
+
+.activeButton {
+    background-color: #fc7115;
+    width: 10px !important;
+    height: 10px !important;
+}
+
+.parter {
+    width: 150px;
+    height: 130px;
+    border-radius: 20px;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.Teatertext {
+    color: white;
+    font-size: 20px;
+}
+
 .zoom-container img {
     width: 100%;
 }

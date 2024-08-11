@@ -36,8 +36,6 @@ const AllEventss = () => {
   const [height, setHeight] = useState(false)
   const menuRef = useRef(null);
 
-  console.log(events.events, 'getCategory')
-
   useEffect(() => {
     HallName()
   }, [language])
