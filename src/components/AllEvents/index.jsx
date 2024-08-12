@@ -25,7 +25,7 @@ export const ALLEvents = () => {
                 <h2>{t('AllEvents')}</h2>
             </div>
             <div className="Allevents">
-                {events.events?.map((elm, i) => {
+                {events.events && events.events?.map((elm, i) => {
                     if (elm.active)
                         return (
                             <EachTicket
@@ -35,7 +35,7 @@ export const ALLEvents = () => {
                                 hall={elm?.hall}
                                 title={truncateText(elm.name, 43)}
                                 category={elm?.category?.name}
-                                image={`http://localhost:8000/${elm.cover_image}`}
+                                image={`http://159.89.105.14/${elm.cover_image}`}
                                 date={elm.dates[0].start_date}
                                 price={`${elm?.price} - ${elm?.price} AMD`}
                             />

@@ -1,7 +1,8 @@
 import Head from 'next/head';
 import { useEffect } from 'react';
 
-const DynamicMeta = ({ title, description }) => {
+const DynamicMeta = ({ title, description, keywords }) => {
+  console.log(keywords, 'keywords')
   useEffect(() => {
     document.title = title;
   }, [title]);
@@ -11,6 +12,7 @@ const DynamicMeta = ({ title, description }) => {
       <Head>
         <link rel="shortcut icon" href="../../app/favicon.ico" />
         <meta name="description" content={description} />
+        {keywords && <meta name="keywords" content={keywords} />}
       </Head>
     </>
   );

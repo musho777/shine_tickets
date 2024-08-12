@@ -8,8 +8,8 @@ import { MD5 } from "crypto-js";
 const keys = "hYDepOnSarMi";
 const secretKey = "cyJhbGcieiJIUdzI1Nir9eyJt2xglIyoiQWRdtsg";
 
-const url = 'http://127.0.0.1:8000/api/v1/'
-const uuid = '924f93ba-38bb-4c37-b01d-5e3f966dd401'
+const url = 'http://159.89.105.14/api/v1/'
+const uuid = '6358f20d-923e-4409-8f00-abceb8fe9f50'
 
 
 export const OpenCategoryMenu = (data) => {

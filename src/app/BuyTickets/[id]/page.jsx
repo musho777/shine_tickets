@@ -59,6 +59,7 @@ const BuyTickets = ({ params }) => {
 
   return <>
     <DynamicMeta
+      keywords={getSinglPage.events.keyword}
       title={getSinglPage.events.name}
       description={getSinglPage.events.description}
     />
@@ -70,10 +71,7 @@ const BuyTickets = ({ params }) => {
           setOpen(false)
         }}
       >
-        <BuyNow
-          event_id={getSinglPage?.events?.event?.paronyanId}
-          grupID={getSinglPage.events?.event?.ParonyanGroup_id}
-          open={open} />
+        <BuyNow open={open} />
       </CartPopup >}
       <PriceColor ChoosePrice={(e) => ChoosePrice(e)} data={getSinglPage.events.color} claseName='ticketPrice' />
       <div className='BuyTicketsWrapper'>

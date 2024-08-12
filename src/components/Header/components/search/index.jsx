@@ -24,7 +24,7 @@ export const Search = () => {
           e.stopPropagation()
         }}>
           {search.events.map((elm, i) => {
-            return <SearchBody data={elm} />
+            return <SearchBody key={i} data={elm} />
           })}
         </div>
       }

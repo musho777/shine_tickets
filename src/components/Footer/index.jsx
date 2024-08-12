@@ -140,7 +140,7 @@ export const Footer = ({ menu }) => {
                         width={50}
                         height={40}
                         onClick={() => scrollToTop()} src={img} />
-                    <p className=''>
+                    <p >
                         {t('SHINETICKETSLLC')}
                     </p>
                 </div>

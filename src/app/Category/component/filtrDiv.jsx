@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useSelector } from "react-redux"
 import { Calendar } from '../../../components/Calendar'
+import { CategoryMenu } from "@/src/components/CategoryMenu"
 
 
 export const FiltrDiv = ({ selectedDate, setSelectedDate, date }) => {
@@ -14,6 +15,8 @@ export const FiltrDiv = ({ selectedDate, setSelectedDate, date }) => {
   const { language } = useSelector((st) => st.StaticReducer)
   const [hallId, setHallId] = useState('')
   const openMenu = useSelector((st) => st.StaticReducer)
+  const { t } = useTranslation()
+
 
 
   document.body.addEventListener('click', function () {
@@ -34,7 +37,6 @@ export const FiltrDiv = ({ selectedDate, setSelectedDate, date }) => {
     }} item={events.hall} close={() => setOpen(!open)} />
   }
 
-  const { t } = useTranslation()
   return <div className='FilterDiv'>
     <div className='CalendarDiv'>
       <div >

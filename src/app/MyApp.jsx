@@ -11,7 +11,6 @@ import '../lib/i18n'
 const MyApp = ({ children }) => {
   const { t } = useTranslation()
   const Event_reducer = useSelector((state) => state.Event_reducer)
-  const language = useSelector((state) => state.StaticReducer.language)
   const dispatch = useDispatch()
 
   useEffect(() => {

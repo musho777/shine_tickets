@@ -70,9 +70,6 @@ export const BuyNow = ({ open, isParonyanEvent, paronyanSeans, event_id, grupID 
             checked: '',
             address: ''
         })
-        // if (open) {
-        //     BookTikests()
-        // }
     }, [open])
 
     useEffect(() => {
@@ -282,11 +279,10 @@ export const BuyNow = ({ open, isParonyanEvent, paronyanSeans, event_id, grupID 
                 {isParonyanEvent ?
                     <p id="paronyan" className='BuyTicketDateMonth' dangerouslySetInnerHTML={{ __html: getSinglPage.events.event.ParonyanTime }} />
                     :
-                    <p className='BuyNowHeaderDate'> {new Date(getSinglPage.events.event?.sessions[0]?.date).getDate()}.{new Date(getSinglPage.events.event?.sessions[0].date).getMonth() + 1}.{new Date(getSinglPage.events.event?.sessions[0].date).getFullYear()} {getSinglPage.events.event?.sessions[0].time}</p>
+                    <p className='BuyNowHeaderDate'> </p>
                 }
             </div>
             <div className='BuyNowBody'>
-                {/* <p className='FreeDelivery'>{t('freeDelivery')}</p> */}
                 <div className='InputTextareWrapper'>
                     <div className='InputWrapperBuy'>
                         <div className='InputWeapper'>
