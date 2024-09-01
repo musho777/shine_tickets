@@ -33,8 +33,8 @@ const Single = ({ params }) => {
             <DynamicMeta keywords={getSinglPage.events.keyword} title={getSinglPage.events?.name} description={getSinglPage.events?.description} />
             <div id='singlPage' className='container'>
                 <Card
-                    img={`http://159.89.105.14/${getSinglPage.events.main_image}`}
-                    imgLarg={`http://159.89.105.14/${getSinglPage.events.cover_image}`}
+                    img={`https://dev2.shinetickets.com/${getSinglPage.events.main_image}`}
+                    imgLarg={`https://dev2.shinetickets.com/${getSinglPage.events.cover_image}`}
                     date={getSinglPage?.events?.dates && getSinglPage?.events?.dates[0].start_date}
                     description={getSinglPage?.events?.description}
                     title={getSinglPage.events.name}
@@ -42,7 +42,7 @@ const Single = ({ params }) => {
                     priceStart={`${getSinglPage.events.price} -`}
                     place={getSinglPage.events.place}
                     onClick={() => window.location = `/BuyTickets/${id}`}
-                    largImage={`http://159.89.105.14/${getSinglPage.events.cover_image}`}
+                    largImage={`https://dev2.shinetickets.com/${getSinglPage.events.cover_image}`}
                 />
                 <div className='DescriptionDiv'>
                     <p className='descriptionDiv2Title'>{t('description')}</p>

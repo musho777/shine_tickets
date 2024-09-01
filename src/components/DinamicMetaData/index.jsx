@@ -2,7 +2,6 @@ import Head from 'next/head';
 import { useEffect } from 'react';
 
 const DynamicMeta = ({ title, description, keywords }) => {
-  console.log(keywords, 'keywords')
   useEffect(() => {
     document.title = title;
   }, [title]);

@@ -6,7 +6,6 @@ export const PriceColor = ({ claseName, data, ChoosePrice }) => {
   return <div className={claseName}>
     <div onClick={() => ChoosePrice(null)} style={{ backgroundColor: '#7d4e5a' }}>{t('All')}</div>
     {data && Object.entries(data).map(([color, price]) => {
-      console.log(color)
       return <div key={color} onClick={() => ChoosePrice(color)} style={{ backgroundColor: color }}>{price}</div>
     })}
   </div>

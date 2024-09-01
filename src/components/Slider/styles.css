@@ -12,6 +12,7 @@
     margin-left: 2px;
     width: 100%;
     border-radius: 15px;
+    height: 420px;
 }
 
 .alice-carousel__dots-item:not(.__custom):not(:last-child) {

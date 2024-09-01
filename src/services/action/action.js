@@ -8,8 +8,8 @@ import { MD5 } from "crypto-js";
 const keys = "hYDepOnSarMi";
 const secretKey = "cyJhbGcieiJIUdzI1Nir9eyJt2xglIyoiQWRdtsg";
 
-const url = 'http://159.89.105.14/api/v1/'
-const uuid = '6358f20d-923e-4409-8f00-abceb8fe9f50'
+const url = 'https://dev2.shinetickets.com/api/v1/'
+const uuid = 'da98243f-9a26-48de-893a-40491b6619e2'
 
 
 export const OpenCategoryMenu = (data) => {
@@ -242,16 +242,17 @@ export const CreateCurrentTicket = (data, res, selectPay) => {
 }
 
 
-export const GetHallAction = () => {
+export const GetHallAction = (data, locale) => {
     return (dispatch) => {
         dispatch(StartGetHallAction())
-        axios.get(`${url}${uuid}/map-and-seat-data-for-reserve?project_event_id=1&event_date_id=2&event_id=1&locale=am`).then((r) => {
-            dispatch(SuccessGetHallAction(r.data))
+        if (data?.dates?.length)
+            axios.get(`${url}${uuid}/map-and-seat-data-for-reserve?project_event_id=${data.id}&event_date_id=${data?.dates[0].id}&event_id=${data.id}&locale=${locale}`).then((r) => {
+                dispatch(SuccessGetHallAction(r.data))
 
-        })
-            .catch((error) => {
-                dispatch(ErrorGetHallAction())
             })
+                .catch((error) => {
+                    dispatch(ErrorGetHallAction())
+                })
     }
 }
 

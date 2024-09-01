@@ -3,7 +3,7 @@ import { truncateText } from "@/src/function/function"
 
 export const Card = ({ data, id }) => {
   return <div className='BuyTicketsCard' id={id}>
-    <img src={`http://159.89.105.14/${data.main_image}`} />
+    <img src={`https://dev2.shinetickets.com/${data.main_image}`} />
     <div className='BuyTicketsCardInfo'>
       <div>
         <p className='BuyTicketTitle'>{truncateText(data.name, 15)}</p>

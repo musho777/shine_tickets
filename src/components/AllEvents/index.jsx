@@ -35,14 +35,14 @@ export const ALLEvents = () => {
                                 hall={elm?.hall}
                                 title={truncateText(elm.name, 43)}
                                 category={elm?.category?.name}
-                                image={`http://159.89.105.14/${elm.cover_image}`}
+                                image={`https://dev2.shinetickets.com/${elm.poster_image}`}
                                 date={elm.dates[0].start_date}
                                 price={`${elm?.price} - ${elm?.price} AMD`}
                             />
                         )
                 })}
             </div>
-            <ShowAllButton onClick={() => window.location = '/allEvents'} />
+            <ShowAllButton onClick={() => window.location = '/Category/all'} />
         </div>
     )
 }

@@ -23,10 +23,11 @@ const BuyTickets = ({ params }) => {
   const [color, setColor] = useState()
   const tickets = useSelector((st) => st.tiketsForBuy)
   const [total, setTotal] = useState(0)
-
   useEffect(() => {
-    dispatch(GetHallAction())
-  }, [])
+    if (getSinglPage.events) {
+      dispatch(GetHallAction(getSinglPage.events, language))
+    }
+  }, [getSinglPage.events])
 
   useEffect(() => {
     if (params.id && language) {

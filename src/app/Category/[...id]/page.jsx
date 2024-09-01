@@ -127,14 +127,6 @@ const Category = ({ params }) => {
         </div>
       )
     }
-    else {
-      setBaner(
-        <div className='CategoryBaner'>
-
-        </div>
-      )
-    }
-
   }, [id])
 
 

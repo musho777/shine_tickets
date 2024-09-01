@@ -108,9 +108,8 @@ export const ZoomMap = ({ value, setValue, color }) => {
             maxScale={1.5}
         >
             <div style={{ position: 'relative', }}>
-                <img style={{ position: 'relative', }} src={`http://159.89.105.14/${getHall.events.map.background}`} />
+                <img style={{ position: 'relative', }} src={`https://dev2.shinetickets.com/${getHall.events.map.background}`} />
                 {data?.map((elm, i) => {
-                    console.log(elm.color, color, '22')
                     if (elm.color == color || !color)
                         return <div
                             className={[

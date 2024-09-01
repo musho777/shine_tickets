@@ -19,7 +19,7 @@ export const Carusel = () => {
                 item.push(
                     <div key={i} className='CaruselItem'>
                         <div className='BanerDiv' >
-                            <img onDragStart={handleDragStart} className='BanerImg2' src={`http://159.89.105.14/${elm?.main_image}`} />
+                            <img onDragStart={handleDragStart} className='BanerImg2' src={`https://dev2.shinetickets.com/${elm?.main_image}`} />
                             <div className='BanerDivInfo'>
                                 <SliderDate hall={elm.place} date={elm.dates[0].start_date} />
                                 <p className='BanerTitle'>{elm.name}</p>
@@ -27,7 +27,7 @@ export const Carusel = () => {
                                 <ButtonWrapper id={elm.id} name={elm.name} />
                             </div>
                         </div>
-                        <img className='BanerImg' src={`http://159.89.105.14/${elm?.main_image}`} alt='#' onDragStart={handleDragStart} />
+                        <img className='BanerImg' src={`https://dev2.shinetickets.com/${elm?.main_image}`} alt='#' onDragStart={handleDragStart} />
                     </div>
                 )
             })
