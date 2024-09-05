@@ -43,7 +43,7 @@ export const TicketPrice = ({ tickets, total, setOpen }) => {
       <div className='BuyTicketButtonWrapper'>
         <button
           disabled={tickets?.length == 0}
-          className={tickets?.length == 0 && 'disableButton'} onClick={() => setOpen(true)}>{t('Next')}</button>
+          className={tickets?.length == 0 ? 'disableButton' : ''} onClick={() => setOpen(true)}>{t('Next')}</button>
       </div>
     </div>
   </div>

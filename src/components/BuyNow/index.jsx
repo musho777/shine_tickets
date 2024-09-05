@@ -1,24 +1,15 @@
 import './style.css'
 import { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { CreateCurrentTicket, StatusSuccessAction } from '../../services/action/action'
-import { CheckSvg, CheckedSvg, MobileSvg, SelectSvg, SelectedSvg } from '../svg'
-import axios from 'axios'
+import { CheckSvg, CheckedSvg, SelectSvg, SelectedSvg } from '../svg'
 import { PuffLoader } from 'react-spinners'
-import CryptoJS, { MD5 } from 'crypto-js'
-import { Buffer } from "buffer"
 import 'react-phone-input-2/lib/style.css'
 import { useTranslation } from 'react-i18next'
 import InputMask from 'react-input-mask';
 import Image from 'next/image'
 
-export const BuyNow = ({ open, isParonyanEvent, paronyanSeans, event_id, grupID }) => {
+export const BuyNow = ({ event, open, data_id }) => {
     const { language } = useSelector((st) => st.StaticReducer)
-    const generateOrderNumber = () => {
-        const timestamp = Date.now()
-        const randomNum = Math.floor(Math.random() * 1000)
-        return `tel-${timestamp}-${randomNum}`
-    }
     const scrollRef = useRef();
 
     const scrollToBottom = () => {
@@ -29,24 +20,23 @@ export const BuyNow = ({ open, isParonyanEvent, paronyanSeans, event_id, grupID 
     };
 
     const { t } = useTranslation()
-
+    console.log(event.id)
     const dispatch = useDispatch()
     const tickets = useSelector((st) => st.tiketsForBuy)
     const getSinglPage = useSelector((st) => st.getSinglPage)
-    const Select = (i) => { setSelectPay(i) }
-    const [total, setTotal] = useState(0)
     const [chedked, setChedker] = useState(false)
-    const [selectPay, setSelectPay] = useState(1)
+    const [selectPay, setSelectPay] = useState("card")
     const [name, setName] = useState('')
     const [number, setNumber] = useState('')
     const [email, setEmail] = useState('')
     const [additional, setAdditional] = useState('')
     const [address, setAddress] = useState('')
     const [disableButton, setDisableButton] = useState(false)
-    const issuerId = generateOrderNumber()
     const { creatTicket } = useSelector((st) => st)
     const [delivery, setDelivery] = useState(false)
+    const [seat_list, setSeat_list] = useState({})
     let [title, setTitle] = useState()
+    const [loading, setLoading] = useState(false)
     const [error, setError] = useState({
         name: '',
         email: '',
@@ -99,67 +89,66 @@ export const BuyNow = ({ open, isParonyanEvent, paronyanSeans, event_id, grupID 
         return (false)
     }
 
-    const [loading, setLoading] = useState(false)
-
-    useEffect(() => {
-        let price = 0
-        tickets.tickets?.map((elm, i) => {
-            price += +elm.price
-        })
-        setTotal(price)
-    }, [tickets])
 
     useEffect(() => {
         if (language === 'am') {
-            if (isParonyanEvent) {
-                setTitle(getSinglPage.events.event?.ParonyanName)
-            }
-            else {
-                setTitle(getSinglPage.events.event?.title)
-            }
+            setTitle(getSinglPage.events.event?.title)
         }
         else if (language === 'en') {
-            if (isParonyanEvent) {
-                setTitle(getSinglPage.events.event?.ParonyanName)
-            }
-            else {
-                setTitle(getSinglPage?.events?.event?.title_en)
-            }
-
-
+            setTitle(getSinglPage?.events?.event?.title_en)
         }
         else if (language === 'ru') {
-            if (isParonyanEvent) {
-                setTitle(getSinglPage.events.event?.ParonyanName)
-            }
-            else {
-                setTitle(getSinglPage.events.event?.title_ru)
-            }
-
+            setTitle(getSinglPage.events.event?.title_ru)
         }
     }, [language, getSinglPage])
 
 
     function handlePurchase() {
-        setLoading(true)
-        axios.post(`https://api.shinetickets.com/registerPayment`, {
-            amount: total * 100,
-            tickets: tickets.tickets,
-            sessionId: tickets.tickets[0].sessionId,
-            buyerName: name,
-            buyerEmail: email,
-            buyerPhone: number,
-            deliveryLocation: address,
-            isParonyanEvent: false,
-            buyerNotes: additional,
-            paymentMethod: selectPay == '3' ? "CASH" : 'CREDIT CARD',
-            delivery,
+        let event_seats = []
+        tickets.tickets.map((elm, i) => {
+            console.log(elm)
+            event_seats.push(elm.id)
         })
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+        const formattedNumber = "+374 (33) 333-333".replace(/\D/g, "");
+        var raw = JSON.stringify({
+            "locale": language,
+            "user": {
+                "first_name": name,
+                "last_name": name,
+                "email": email,
+                "phone": formattedNumber,
+                "address": address,
+                "description": additional
+            },
+            "project_event_id": event.id,
+            "event_seats": event_seats,
+            "event_date_id": 1,
+            "payment_method": selectPay,
+            "seat_description": seat_list,
+            "entrances": {},
+            "bonus": 0
+        });
+
+        var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
+        };
+
+        setLoading(true)
+
+        fetch("https://dev2.shinetickets.com/api/v1/da98243f-9a26-48de-893a-40491b6619e2/pending-seats-for-reserve", requestOptions)
+            .then(response => response.json())
             .then(res => {
-                if (res?.data?.success) {
+                console.log(res)
+                if (res?.success) {
+                    console.log(res)
                     setLoading(false)
-                    window.location.href = res?.data?.formUrl
-                    if (selectPay == '3') {
+                    // window.location.href = res?.data?.formUrl
+                    if (selectPay == 'shipping') {
                         window.location = '/DeliveryStatusPage'
                     }
                 }
@@ -168,6 +157,10 @@ export const BuyNow = ({ open, isParonyanEvent, paronyanSeans, event_id, grupID 
                     setLoading(false)
                 }
             })
+            .catch(error => {
+                alert(t('Pleasetryagainlater'))
+                setLoading(false)
+            });
     }
 
     const validation = () => {
@@ -200,8 +193,8 @@ export const BuyNow = ({ open, isParonyanEvent, paronyanSeans, event_id, grupID 
         else if (chedked) {
             item.checked = ''
         }
-        if (selectPay == 3) {
-            if (!address) {
+        if (selectPay == "shipping") {
+            if (address.length <= 11) {
                 item.address = 'error'
             }
             else {
@@ -209,58 +202,8 @@ export const BuyNow = ({ open, isParonyanEvent, paronyanSeans, event_id, grupID 
 
             }
         }
-        if (
-            item.name == '' && item.address == '' && item.checked == '' && item.email == '' && item.phonNumber == ''
-        ) {
-            if (selectPay === 2) {
-                setLoading(true)
-                dispatch(CreateCurrentTicket({
-                    tickets: tickets.tickets,
-                    buyerName: name,
-                    buyerEmail: email,
-                    buyerPhone: number,
-                    deliveryLocation: address,
-                    sessionId: tickets.tickets[0].sessionId,
-                    paymentMethod: 'Telcell',
-                    buyerNotes: additional,
-                    orderId: issuerId,
-                }))
-                setLoading(false)
-
-                function getTelcellSecurityCode(shop_key, issuer, currency, price, product, issuer_id, valid_days) {
-                    return CryptoJS.MD5(shop_key + issuer + currency + price + product + issuer_id + valid_days).toString();
-                }
-
-                const encodedProduct = new Buffer.from('Ticket payment').toString('base64')
-                const encodedIssuerId = new Buffer.from(issuerId).toString('base64')
-                const security_code = getTelcellSecurityCode(
-                    process.env.REACT_APP_TELCELL_SHOP_KEY,
-                    process.env.REACT_APP_TELCELL_ISSUER,
-                    "֏",
-                    total,
-                    encodedProduct,
-                    encodedIssuerId,
-                    "1"
-                )
-                document.getElementById('telcellForm').innerHTML = `
-                <form id='form' style={{ margin: "20px" }} target="_blank" action="https://telcellmoney.am/invoices" method="POST">
-                    <input type="hidden" name="action" value="PostInvoice" />
-                    <input type="hidden" name="issuer" value="${process.env.REACT_APP_TELCELL_ISSUER}" />
-                    <input type="hidden" name="currency" value="֏" />
-                    <input type="hidden" name="price" value="${total}" />
-                    <input type="hidden" name="product" value="${encodedProduct}" />
-                    <input type="hidden" name="issuer_id" value="${encodedIssuerId}" />
-                    <input type="hidden" name="valid_days" value="1" />
-                    <input type="hidden" name="lang" value="am" />
-                    <input type="hidden" name="security_code" value="${security_code}" />
-                </form>`;
-                document.getElementById('form').submit()
-                window.location.reload()
-            }
-
-            else {
-                handlePurchase()
-            }
+        if (item.name == '' && item.address == '' && item.checked == '' && item.email == '' && item.phonNumber == '') {
+            handlePurchase()
         }
         setError(item)
     }
@@ -272,15 +215,39 @@ export const BuyNow = ({ open, isParonyanEvent, paronyanSeans, event_id, grupID 
     }, [creatTicket])
 
 
+    useEffect(() => {
+        let item = []
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+        tickets.tickets?.map((elm, i) => {
+            item.push(elm.id)
+        })
+        let data = { "locale": "am", "elements": item }
+        var raw = JSON.stringify({
+            "locale": language,
+            "elements": item
+        });
+        console.log(data)
+        var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: raw,
+        };
+        fetch("https://dev2.shinetickets.com/api/v1/da98243f-9a26-48de-893a-40491b6619e2/selected-event-seats", requestOptions)
+            .then(response => response.json())
+            .then(res => {
+                setSeat_list(res.data)
+            })
+            .catch(error => {
+            });
+    }, [])
+
+
     return (
         <div className='BuyNow'>
             <div className='BuyNowHeader'>
                 <p className='BuyNowHeaderTitle'>{title}</p>
-                {isParonyanEvent ?
-                    <p id="paronyan" className='BuyTicketDateMonth' dangerouslySetInnerHTML={{ __html: getSinglPage.events.event.ParonyanTime }} />
-                    :
-                    <p className='BuyNowHeaderDate'> </p>
-                }
+                <p className='BuyNowHeaderDate'> </p>
             </div>
             <div className='BuyNowBody'>
                 <div className='InputTextareWrapper'>
@@ -319,13 +286,13 @@ export const BuyNow = ({ open, isParonyanEvent, paronyanSeans, event_id, grupID 
                             <input
                                 placeholder={t('Deliveryaddress')}
                                 className='InputsBuyDelvery' id={error.address != '' ? 'errorInut' : 'inout'} value={address} onChange={(e) => setAddress(e.target.value)} />
-                            {error.address && <p>{t('requiredfield')}</p>}
+                            {error.address && <p>{t('addressError')}</p>}
                         </div>
                     }
                 </div>
                 <div className='selectPay' onClick={() => {
                     setDelivery(false)
-                    Select(1)
+                    setSelectPay("card")
                 }}>
                     <div>
                         <div className='BuyMethodSelect'>
@@ -355,11 +322,11 @@ export const BuyNow = ({ open, isParonyanEvent, paronyanSeans, event_id, grupID 
                 </div> */}
                 <div className='selectPay' onClick={() => {
                     setDelivery(true)
-                    Select(3)
+                    setSelectPay("shipping")
                 }} >
                     <div>
                         <div className='BuyMethodSelect'>
-                            {selectPay == 3 ? <SelectedSvg /> : <SelectSvg />}
+                            {selectPay == "shipping" ? <SelectedSvg /> : <SelectSvg />}
                         </div>
                         <Image width={68} height={34} src={require('../../assets/22.png')} />
                     </div>

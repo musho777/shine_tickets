@@ -8,7 +8,7 @@ i18next
   .init({
     fallbackLng: 'am',
     supportedLngs: ['en', 'ru', 'am'],
-    debug: true,
+    debug: false,
     defaultNS: 'translation',
     ns: ['translation'],
     backend: {

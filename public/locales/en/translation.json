@@ -58,5 +58,6 @@
   "SHINETICKETSLLC2": " Privacy Policy",
   "Pleasetryagainlater": "Please try again later",
   "requiredfield": "required field*",
+  "addressError": "address must be more than 11 characters",
   "description": "Description"
 }

@@ -65,6 +65,7 @@
 .BuyTicketsWrapper {
   display: flex;
   justify-content: space-between;
+  gap: 20px;
 }
 
 .BuyTicketTitle {
@@ -338,8 +339,13 @@
     display: flex;
   }
 
+  .BuyTicketsCard {
+    max-width: 100%;
+  }
+
   .BuyTicketsWrapper {
     flex-direction: column;
+
   }
 
   .ticketPrice {

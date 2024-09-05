@@ -1,5 +1,5 @@
 import './styles.css'
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { EachTicket } from "../EachTicket"
 import { useTranslation } from "react-i18next"
 import { useDispatch, useSelector } from "react-redux"

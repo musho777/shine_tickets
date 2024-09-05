@@ -58,5 +58,6 @@
   "DEPARTMENTS": "ОТДЕЛЕНИЯ",
   "Pleasetryagainlater": "Пожалуйста, повторите попытку позже",
   "requiredfield": "Обязательное поле*",
+  "addressError": "адрес должен содержать более 11 символов",
   "description": "Описание"
 }
