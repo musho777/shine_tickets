@@ -28,9 +28,9 @@ export default function Home() {
     <div className='mainPage'>
       <div className='container'>
         <Carusel />
-        {/* <TopEventsComponent /> */}
+        <TopEventsComponent />
       </div>
-      {/* <WeekEvents /> */}
+      <WeekEvents />
       <div className='container'>
         <ALLEvents />
         <ExpectedEvents />

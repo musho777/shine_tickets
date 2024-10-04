@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 
 const DynamicMeta = ({ title, description, keywords }) => {
   useEffect(() => {
-    document.title = title;
+    document.title = title ? title : 'Shine Tickets';
   }, [title]);
 
   return (

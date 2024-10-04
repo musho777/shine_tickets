@@ -4,11 +4,7 @@ import './styles.css'
 import { useSelector } from 'react-redux'
 export const WeekCard = ({
     title,
-    title_en,
-    title_ru,
     hall,
-    hall_en,
-    hall_ru,
     time,
     date,
     img,
@@ -31,6 +27,7 @@ export const WeekCard = ({
     useEffect(() => {
         let item = { ...languageData }
         let datee = new Date(date)
+        console.log(date)
         let day = datee.getDate()
         let mount = datee.getMonth() + 1
         if (day < 10) {
@@ -39,25 +36,8 @@ export const WeekCard = ({
         if (mount < 10) {
             mount = `0${mount}`
         }
+        console.log(day)
         setDate(`${day}.${mount}`)
-
-
-        if (language === 'am') {
-            item.title = title
-            item.hall = hall
-            item.place = place
-        }
-        else if (language === 'en') {
-            item.title = title_en
-            item.hall = hall_en
-            item.place = place_en
-
-        }
-        else if (language === 'ru') {
-            item.title = title_ru
-            item.hall = hall_ru
-            item.place = place_ru
-        }
         setLanguageData(item)
     }, [language])
     return <div onClick={() => {
@@ -67,11 +47,11 @@ export const WeekCard = ({
             <img src={img} />
         </div>
         <div className='WeekcardIfno'>
-            <p className='WeekcardIfnoTitle'>{truncateText(languageData.title)}</p>
+            <p className='WeekcardIfnoTitle'>{truncateText(title)}</p>
             <p className='WeekCardDate'>
                 {dateTime} {time}
             </p>
-            <p className='WeekCardPlace'>{truncateText(languageData.hall)} {truncateText(languageData.place, 30)}</p>
+            <p className='WeekCardPlace'>{truncateText(hall)} {truncateText(place, 30)}</p>
         </div>
         <div className='WeekcardLine' />
         <div className='WeekcardLineSvg'>

@@ -6,7 +6,12 @@ import { useSelector } from "react-redux"
 
 export const WeekEvents = () => {
     const { t } = useTranslation()
-    const getWeekEvent = useSelector((st) => st.getWeekEvent)
+    const getWeekEvent = useSelector((st) => st.general)
+    const months = [
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+    ];
+    const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
     return <div className="WeekEvents">
         <div className="container">
@@ -19,23 +24,27 @@ export const WeekEvents = () => {
             </div>
             <div className="WeekCardWrapper">
                 {getWeekEvent.events.map((elm, i) => {
-                    return <div key={i}>
-                        <WeekCard
-                            date={elm.date}
-                            time={elm.time}
-                            id={elm.eventId?._id}
-                            hall={elm?.hallId?.hall}
-                            hall_en={elm.hallId?.hall_en}
-                            hall_ru={elm.hallId?.hall_ru}
-                            place={elm.hallId.place}
-                            place_en={elm.hallId.place_en}
-                            place_ru={elm.hallId.place_ru}
-                            title={elm.eventId?.title}
-                            title_en={elm.eventId?.title_en}
-                            title_ru={elm.eventId?.title_ru}
-                            img={`https://api.shinetickets.com/images/${elm.eventId?.image}`}
-                        />
-                    </div>
+                    const date = new Date(elm.dates[0].start_date)
+                    const currentDate = new Date();
+                    const timeDifference = date - currentDate;
+                    const differenceInDays = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+                    if (differenceInDays <= 7)
+                        return <div key={i}>
+                            <WeekCard
+                                key={i}
+                                date={elm.dates[0].start_date}
+                                id={elm.id}
+                                img={`https://dev2.shinetickets.com/${elm.main_image}`}
+                                title={elm.name}
+                                category={elm.category}
+                                place={elm.place}
+                                data={elm}
+                                time={`${date.getHours()}:${date.getMinutes().toString().padStart(2, '0')}`}
+                                months={months[date.getMonth()]}
+                                currentDayOfWeek={daysOfWeek[date.getDay()]}
+                                price={`${elm.price}`}
+                            />
+                        </div>
                 })
                 }
             </div>
