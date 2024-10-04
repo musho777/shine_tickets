@@ -47,7 +47,6 @@ export const Hall = ({ color, setShowTickets }) => {
         value={value}
         setValue={(e) => setValue(e)}
         getSinglPage={getSinglPage}
-        open={open}
         color={color}
       />
     </div>

@@ -20,12 +20,11 @@ export const BuyNow = ({ event, open, data_id }) => {
     };
 
     const { t } = useTranslation()
-    console.log(event.id)
     const dispatch = useDispatch()
     const tickets = useSelector((st) => st.tiketsForBuy)
     const getSinglPage = useSelector((st) => st.getSinglPage)
     const [chedked, setChedker] = useState(false)
-    const [selectPay, setSelectPay] = useState("card")
+    const [selectPay, setSelectPay] = useState("arca")
     const [name, setName] = useState('')
     const [number, setNumber] = useState('')
     const [email, setEmail] = useState('')
@@ -49,7 +48,7 @@ export const BuyNow = ({ event, open, data_id }) => {
         setName('')
         setNumber('')
         setChedker(false)
-        setSelectPay(1)
+        setSelectPay('arca')
         setEmail('')
         setAddress('')
         setAdditional('')
@@ -63,7 +62,7 @@ export const BuyNow = ({ event, open, data_id }) => {
     }, [open])
 
     useEffect(() => {
-        if (selectPay == 3) {
+        if (selectPay == 'arca') {
             if (name == '' || number == '' || address == '' || email == '') {
                 setDisableButton(true)
             }
@@ -102,16 +101,14 @@ export const BuyNow = ({ event, open, data_id }) => {
         }
     }, [language, getSinglPage])
 
-
     function handlePurchase() {
         let event_seats = []
         tickets.tickets.map((elm, i) => {
-            console.log(elm)
             event_seats.push(elm.id)
         })
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
-        const formattedNumber = "+374 (33) 333-333".replace(/\D/g, "");
+        const formattedNumber = number.replace(/\D/g, "");
         var raw = JSON.stringify({
             "locale": language,
             "user": {
@@ -124,7 +121,7 @@ export const BuyNow = ({ event, open, data_id }) => {
             },
             "project_event_id": event.id,
             "event_seats": event_seats,
-            "event_date_id": 1,
+            "event_date_id": event.dates[0].id,
             "payment_method": selectPay,
             "seat_description": seat_list,
             "entrances": {},
@@ -145,11 +142,13 @@ export const BuyNow = ({ event, open, data_id }) => {
             .then(res => {
                 console.log(res)
                 if (res?.success) {
-                    console.log(res)
                     setLoading(false)
-                    // window.location.href = res?.data?.formUrl
                     if (selectPay == 'shipping') {
                         window.location = '/DeliveryStatusPage'
+                    }
+                    else {
+                        window.open(res?.redirectURL)
+                        window.location.reload()
                     }
                 }
                 else {
@@ -193,15 +192,15 @@ export const BuyNow = ({ event, open, data_id }) => {
         else if (chedked) {
             item.checked = ''
         }
-        if (selectPay == "shipping") {
-            if (address.length <= 11) {
-                item.address = 'error'
-            }
-            else {
-                item.address = ''
-
-            }
+        // if (selectPay == "shipping") {
+        if (address.length <= 11) {
+            item.address = 'error'
         }
+        else {
+            item.address = ''
+
+        }
+        // }
         if (item.name == '' && item.address == '' && item.checked == '' && item.email == '' && item.phonNumber == '') {
             handlePurchase()
         }
@@ -209,7 +208,7 @@ export const BuyNow = ({ event, open, data_id }) => {
     }
 
     useEffect(() => {
-        if (creatTicket.status && selectPay == 3) {
+        if (creatTicket.status && selectPay == "arca") {
             window.location = `/StatusACBA`
         }
     }, [creatTicket])
@@ -222,12 +221,10 @@ export const BuyNow = ({ event, open, data_id }) => {
         tickets.tickets?.map((elm, i) => {
             item.push(elm.id)
         })
-        let data = { "locale": "am", "elements": item }
         var raw = JSON.stringify({
             "locale": language,
             "elements": item
         });
-        console.log(data)
         var requestOptions = {
             method: 'POST',
             headers: myHeaders,
@@ -281,22 +278,20 @@ export const BuyNow = ({ event, open, data_id }) => {
                         className='TextareBuy'
                         placeholder={t('Notes')}
                         value={additional} onChange={(e) => setAdditional(e.target.value)} />
-                    {delivery &&
-                        <div className='InputWeapperDelivery'>
-                            <input
-                                placeholder={t('Deliveryaddress')}
-                                className='InputsBuyDelvery' id={error.address != '' ? 'errorInut' : 'inout'} value={address} onChange={(e) => setAddress(e.target.value)} />
-                            {error.address && <p>{t('addressError')}</p>}
-                        </div>
-                    }
+                    <div className='InputWeapperDelivery'>
+                        <input
+                            placeholder={t('Deliveryaddress')}
+                            className='InputsBuyDelvery' id={error.address != '' ? 'errorInut' : 'inout'} value={address} onChange={(e) => setAddress(e.target.value)} />
+                        {error.address && <p>{t('addressError')}</p>}
+                    </div>
                 </div>
                 <div className='selectPay' onClick={() => {
                     setDelivery(false)
-                    setSelectPay("card")
+                    setSelectPay("arca")
                 }}>
                     <div>
                         <div className='BuyMethodSelect'>
-                            {selectPay == 1 ? <SelectedSvg /> : <SelectSvg />}
+                            {selectPay == 'arca' ? <SelectedSvg /> : <SelectSvg />}
                         </div>
                         <div className='BuyMethodSelectImg'>
                             <Image alt='' width={80} height={34} src={require('../../assets/MIR_logo.png')} />
@@ -306,7 +301,7 @@ export const BuyNow = ({ event, open, data_id }) => {
                             <Image alt='' width={55} height={34} src={require('../../assets/arca_logo.png')} />
                         </div>
                     </div>
-                    <p className={selectPay == 1 && 'activeSelectedBuy'}>{t('Youwillreceive')}</p>
+                    <p className={selectPay == 'arca' && 'activeSelectedBuy'}>{t('Youwillreceive')}</p>
                 </div>
                 {/* <div className='selectPay' onClick={() => {
                     Select(2)
@@ -330,7 +325,7 @@ export const BuyNow = ({ event, open, data_id }) => {
                         </div>
                         <Image width={68} height={34} src={require('../../assets/22.png')} />
                     </div>
-                    <p className={selectPay == 3 && 'activeSelectedBuy'}>{t('Shippingisfree')}</p>
+                    <p className={selectPay == 'shipping' && 'activeSelectedBuy'}>{t('Shippingisfree')}</p>
 
                 </div>
                 <div className='BuyEndWrapper'>
