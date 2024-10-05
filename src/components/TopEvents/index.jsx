@@ -21,7 +21,7 @@ export const TopEventsComponent = () => {
         </div>}
         <div className="TopEventWrapper">
             {
-                topEvents.events?.map((elm, i) => {
+                topEvents.events && topEvents.events?.map((elm, i) => {
                     let date = new Date(elm.dates[0].start_date)
                     if (i < 8)
                         return <TopEvents

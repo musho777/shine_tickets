@@ -5,6 +5,7 @@ import AliceCarousel from 'react-alice-carousel'
 import 'react-alice-carousel/lib/alice-carousel.css'
 import { SliderDate } from './components/sliderDate'
 import { ButtonWrapper } from './components/buttonWrapper'
+import Image from 'next/image'
 
 const handleDragStart = (e) => e.preventDefault()
 
@@ -19,7 +20,15 @@ export const Carusel = () => {
                 item.push(
                     <div key={i} className='CaruselItem'>
                         <div className='BanerDiv' >
-                            <img onDragStart={handleDragStart} className='BanerImg2' src={`https://dev2.shinetickets.com/${elm?.main_image}`} />
+                            <Image
+                                loading="lazy"
+                                width={285}
+                                height={400}
+                                onDragStart={handleDragStart}
+                                className='BanerImg2'
+                                alt={elm.name || 'Banner Image'}
+                                src={`https://dev2.shinetickets.com/${elm?.main_image}`}
+                            />
                             <div className='BanerDivInfo'>
                                 <SliderDate hall={elm.place} date={elm.dates[0].start_date} />
                                 <p className='BanerTitle'>{elm.name}</p>
@@ -27,7 +36,15 @@ export const Carusel = () => {
                                 <ButtonWrapper id={elm.id} name={elm.name} />
                             </div>
                         </div>
-                        <img className='BanerImg' src={`https://dev2.shinetickets.com/${elm?.main_image}`} alt='#' onDragStart={handleDragStart} />
+                        <Image
+                            loading="lazy"
+                            height={400}
+                            width={800}
+                            className='BanerImg'
+                            src={`https://dev2.shinetickets.com/${elm?.main_image}`}
+                            alt='#'
+                            onDragStart={handleDragStart}
+                        />
                     </div>
                 )
             })

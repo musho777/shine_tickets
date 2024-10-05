@@ -11,7 +11,6 @@ const secretKey = "cyJhbGcieiJIUdzI1Nir9eyJt2xglIyoiQWRdtsg";
 const url = 'https://dev2.shinetickets.com/api/v1/'
 const uuid = 'da98243f-9a26-48de-893a-40491b6619e2'
 
-// const url = 'https://dev2.shinetickets.com/api/v1/'
 // const uuid = 'b10d0461-7b04-498c-a193-6078465d4c30'
 
 
@@ -258,19 +257,6 @@ export const GetHallAction = (data, locale) => {
                 })
     }
 }
-
-// export const GetCurrentTicket = () => {
-//     return (dispatch) => {
-//         axios.post(`${"https://api.shinetickets.com"}/getCurrentTicket`, { orderId: localStorage.getItem('orderId') })
-//             .then(res => {
-//                 if (res.data.success) {
-//                     dispatch(ButTickets(res.data.ticket))
-//                 }
-//             })
-//             .catch((error) => {
-//             })
-//     }
-// }
 
 export const StatusSuccessAction = () => {
     return {

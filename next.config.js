@@ -3,4 +3,7 @@
 
 module.exports = {
   // i18n,
+  images: {
+    domains: ['dev2.shinetickets.com'],
+  },
 };

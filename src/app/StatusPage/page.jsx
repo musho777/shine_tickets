@@ -3,17 +3,10 @@ import '../StatusPageReject/styles.css'
 import { PuffLoader } from 'react-spinners'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { GetTicketStatus } from '../../services/action/action'
 import { StatusPageReject } from '../StatusPageReject'
 
 const StatusPage = ({ params }) => {
     const dispatch = useDispatch()
-    // const orderId = router.query.order;
-    // let orderId = window.location?.href?.split('order=')[1]
-    useEffect(() => {
-        dispatch(GetTicketStatus({ orderId }))
-    }, [])
-
     const { getTell } = useSelector((st) => st)
 
 
@@ -33,10 +26,6 @@ const StatusPage = ({ params }) => {
             </div>
         </div>
     }
-    else {
-        return <StatusPageReject />
-    }
-    return <div></div>
 }
 
 export default StatusPage

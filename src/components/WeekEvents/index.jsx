@@ -23,7 +23,7 @@ export const WeekEvents = () => {
                 </div>
             </div>
             <div className="WeekCardWrapper">
-                {getWeekEvent.events.map((elm, i) => {
+                {getWeekEvent.events && getWeekEvent.events.map((elm, i) => {
                     const date = new Date(elm.dates[0].start_date)
                     const currentDate = new Date();
                     const timeDifference = date - currentDate;
