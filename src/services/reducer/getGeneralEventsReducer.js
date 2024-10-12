@@ -1,6 +1,6 @@
 const store = {
     events: [],
-    loading: false,
+    loading: true,
     error: ''
 }
 export const GetGeneralEventsReducer = (state = store, action) => {

@@ -7,6 +7,7 @@ import { GetAllAds, GetGenerealEvents, WeekEvetntApi } from '../services/action/
 import { ExpectedEvents } from '../components/ExpectedEvents'
 import { WeekEvents } from '../components/WeekEvents'
 import { TopEventsComponent } from '../components/TopEvents'
+import Head from 'next/head'
 
 
 export default function Home() {
@@ -21,6 +22,9 @@ export default function Home() {
   }, [language])
   return (
     <div className='mainPage'>
+      <Head>
+        <title>Shine Tickets</title>
+      </Head>
       <div className='container'>
         <Carusel />
         <TopEventsComponent />

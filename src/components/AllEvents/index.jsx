@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from "react-redux"
 import { GetAllEvents2 } from "../../services/action/action"
 import { ShowAllButton } from '../Button/ShowAllButton'
 import { truncateText } from '@/src/function/function'
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 export const ALLEvents = () => {
     const dispatch = useDispatch()
@@ -18,30 +20,33 @@ export const ALLEvents = () => {
             dispatch(GetAllEvents2(1, language))
         }
     }, [language])
-
+    console.log(events.loading, 'events.loading')
     return (
         <div>
             <div className='EventTitle'>
                 <h2>{t('AllEvents')}</h2>
             </div>
-            <div className="Allevents">
-                {events.events && events.events?.map((elm, i) => {
-                    if (elm.active)
-                        return (
-                            <EachTicket
-                                key={i}
-                                onClick={() => window.location = `/Single/${elm.id}/${elm?.name}`}
-                                location={elm?.place}
-                                hall={elm?.hall}
-                                title={truncateText(elm.name, 43)}
-                                category={elm?.category?.name}
-                                image={`https://dev2.shinetickets.com/${elm.poster_image}`}
-                                date={elm.dates[0].start_date}
-                                price={`${elm?.price} - ${elm?.price} AMD`}
-                            />
-                        )
-                })}
-            </div>
+            {events.loading ?
+                <Skeleton height={202} className='ticket' /> :
+                <div className="Allevents">
+                    {events.events && events.events?.map((elm, i) => {
+                        if (elm.active)
+                            return (
+                                <EachTicket
+                                    key={i}
+                                    onClick={() => window.location = `/Single/${elm.id}/${elm?.name}`}
+                                    location={elm?.place}
+                                    hall={elm?.hall}
+                                    title={truncateText(elm.name, 43)}
+                                    category={elm?.category?.name}
+                                    image={`https://dev2.shinetickets.com/${elm.poster_image}`}
+                                    date={elm.dates[0].start_date}
+                                    price={`${elm?.price} - ${elm?.price} AMD`}
+                                />
+                            )
+                    })}
+                </div>
+            }
             <ShowAllButton onClick={() => window.location = '/Category/all'} />
         </div>
     )

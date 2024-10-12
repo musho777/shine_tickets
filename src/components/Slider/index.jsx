@@ -6,13 +6,14 @@ import 'react-alice-carousel/lib/alice-carousel.css'
 import { SliderDate } from './components/sliderDate'
 import { ButtonWrapper } from './components/buttonWrapper'
 import Image from 'next/image'
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 const handleDragStart = (e) => e.preventDefault()
 
 export const Carusel = () => {
     const general = useSelector((st) => st.general)
     const [data, setData] = useState([])
-
     useEffect(() => {
         let item = [...data]
         if (!item.length) {
@@ -50,8 +51,14 @@ export const Carusel = () => {
             })
         }
         setData(item)
-    }, [general.events])
+    }, [general])
 
+
+    if (general.loading) {
+        return <div style={{ marginBottom: 50 }}>
+            <Skeleton className='CaruselLoading' style={{ borderRadius: 15 }} />
+        </div>
+    }
     return (
         <div style={{ width: '100%' }}>
             <AliceCarousel
