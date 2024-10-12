@@ -19,9 +19,11 @@ export const ZoomMap = ({ value, setValue, color }) => {
     useEffect(() => {
         setData(getHall?.events?.event_seats)
     }, [getHall?.events?.event_seats])
+
+
     const [windowSize, setWindowSize] = useState({
-        width: window.innerWidth,
-        height: window.innerHeight,
+        // width: window.innerWidth,
+        // height: window.innerHeight,
     });
 
     const handleResize = () => {
@@ -108,7 +110,7 @@ export const ZoomMap = ({ value, setValue, color }) => {
             maxScale={1.5}
         >
             <div style={{ position: 'relative', }}>
-                <img style={{ position: 'relative', }} src={`https://dev2.shinetickets.com/${getHall.events?.map?.background}`} />
+                <img alt='#' style={{ position: 'relative', }} src={`https://dev2.shinetickets.com/${getHall.events?.map?.background}`} />
                 {data?.map((elm, i) => {
                     if (elm.color == color || !color)
                         return <div

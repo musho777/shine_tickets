@@ -36,7 +36,7 @@ export const Hall = ({ color, setShowTickets }) => {
     <div className="zoom-controls">
       <button onClick={handleZoomIn}>+</button>
       <button onClick={handleZoomOut}>-</button>
-      <button onClick={() => setValue({ scale: 0.13, translation: { x: 70, y: 25 } })}>
+      <button aria-label="Restart" onClick={() => setValue({ scale: 0.13, translation: { x: 70, y: 25 } })}>
         <Restart />
       </button>
     </div>
