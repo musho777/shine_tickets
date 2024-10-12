@@ -18,6 +18,9 @@ export default function RootLayout({ children }) {
 
   return (
     <html lang="en">
+      <title>Shine Tickets</title>
+      <meta name="description" content="page where tickets for an event are sold." />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
       <body className={inter.className}>
         <Providers>
           <MyApp>

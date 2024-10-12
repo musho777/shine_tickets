@@ -54,6 +54,6 @@ export const TopEvents = ({
                     title={t('seeMore')} />
             </div>
         </div>
-        <img src={image} />
+        <img alt='#' src={image} />
     </div>
 }
