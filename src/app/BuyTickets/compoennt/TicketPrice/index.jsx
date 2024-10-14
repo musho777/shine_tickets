@@ -6,6 +6,13 @@ import { useDispatch } from "react-redux";
 export const TicketPrice = ({ tickets, total, setOpen }) => {
   const dispatch = useDispatch()
   const { t } = useTranslation();
+
+
+  const goNextPage = () => {
+    setOpen(true)
+  }
+
+
   return <div className='Tickets'>
     <div className='TicketsHeader'>
       <p>{t('Ticket')}</p>
@@ -17,13 +24,15 @@ export const TicketPrice = ({ tickets, total, setOpen }) => {
           return <div key={i} className='TikcetsWrapper'>
             <div className='TicketDiv'>
               <div className='TicketInfoo'>
-                <p>{elm.seat.name}</p>
-                <div>
-                  <p>{t('Line')}: <span>{elm.seat.row}</span></p>
+                <p>{elm.seat?.name}</p>
+                {elm.seat?.row ? <div>
+                  <p>{t('Line')}: <span>{elm.seat?.row}</span></p>
                   <p>{t('Place')}: <span>
-                    {elm.seat.column}
+                    {elm.seat?.column}
                   </span></p>
-                </div>
+                </div> :
+                  <p>մուտքավճար</p>
+                }
               </div>
               <p className='TicketPrcie'>{elm.price} AMD</p>
               <div className='ClewarTicet' onClick={() => dispatch(RemoveTicketsAction(elm))}>
@@ -35,6 +44,8 @@ export const TicketPrice = ({ tickets, total, setOpen }) => {
       }
 
 
+
+
       <div className='TotalPrice'>
         <p className='Totalp'>{t('TOTALLY')}</p>
         <p className='ToatalPricep'>{total} AMD</p>
@@ -43,7 +54,7 @@ export const TicketPrice = ({ tickets, total, setOpen }) => {
       <div className='BuyTicketButtonWrapper'>
         <button
           disabled={tickets?.length == 0}
-          className={tickets?.length == 0 ? 'disableButton' : ''} onClick={() => setOpen(true)}>{t('Next')}</button>
+          className={tickets?.length == 0 ? 'disableButton' : ''} onClick={() => goNextPage()}>{t('Next')}</button>
       </div>
     </div>
   </div>

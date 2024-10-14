@@ -29,6 +29,48 @@
   flex-wrap: wrap;
 }
 
+.seatType {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+  background-position: center;
+  background-size: cover;
+}
+
+.EnteryTypeWrapper {
+  background-color: white;
+  width: 50%;
+  height: 150px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0;
+  gap: 10px;
+}
+
+.EnteryTypeNumber {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+
+.EnteryTypeNumberPlaseMinus {
+  display: flex;
+  gap: 10px;
+}
+
+.seatTypeButton {
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  padding: 10px 0;
+  width: 150px;
+  text-align: center;
+  border-radius: 20px;
+  cursor: pointer;
+  background-color: white;
+}
+
 .ticketPrice>div {
   padding: 5px 15px;
   border-radius: 20px;

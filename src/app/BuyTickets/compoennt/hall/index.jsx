@@ -1,14 +1,24 @@
 import { Restart } from "@/src/components/svg";
 import { ZoomMap } from "@/src/components/ZoomMap/ZoomMap";
+import { SetTicketsAction } from "@/src/services/action/action";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
+import Swal from 'sweetalert2'
+// import withReactContent from 'sweetalert2-react-content'
 
 export const Hall = ({ color, setShowTickets }) => {
-  const [price, setPrice] = useState([])
   const getSinglPage = useSelector((st) => st.getSinglPage)
   const tickets = useSelector((st) => st.tiketsForBuy)
 
   const { event } = getSinglPage?.events
+  const [show, setShow] = useState(false)
+  const [showSeatMap, setShowSetMap] = useState(false)
+  const getHall = useSelector((st) => st.getHall)
+  const [showEnteryType, setShowEnteryType] = useState(false)
+  const dispatch = useDispatch()
+  const { t } = useTranslation();
+
 
 
   const handleZoomOut = () => {
@@ -31,8 +41,41 @@ export const Hall = ({ color, setShowTickets }) => {
     translation: { x: 0, y: 0 }
   });
 
+  const addTicket = (item) => {
+    console.log(item, 'getHall')
+    let count = 0
+    tickets.tickets.map((elm, i) => {
+      if (elm.name == item.name) {
+        count = count + 1
+      }
+    })
+
+    let data = {
+      name: item.name,
+      id: item.id,
+      price: item.mutqi_gumar
+    }
+    if (count <= item.sahmanachap) {
+      dispatch(SetTicketsAction(data))
+    }
+    else {
+      Swal.fire(t("Youhavereached"));
+    }
+  }
+
+  useEffect(() => {
+    if (getSinglPage.events.mutqavchar_type == 'mix' || getSinglPage.events.mutqavchar_type == "entrance") {
+      setShow(true)
+    }
+    else {
+      setShow(false)
+      setShowSetMap(true)
+    }
+  }, [getSinglPage.event])
+
 
   return <div className='HallWrapper'>
+
     <div className="zoom-controls">
       <button onClick={handleZoomIn}>+</button>
       <button onClick={handleZoomOut}>-</button>
@@ -40,16 +83,55 @@ export const Hall = ({ color, setShowTickets }) => {
         <Restart />
       </button>
     </div>
-    <div className='Hall'>
-      <ZoomMap
-        price={price}
-        event={event}
-        value={value}
-        setValue={(e) => setValue(e)}
-        getSinglPage={getSinglPage}
-        color={color}
-      />
-    </div>
+    {(show && !showSeatMap) &&
+      <div style={{
+        backgroundImage: `url(https://dev2.shinetickets.com/${getHall.events?.map?.background})`,
+      }} className='Hall seatType'>
+        <div className="seatTypeButton"
+          onClick={() => {
+            setShow(false)
+            setShowEnteryType(true)
+          }}
+        >մուտքավճար</div>
+        {getSinglPage.events.mutqavchar_type == 'mix' && <div className="seatTypeButton" onClick={() => {
+          setShow(false)
+          setShowSetMap(true)
+        }}>նստատեղ
+        </div>}
+      </div>}
+    {(!show && showSeatMap) &&
+      <div className='Hall'>
+        {<ZoomMap
+          event={event}
+          value={value}
+          setValue={(e) => setValue(e)}
+          getSinglPage={getSinglPage}
+          color={color}
+        />
+        }
+      </div>
+    }
+    {(!show && showEnteryType) &&
+      <div style={{ backgroundImage: `url(https://dev2.shinetickets.com/${getHall.events?.map?.background})`, }} className='Hall seatType'>
+        <div className="EnteryTypeWrapper">
+          {getHall.events.entrances.map((elm, i) => {
+            return <div key={i} className="EnteryTypeNumber">
+              <div>{elm.name}</div>
+              <div className="EnteryTypeNumberPlaseMinus">
+
+                <div onClick={() => addTicket(elm)}>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" width="20px" height="20px" viewBox="0 0 32 32" version="1.1">
+                    <path d="M16 0c-8.836 0-16 7.163-16 16s7.163 16 16 16c8.837 0 16-7.163 16-16s-7.163-16-16-16zM16 30.032c-7.72 0-14-6.312-14-14.032s6.28-14 14-14 14 6.28 14 14-6.28 14.032-14 14.032zM23 15h-6v-6c0-0.552-0.448-1-1-1s-1 0.448-1 1v6h-6c-0.552 0-1 0.448-1 1s0.448 1 1 1h6v6c0 0.552 0.448 1 1 1s1-0.448 1-1v-6h6c0.552 0 1-0.448 1-1s-0.448-1-1-1z" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          })}
+
+        </div>
+      </div>
+    }
+
     {tickets.tickets.length > 0 && <div onClick={() => setShowTickets(true)} className='Ticketdivs'>
       <div>
         <svg width="33" height="36" viewBox="0 0 33 36" fill="none" xmlns="http://www.w3.org/2000/svg">

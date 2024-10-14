@@ -14883,6 +14883,7 @@ __metadata:
     redux: ^4.2.1
     redux-thunk: ^3.1.0
     styled-components: ^6.0.8
+    sweetalert2: ^11.14.3
     thunk: ^0.0.1
     web-vitals: ^2.1.4
   languageName: unknown
@@ -15659,6 +15660,13 @@ __metadata:
   bin:
     svgo: bin/svgo
   checksum: b92f71a8541468ffd0b81b8cdb36b1e242eea320bf3c1a9b2c8809945853e9d8c80c19744267eb91cabf06ae9d5fff3592d677df85a31be4ed59ff78534fa420
+  languageName: node
+  linkType: hard
+
+"sweetalert2@npm:^11.14.3":
+  version: 11.14.3
+  resolution: "sweetalert2@npm:11.14.3"
+  checksum: 7fc9368684830ce81ad14361d64b072979ec6e6060869dbfb8c596a44e26983b950c1e411ce49f4460349f0a158ef6fd98fb245491101280fb577bd1a8ad46b7
   languageName: node
   linkType: hard
 

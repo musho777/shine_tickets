@@ -59,5 +59,6 @@
   "Pleasetryagainlater": "Please try again later",
   "requiredfield": "required field*",
   "addressError": "address must be more than 11 characters",
-  "description": "Description"
+  "description": "Description",
+  "Youhavereached": "You have reached the limit, you cannot buy more tickets"
 }
