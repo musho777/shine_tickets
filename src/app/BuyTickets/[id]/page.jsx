@@ -23,17 +23,29 @@ const BuyTickets = ({ params }) => {
   const [color, setColor] = useState()
   const tickets = useSelector((st) => st.tiketsForBuy)
   const [total, setTotal] = useState(0)
+  const [id, setID] = useState()
+  const [date, setDate] = useState()
+
+
+
+  useEffect(() => {
+    let item = params.id.split('-');
+    setID(item[0])
+    setDate(item[1])
+  }, [params]);
+
+
   useEffect(() => {
     if (getSinglPage.events) {
-      dispatch(GetHallAction(getSinglPage.events, language))
+      dispatch(GetHallAction(getSinglPage.events, language, date))
     }
   }, [getSinglPage.events])
 
   useEffect(() => {
-    if (params.id && language) {
+    if (id && language) {
       dispatch(GetSinglPage(params.id, language))
     }
-  }, [params.id, language])
+  }, [id, language])
 
 
   useEffect(() => {
@@ -75,7 +87,7 @@ const BuyTickets = ({ params }) => {
       </CartPopup >}
       <PriceColor ChoosePrice={(e) => ChoosePrice(e)} data={getSinglPage.events.color} claseName='ticketPrice' />
       <div className='BuyTicketsWrapper'>
-        <Card data={getSinglPage.events} id={"mobileBuyTicketsCard"} />
+        <Card time={date} data={getSinglPage.events} id={"mobileBuyTicketsCard"} />
         <PriceColor data={getSinglPage.events.color} claseName='ticketPriceMobile' />
         {showTickets ?
           <TicketPrice tickets={tickets.tickets} total={total} setOpen={e => setOpen(e)} /> :
@@ -83,7 +95,7 @@ const BuyTickets = ({ params }) => {
         }
         <div className='BuyTicketsCardWrapperDiv'>
           <div className='BuyTicketsCardWrapper'>
-            <Card data={getSinglPage.events} />
+            <Card time={date} data={getSinglPage.events} />
             <TicketPrice tickets={tickets.tickets} total={total} setOpen={e => setOpen(e)} />
           </div>
         </div>

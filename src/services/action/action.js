@@ -244,11 +244,12 @@ export const CreateCurrentTicket = (data, res, selectPay) => {
 }
 
 
-export const GetHallAction = (data, locale) => {
+export const GetHallAction = (data, locale, date) => {
+    console.log(date)
     return (dispatch) => {
         dispatch(StartGetHallAction())
         if (data?.dates?.length)
-            axios.get(`${url}${uuid}/map-and-seat-data-for-reserve?project_event_id=${data.id}&event_date_id=${data?.dates[0].id}&event_id=${data.id}&locale=${locale}`).then((r) => {
+            axios.get(`${url}${uuid}/map-and-seat-data-for-reserve?project_event_id=${data.id}&event_date_id=${date}&event_id=${data.id}&locale=${locale}`).then((r) => {
                 dispatch(SuccessGetHallAction(r.data))
 
             })

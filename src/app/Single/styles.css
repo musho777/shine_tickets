@@ -326,6 +326,46 @@
   display: none;
 }
 
+.seansTime {
+  position: absolute;
+  width: 250px;
+  height: 100%;
+  z-index: 9999;
+  height: 80%;
+  background-color: rgba(217, 217, 217, 0.16);
+  right: 10px;
+  border-radius: 15px;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: scroll;
+}
+
+#activeEvent>p {
+  color: #FFCE00;
+}
+
+.seansTimeItem>p {
+  color: white;
+  font-family: "Montserratarm-Regular", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  cursor: pointer;
+}
+
+.seansTimeItem {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 0;
+  height: 50px;
+  width: 90%;
+  align-items: center;
+  border-bottom: 1px solid #fff;
+  cursor: pointer;
+}
 
 @media screen and (max-width: 1130px) {
   .BanerTitle {
@@ -369,10 +409,24 @@
   }
 }
 
+.calendarIconeSingl {
+  position: absolute;
+  z-index: 9999;
+  right: 20px;
+  top: 20px;
+}
 
 @media screen and (max-width: 690px) {
   .DescriptionDiv {
     font-size: 13px;
+  }
+
+  .seansTime {
+    width: 100%;
+    height: 100%;
+    left: 0;
+    right: 0;
+    background-color: #1c0d34;
   }
 
   .SeansDivMobile {
