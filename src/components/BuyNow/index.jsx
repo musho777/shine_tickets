@@ -1,6 +1,6 @@
 import './style.css'
 import { useEffect, useRef, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { CheckSvg, CheckedSvg, SelectSvg, SelectedSvg } from '../svg'
 import { PuffLoader } from 'react-spinners'
 import 'react-phone-input-2/lib/style.css'
@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next'
 import InputMask from 'react-input-mask';
 import Image from 'next/image'
 
-export const BuyNow = ({ event, open, data_id }) => {
+export const BuyNow = ({ event, open, }) => {
     const { language } = useSelector((st) => st.StaticReducer)
     const scrollRef = useRef();
 
@@ -20,9 +20,7 @@ export const BuyNow = ({ event, open, data_id }) => {
     };
 
     const { t } = useTranslation()
-    const dispatch = useDispatch()
     const tickets = useSelector((st) => st.tiketsForBuy)
-    const getSinglPage = useSelector((st) => st.getSinglPage)
     const [chedked, setChedker] = useState(false)
     const [selectPay, setSelectPay] = useState("arca")
     const [name, setName] = useState('')
@@ -34,7 +32,6 @@ export const BuyNow = ({ event, open, data_id }) => {
     const { creatTicket } = useSelector((st) => st)
     const [delivery, setDelivery] = useState(false)
     const [seat_list, setSeat_list] = useState({})
-    let [title, setTitle] = useState()
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState({
         name: '',
@@ -88,19 +85,6 @@ export const BuyNow = ({ event, open, data_id }) => {
         return (false)
     }
 
-
-    useEffect(() => {
-        if (language === 'am') {
-            setTitle(getSinglPage.events.event?.title)
-        }
-        else if (language === 'en') {
-            setTitle(getSinglPage?.events?.event?.title_en)
-        }
-        else if (language === 'ru') {
-            setTitle(getSinglPage.events.event?.title_ru)
-        }
-    }, [language, getSinglPage])
-
     function handlePurchase() {
         let event_seats = []
         tickets.tickets.map((elm, i) => {
@@ -109,6 +93,7 @@ export const BuyNow = ({ event, open, data_id }) => {
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
         const formattedNumber = number.replace(/\D/g, "");
+        console.log(language, 'language')
         var raw = JSON.stringify({
             "locale": language,
             "user": {
@@ -140,7 +125,7 @@ export const BuyNow = ({ event, open, data_id }) => {
         fetch("https://dev2.shinetickets.com/api/v1/da98243f-9a26-48de-893a-40491b6619e2/pending-seats-for-reserve", requestOptions)
             .then(response => response.json())
             .then(res => {
-                console.log(res)
+                console.log(res?.error)
                 if (res?.success) {
                     setLoading(false)
                     if (selectPay == 'shipping') {
@@ -152,12 +137,23 @@ export const BuyNow = ({ event, open, data_id }) => {
                     }
                 }
                 else {
-                    alert(t('Pleasetryagainlater'))
+                    if (res?.error[0]) {
+                        alert(res.error[0])
+                    }
+                    else {
+                        alert(t('Pleasetryagainlater'))
+                    }
                     setLoading(false)
                 }
             })
             .catch(error => {
-                alert(t('Pleasetryagainlater'))
+                if (res.error[0]) {
+                    alert(res.error[0])
+                }
+                else {
+                    alert(t('Pleasetryagainlater'))
+                }
+
                 setLoading(false)
             });
     }
@@ -242,10 +238,10 @@ export const BuyNow = ({ event, open, data_id }) => {
 
     return (
         <div className='BuyNow'>
-            <div className='BuyNowHeader'>
+            {/* <div className='BuyNowHeader'>
                 <p className='BuyNowHeaderTitle'>{title}</p>
                 <p className='BuyNowHeaderDate'> </p>
-            </div>
+            </div> */}
             <div className='BuyNowBody'>
                 <div className='InputTextareWrapper'>
                     <div className='InputWrapperBuy'>

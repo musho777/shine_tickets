@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { GetSinglPage } from '../../../services/action/action'
 import { Card } from '../card'
 import DynamicMeta from '@/src/components/DinamicMetaData'
+import { PuffLoader } from 'react-spinners'
 
 const Single = ({ params }) => {
     const dispatch = useDispatch()
@@ -21,6 +22,13 @@ const Single = ({ params }) => {
         }
     }, [language])
 
+    if (getSinglPage?.loading) {
+        return (
+            <div className='loading'>
+                <PuffLoader color="#FEE827" />
+            </div>
+        )
+    }
     return (
         <>
             <DynamicMeta keywords={getSinglPage.events.keyword} title={getSinglPage.events?.name} description={getSinglPage.events?.description} />

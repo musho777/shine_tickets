@@ -115,8 +115,12 @@ export const Hall = ({ color, setShowTickets }) => {
       <div style={{ backgroundImage: `url(https://dev2.shinetickets.com/${getHall.events?.map?.background})`, }} className='Hall seatType'>
         <div className="EnteryTypeWrapper">
           {getHall.events.entrances.map((elm, i) => {
+            console.log(elm)
             return <div key={i} className="EnteryTypeNumber">
-              <div>{elm.name}</div>
+              <div style={{ display: 'flex', gap: 10, }}>
+                <div>{elm.name}</div>
+                <div>{elm.mutqi_gumar}</div>
+              </div>
               <div className="EnteryTypeNumberPlaseMinus">
 
                 <div onClick={() => addTicket(elm)}>

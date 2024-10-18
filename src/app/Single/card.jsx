@@ -50,7 +50,6 @@ export const Card = ({
 
         return () => window.removeEventListener('resize', handleResize);
     }, []);
-    console.log(dates)
 
     return <div style={{ height: hight }} className='SinglCaruselItem'>
         <div ref={divRef} className='SinglBanerDiv' >
