@@ -1,6 +1,6 @@
 const store = {
     events: {},
-    loading: false,
+    loading: true,
     error: ''
 }
 export const GetSinglPageReducer = (state = store, action) => {
