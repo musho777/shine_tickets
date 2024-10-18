@@ -20,7 +20,6 @@ export const ALLEvents = () => {
             dispatch(GetAllEvents2(1, language))
         }
     }, [language])
-    console.log(events.loading, 'events.loading')
     return (
         <div>
             <div className='EventTitle'>

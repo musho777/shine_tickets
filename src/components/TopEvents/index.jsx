@@ -1,6 +1,4 @@
-import { useEffect, useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { GetGenerealEvents, GetTopEvents } from "../../services/action/action"
+import { useSelector } from "react-redux"
 import { TopEvents } from "./TopEvents"
 import { useTranslation } from "react-i18next"
 import './styles.css'
@@ -11,8 +9,6 @@ export const TopEventsComponent = () => {
     // const topEvents = useSelector((st) => st.topEvents)
     const topEvents = useSelector((st) => st.general)
     const { t } = useTranslation()
-    const [loadingData, setLoadingData] = useState(['', '', '', ''])
-    console.log(topEvents, 'loading')
     var months = [
         "January", "February", "March", "April", "May", "June",
         "July", "August", "September", "October", "November", "December"

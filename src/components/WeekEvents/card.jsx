@@ -27,7 +27,6 @@ export const WeekCard = ({
     useEffect(() => {
         let item = { ...languageData }
         let datee = new Date(date)
-        console.log(date)
         let day = datee.getDate()
         let mount = datee.getMonth() + 1
         if (day < 10) {
@@ -36,7 +35,6 @@ export const WeekCard = ({
         if (mount < 10) {
             mount = `0${mount}`
         }
-        console.log(day)
         setDate(`${day}.${mount}`)
         setLanguageData(item)
     }, [language])

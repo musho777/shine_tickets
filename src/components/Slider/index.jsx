@@ -18,7 +18,6 @@ export const Carusel = () => {
         let item = [...data]
         if (!item.length) {
             general?.events && general?.events?.map((elm, i) => {
-                console.log(elm.dates[0].id, 'iddd')
                 item.push(
                     <div key={i} className='CaruselItem'>
                         <div className='BanerDiv' >

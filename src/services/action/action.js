@@ -245,7 +245,6 @@ export const CreateCurrentTicket = (data, res, selectPay) => {
 
 
 export const GetHallAction = (data, locale, date) => {
-    console.log(date)
     return (dispatch) => {
         dispatch(StartGetHallAction())
         if (data?.dates?.length)

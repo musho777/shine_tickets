@@ -12,7 +12,6 @@ import { PuffLoader } from 'react-spinners'
 const Single = ({ params }) => {
     const dispatch = useDispatch()
     const id = params.id[0]
-    console.log(id)
     const { t } = useTranslation();
     const getSinglPage = useSelector((st) => st.getSinglPage)
     const { language } = useSelector((st) => st.StaticReducer)

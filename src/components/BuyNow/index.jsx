@@ -93,7 +93,6 @@ export const BuyNow = ({ event, open, }) => {
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
         const formattedNumber = number.replace(/\D/g, "");
-        console.log(language, 'language')
         var raw = JSON.stringify({
             "locale": language,
             "user": {
@@ -125,7 +124,6 @@ export const BuyNow = ({ event, open, }) => {
         fetch("https://dev2.shinetickets.com/api/v1/da98243f-9a26-48de-893a-40491b6619e2/pending-seats-for-reserve", requestOptions)
             .then(response => response.json())
             .then(res => {
-                console.log(res?.error)
                 if (res?.success) {
                     setLoading(false)
                     if (selectPay == 'shipping') {

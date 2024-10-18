@@ -6,12 +6,10 @@ export const Card = ({ data, id, time }) => {
   const [timeIndex, setTiemIndex] = useState(0)
   useEffect(() => {
     let index = 0
-    console.log(data.dates)
     if (data.dates) {
       index = data.dates?.findIndex(elm => elm.id == time)
     }
     setTiemIndex(index)
-    console.log(index, '1111')
   }, [time])
   return <div className='BuyTicketsCard' id={id}>
     <img alt="#" src={`https://dev2.shinetickets.com/${data.main_image}`} />
