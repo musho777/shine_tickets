@@ -112,11 +112,13 @@ export const ZoomMap = ({ value, setValue, color }) => {
             <div style={{ position: 'relative', }}>
                 <img alt='#' style={{ position: 'relative', }} src={`https://dev2.shinetickets.com/${getHall.events?.map?.background}`} />
                 {data?.map((elm, i) => {
+                    let valueWithPx = elm.seat.top;
+                    let numericValue = parseFloat(valueWithPx);
+                    let valueWithPx2 = elm.seat.left;
+                    let numericValue2 = parseFloat(valueWithPx2);
                     if (elm.color == color || !color)
                         return <div
-                            className={[
-                                tickets.findIndex((el) => el.id == elm.id) < 0 ? "" : 'addTicketButton'
-                            ]}
+                            className={[tickets.findIndex((el) => el.id == elm.id) < 0 ? "" : 'addTicketButton']}
                             onMouseOver={() => {
                                 getPrice(elm)
                             }}
@@ -139,9 +141,8 @@ export const ZoomMap = ({ value, setValue, color }) => {
                                     addTicket(i, elm)
                                 }
                             }}
-                            key={i} style={{ top: elm.seat.top, left: elm.seat.left, position: 'absolute', width: 20, height: 20, rotate: elm.seat.rotate, zIndex: 999 }}>
+                            key={i} style={{ top: numericValue + 5, left: numericValue2 + 1, position: 'absolute', width: 20, height: 20, rotate: elm.seat.rotate, zIndex: 999 }}>
                             <SeatSvg color={elm.color} />
-
                         </div>
                 })}
                 {showModal &&

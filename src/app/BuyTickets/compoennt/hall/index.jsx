@@ -20,7 +20,6 @@ export const Hall = ({ color, setShowTickets }) => {
   const { t } = useTranslation();
 
 
-
   const handleZoomOut = () => {
     if (value.scale - 0.1 > 0.1)
       setValue({
@@ -54,6 +53,7 @@ export const Hall = ({ color, setShowTickets }) => {
       id: item.id,
       price: item.mutqi_gumar
     }
+    console.log(data, 'data')
     if (count <= item.sahmanachap) {
       dispatch(SetTicketsAction(data))
     }
@@ -100,20 +100,20 @@ export const Hall = ({ color, setShowTickets }) => {
       </div>}
     {(!show && showSeatMap) &&
       <div className='Hall'>
-        {<ZoomMap
+        <ZoomMap
           event={event}
           value={value}
           setValue={(e) => setValue(e)}
           getSinglPage={getSinglPage}
           color={color}
         />
-        }
       </div>
     }
     {(!show && showEnteryType) &&
       <div style={{ backgroundImage: `url(https://dev2.shinetickets.com/${getHall.events?.map?.background})`, }} className='Hall seatType'>
         <div className="EnteryTypeWrapper">
           {getHall.events.entrances.map((elm, i) => {
+            console.log(elm)
             return <div key={i} className="EnteryTypeNumber">
               <div style={{ display: 'flex', gap: 10, }}>
                 <div>{elm.name}</div>
